@@ -1,0 +1,39 @@
+
+<h1>Storage Selector</h1>
+
+<p class="lead">This is a sample implementation of the storage selector</p>
+
+<p><strong>Dependencies</strong><span class="label label-info">Angular JS</span></p>
+
+<h3>Usage</h3>
+<p>When a file is selected, the storage selector will send a message to its parent window.
+   The message will contain the url of the selected file.</p>
+
+<p>The current window will load the iframe and is responsible for providing the Company ID
+as well as any desired styling on the iframe. </p>
+
+<p>To retrieve the Company ID click on Settings from the menu of the Rise Vision Application.
+The ID for the currently selected Company can be found in the URL where the ID is everything to the right of "company=", for example:</p>
+<hljs>http://rva.risevision.com/#COMPANY_MANAGE/company=XXXXXXXX-XXXX-XXXX-XXXXXXXXXXXX</hljs>
+
+<h3>Module Includes</h3>
+<code>angular.module('myApp', ['risevision.widget.common.storage-client-loader']);</code>
+
+
+<h3>Script Includes</h3>
+<p>Make sure you include the following files in <code>index.html</code></p>
+<hljs>
+bower_components/angular/angular.js
+bower_components/component-storage-loader/dist/component-storage-loader.js
+</hljs>
+
+<h3>Usage</h3>
+<hljs include="'sample'"></hljs>
+
+<div class="add-bottom">
+  <ng-include src="'sample'"></ng-include>
+</div>
+
+<script type="text/ng-template" id="sample">
+<storage-client-loader companyid="YOUR_COMPANY_ID"></storage-client-loader>
+</script>

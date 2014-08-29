@@ -1,0 +1,5 @@
+<button class="btn btn-widget-icon-storage" ng-click="showSelector()" type="button" />
+<div ng-if="show">
+   <div class="storage-selector-backdrop" ng-click="hideSelector()"></div>
+  <iframe class="storage-selector-iframe" src="{{storageUrl}}"></iframe>
+</div>
