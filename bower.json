@@ -1,0 +1,22 @@
+{
+  "name": "component-storage-loader",
+  "version": "0.0.1",
+  "homepage": "https://github.com/Rise-Vision/component-storage-loader",
+  "authors": [
+    "Rise Vision"
+  ],
+  "description": "Angular Directive to simplify use of Rise-Vision/storage-client",
+  "license": "MIT",
+  "private": false,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "components",
+    "test",
+    "tmp"
+  ],
+  "devDependencies": {
+  },
+  "dependencies": {
+  }
+}
