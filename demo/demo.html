@@ -28,12 +28,45 @@ bower_components/component-storage-loader/dist/component-storage-loader.js
 </hljs>
 
 <h3>Usage</h3>
-<hljs include="'sample'"></hljs>
-
-<div class="add-bottom">
-  <ng-include src="'sample'"></ng-include>
+<div class="btn-group" data-toggle="buttons">
+  <form>
+    <input type="radio"  ng-model="storageClientSource" value="angular"> AngularJs
+    <input type="radio"  ng-model="storageClientSource" value="js"> Javascript
+  </form>
+</div>
+<div ng-show="storageClientSource === 'angular'">
+  <hljs include="'sample-angular'"></hljs>
+</div>
+<div ng-show="storageClientSource === 'js'">
+  <hljs include="'sample-js'"></hljs>
+</div>
+  </div>
 </div>
 
-<script type="text/ng-template" id="sample">
+<div class="add-bottom">
+  <ng-include src="'sample-angular'"></ng-include>
+</div>
+
+<script type="text/ng-template" id="sample-angular">
 <storage-client-loader companyid="YOUR_COMPANY_ID"></storage-client-loader>
 </script>
+<script type="text/ng-template" id="sample-js">
+  function loadStorageSelector() {
+    backDrop = document.createElement("div");
+    backDrop.className = "storage-selector-backdrop";
+    document.body.appendChild(backDrop);
+    storageModal = document.createElement("iframe");
+    storageModal.src = "http://storage.risevision.com/storage-modal.html#/files/YOUR_COMPANY_ID";
+    storageModal.className = "storage-selector-iframe";
+    storageModal = document.body.appendChild(storageModal);
+  }
+
+  window.addEventListener("load", loadStorageSelector);
+  window.addEventListener("message", handleStorageMessage, false);
+
+  function handleStorageMessage(event) {
+    if (event.origin !== "http://storage.risevision.com") { return; }
+    console.log(event.data);
+  }
+</script>
+
