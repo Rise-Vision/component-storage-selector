@@ -19,6 +19,9 @@
           $window.addEventListener('message',
             function (event) {
               if (event.origin !== 'http://storage.risevision.com') { return; }
+              if (event.data === "close") {
+                  document.getElementsByClassName('storage-selector-backdrop')[0].click();
+              }
               console.log(event.data);
             }, false);
 
