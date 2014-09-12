@@ -31,11 +31,15 @@ bower_components/component-storage-loader/dist/component-storage-loader.js
 <div class="btn-group" data-toggle="buttons">
   <form>
     <input type="radio"  ng-model="storageClientSource" value="angular"> AngularJs
+    <input type="radio"  ng-model="storageClientSource" value="angularCustom"> AngularJs Custom
     <input type="radio"  ng-model="storageClientSource" value="js"> Javascript
   </form>
 </div>
 <div ng-show="storageClientSource === 'angular'">
   <hljs include="'sample-angular'"></hljs>
+</div>
+<div ng-show="storageClientSource === 'angularCustom'">
+    <hljs include="'sample-angular-custom'"></hljs>
 </div>
 <div ng-show="storageClientSource === 'js'">
   <hljs include="'sample-js'"></hljs>
@@ -49,6 +53,9 @@ bower_components/component-storage-loader/dist/component-storage-loader.js
 
 <script type="text/ng-template" id="sample-angular">
 <storage-client-loader companyid="YOUR_COMPANY_ID"></storage-client-loader>
+</script>
+<script type="text/ng-template" id="sample-angular-custom">
+    <storage-client-loader companyid="YOUR_COMPANY_ID" instance_template="storage.html" use_ctrl="StorageCtrl"></storage-client-loader>
 </script>
 <script type="text/ng-template" id="sample-js">
   function loadStorageSelector() {

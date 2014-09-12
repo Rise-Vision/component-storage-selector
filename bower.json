@@ -15,8 +15,8 @@
     "test",
     "tmp"
   ],
-  "devDependencies": {
-  },
+  "devDependencies": {},
   "dependencies": {
+    "ui-bootstrap": "~0.11.0"
   }
 }
