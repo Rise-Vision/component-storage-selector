@@ -16,6 +16,9 @@ as well as any desired styling on the iframe. </p>
 The ID for the currently selected Company can be found in the URL where the ID is everything to the right of "company=", for example:</p>
 <hljs>http://rva.risevision.com/#COMPANY_MANAGE/company=XXXXXXXX-XXXX-XXXX-XXXXXXXXXXXX</hljs>
 
+<p>The custom directive has options to point to a different template and controller that you could provide.  The local attribute
+tells the directive if it should use local files list or actually use a company id to view it's storage bucket.</p>
+
 <h3>Module Includes</h3>
 <code>angular.module('myApp', ['risevision.widget.common.storage-client-loader']);</code>
 
@@ -48,14 +51,14 @@ bower_components/component-storage-loader/dist/component-storage-loader.js
 </div>
 
 <div class="add-bottom">
-  <ng-include src="'sample-angular'"></ng-include>
+  <ng-include src="'sample-angular-custom'"></ng-include>
 </div>
 
 <script type="text/ng-template" id="sample-angular">
 <storage-client-loader companyid="YOUR_COMPANY_ID"></storage-client-loader>
 </script>
 <script type="text/ng-template" id="sample-angular-custom">
-    <storage-client-loader companyid="YOUR_COMPANY_ID" instance_template="storage.html" use_ctrl="StorageCtrl"></storage-client-loader>
+    <storage-client-loader companyid="YOUR_COMPANY_ID" instance_template="storage.html" use_ctrl="StorageCtrl" local="local"></storage-client-loader>
 </script>
 <script type="text/ng-template" id="sample-js">
   function loadStorageSelector() {
