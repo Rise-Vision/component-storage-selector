@@ -9,12 +9,18 @@
       return {
         restrict: 'EA',
         scope : {
+           local: "@",
            useCtrl: "@",
            companyid : '='
         },
         template: $templateCache.get('loader.html'),
         link: function (scope, attrs) {
-            scope.storageUrl = 'http://storage.risevision.com/storage-modal.html#/files/'+attrs.companyId;
+            if (scope.local){
+                scope.storageUrl = 'http://storage.risevision.com/storage-modal.html#/files/local';
+            }
+            else{
+                scope.storageUrl = 'http://storage.risevision.com/storage-modal.html#/files/'+attrs.companyId;
+            }
             scope.open = function() {
                 var modalInstance = $modal.open({
                     templateUrl: attrs.instanceTemplate || "storage.html",
