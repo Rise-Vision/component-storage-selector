@@ -12,7 +12,7 @@
            useCtrl: "@",
            companyid : "="
         },
-        template: $templateCache.get("loader.html"),
+        template: $templateCache.get("storage-selector.html"),
         link: function (scope, attrs) {
             if (scope.local){
                 scope.storageUrl = "http://storage.risevision.com/storage-modal.html#/files/local";
@@ -22,7 +22,7 @@
             }
             scope.open = function() {
                 var modalInstance = $modal.open({
-                    templateUrl: attrs.instanceTemplate || "storage.html",
+                    templateUrl: attrs.instanceTemplate || "storage-selector.html",
                     controller: scope.useCtrl || "StorageCtrl",
                     size: "lg",
                     backdrop: true,
@@ -69,15 +69,48 @@
 
 
 
+/* global CONFIG: true */
+/* exported CONFIG */
+if (typeof CONFIG === "undefined") {
+  var CONFIG = {
+    // variables go here
+  };
+}
+
+/* global CONFIG: true */
+/* exported CONFIG */
+if (typeof CONFIG === "undefined") {
+  var CONFIG = {
+    // variables go here
+  };
+}
+
+/* global CONFIG: true */
+/* exported CONFIG */
+if (typeof CONFIG === "undefined") {
+  var CONFIG = {
+    // variables go here
+  };
+}
+
+/* global CONFIG: true */
+/* exported CONFIG */
+if (typeof CONFIG === "undefined") {
+  var CONFIG = {
+    // variables go here
+  };
+}
+
 (function(module) {
 try { app = angular.module("risevision.widget.common.storage-selector"); }
 catch(err) { app = angular.module("risevision.widget.common.storage-selector", []); }
 app.run(["$templateCache", function($templateCache) {
   "use strict";
-  $templateCache.put("loader.html",
+  $templateCache.put("storage-selector.html",
     "<button class=\"btn btn-widget-icon-storage\" ng-click=\"open()\" type=\"button\" />\n" +
-    "<script type=\"text/ng-template\" id=\"storage.html\">\n" +
+    "<script type=\"text/ng-template\" id=\"storage-selector.html\">\n" +
     "        <iframe class=\"modal-dialog\" scrolling=\"no\" marginwidth=\"0\" src=\"{{ storageUrl.url }}\"></iframe>\n" +
-    "</script>");
+    "</script>\n" +
+    "");
 }]);
 })();

@@ -12,7 +12,7 @@
            useCtrl: "@",
            companyid : "="
         },
-        template: $templateCache.get("loader.html"),
+        template: $templateCache.get("storage-selector.html"),
         link: function (scope, attrs) {
             if (scope.local){
                 scope.storageUrl = "http://storage.risevision.com/storage-modal.html#/files/local";
@@ -22,7 +22,7 @@
             }
             scope.open = function() {
                 var modalInstance = $modal.open({
-                    templateUrl: attrs.instanceTemplate || "storage.html",
+                    templateUrl: attrs.instanceTemplate || "storage-selector.html",
                     controller: scope.useCtrl || "StorageCtrl",
                     size: "lg",
                     backdrop: true,
