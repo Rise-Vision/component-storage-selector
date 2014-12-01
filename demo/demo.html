@@ -20,14 +20,14 @@ The ID for the currently selected Company can be found in the URL where the ID i
 tells the directive if it should use local files list or actually use a company id to view it's storage bucket.</p>
 
 <h3>Module Includes</h3>
-<code>angular.module('myApp', ['risevision.widget.common.storage-client-loader']);</code>
+<code>angular.module('myApp', ['risevision.widget.common.storage-selector']);</code>
 
 
 <h3>Script Includes</h3>
 <p>Make sure you include the following files in <code>index.html</code></p>
 <hljs>
 bower_components/angular/angular.js
-bower_components/component-storage-loader/dist/component-storage-loader.js
+bower_components/component-storage-loader/dist/component-storage-selector.js
 </hljs>
 
 <h3>Usage</h3>
@@ -58,7 +58,7 @@ bower_components/component-storage-loader/dist/component-storage-loader.js
 <storage-client-loader companyid="YOUR_COMPANY_ID"></storage-client-loader>
 </script>
 <script type="text/ng-template" id="sample-angular-custom">
-    <storage-client-loader companyid="YOUR_COMPANY_ID" instance_template="storage.html" use_ctrl="StorageCtrl" local="local"></storage-client-loader>
+    <storage-selector companyid="YOUR_COMPANY_ID" instance_template="storage.html" use_ctrl="StorageCtrl" local="local"></storage-selector>
 </script>
 <script type="text/ng-template" id="sample-js">
   function loadStorageSelector() {

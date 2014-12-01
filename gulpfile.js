@@ -51,7 +51,7 @@
   gulp.task('angular:html2js', function() {
     return gulp.src('src/*.html')
       .pipe(html2js({
-        outputModuleName: 'risevision.widget.common.storage-client-loader',
+        outputModuleName: 'risevision.widget.common.storage-selector',
         useStrict: true,
         base: 'src'
       }))
@@ -64,7 +64,7 @@
       'src/**/*.js',
       'tmp/ng-templates/*.js'])
 
-      .pipe(concat('component-storage-loader.js'))
+      .pipe(concat('component-storage-selector.js'))
       .pipe(gulp.dest('dist/'));
   });
 
