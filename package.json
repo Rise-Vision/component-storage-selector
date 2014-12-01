@@ -1,6 +1,6 @@
 {
-  "name": "component-storage-loader",
-  "version": "0.0.1",
+  "name": "component-storage-selector",
+  "version": "0.0.2",
   "description": "Angular Directive to simplify use of Rise-Vision/storage-client",
   "main": "gulpfile.js",
   "scripts": {
@@ -9,14 +9,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:Rise-Vision/component-storage-loader.git"
+    "url": "git@github.com:Rise-Vision/component-storage-selector.git"
   },
   "author": "Rise Vision",
   "license": "GPLv3",
   "bugs": {
-    "url": "https://github.com/Rise-Vision/component-storage-loader/issues"
+    "url": "https://github.com/Rise-Vision/component-storage-selector/issues"
   },
-  "homepage": "https://github.com/Rise-Vision/component-storage-loader",
+  "homepage": "https://github.com/Rise-Vision/component-storage-selector",
   "devDependencies": {
     "casperjs": "^1.1.0-beta3",
     "chai": "~1.9.1",
