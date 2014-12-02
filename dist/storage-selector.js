@@ -3,8 +3,8 @@
   "use strict";
 
   angular.module("risevision.widget.common.storage-selector", ["ui.bootstrap"])
-  .directive("storageSelector", ["$window", "$templateCache", "$modal",
-    function($window, $templateCache, $modal){
+  .directive("storageSelector", ["$window", "$templateCache", "$modal", "$sce",
+    function($window, $templateCache, $modal, $sce){
       return {
         restrict: "EA",
         scope : {
@@ -22,13 +22,13 @@
             }
             scope.open = function() {
                 var modalInstance = $modal.open({
-                    templateUrl: attrs.instanceTemplate || "storage-selector.html",
+                    templateUrl: attrs.instanceTemplate || "storage.html",
                     controller: scope.useCtrl || "StorageCtrl",
                     size: "lg",
                     backdrop: true,
                     resolve: {
                         storageUrl: function () {
-                            return {url: scope.storageUrl};
+                            return {url: $sce.trustAsResourceUrl(scope.storageUrl)};
                         }
                     }
 
@@ -108,7 +108,7 @@ app.run(["$templateCache", function($templateCache) {
   "use strict";
   $templateCache.put("storage-selector.html",
     "<button class=\"btn btn-widget-icon-storage\" ng-click=\"open()\" type=\"button\" />\n" +
-    "<script type=\"text/ng-template\" id=\"storage-selector.html\">\n" +
+    "<script type=\"text/ng-template\" id=\"storage.html\">\n" +
     "        <iframe class=\"modal-dialog\" scrolling=\"no\" marginwidth=\"0\" src=\"{{ storageUrl.url }}\"></iframe>\n" +
     "</script>\n" +
     "");
