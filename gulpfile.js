@@ -30,6 +30,14 @@
 
   gulp.task('clean', ['clean-dist', 'clean-tmp']);
 
+  gulp.task("config", function() {
+    var env = process.env.NODE_ENV || "dev";
+    gutil.log("Environment is", env);
+
+    return gulp.src(["./src/config/" + env + ".js"])
+      .pipe(rename("config.js"))
+      .pipe(gulp.dest("./src/config"));
+  });
 
   gulp.task('bump', function(){
     return gulp.src(['./package.json', './bower.json'])
@@ -64,7 +72,7 @@
       'src/**/*.js',
       'tmp/ng-templates/*.js'])
 
-      .pipe(concat('component-storage-selector.js'))
+      .pipe(concat('storage-selector.js'))
       .pipe(gulp.dest('dist/'));
   });
 
@@ -78,16 +86,32 @@
   });
 
   gulp.task('build', function (cb) {
-    runSequence(['clean'], ['js-uglify'], cb);
+    runSequence(['clean', 'config'], ['js-uglify'], cb);
   });
 
-
+  gulp.task("e2e:server-close", factory.testServerClose());
+  gulp.task("e2e:server", factory.testServer());
+  gulp.task("webdriver_update", factory.webdriveUpdate());
+  gulp.task("test:ensure-directory", factory.ensureReportDirectory());
 
   gulp.task('test:metrics', factory.metrics());
 
+  gulp.task("test:e2e:ng", ["webdriver_update"], factory.testE2EAngular());
+
+  gulp.task("test:unit:ng", factory.testUnitAngular({
+    testFiles: [
+      "components/q/q.js",
+      "components/angular/angular.js",
+      "components/angular-mocks/angular-mocks.js",
+      "node_modules/widget-tester/mocks/common-mock.js",
+      "src/config/test.js",
+      "src/*.js",
+      "test/unit/**/*spec.js"
+    ]
+  }));
 
   gulp.task('test', ['build'], function (cb) {
-    return runSequence('test:metrics', cb);
+    return runSequence("test:unit:ng", "test:e2e:ng", "test:metrics", cb);
   });
 
   gulp.task('dev',function(){
@@ -98,6 +122,7 @@
     console.log('*************'.yellow);
     console.log('gulp dev - watch source files and auto build dist on change'.yellow);
     console.log('gulp build - one time build of dist'.yellow);
+    console.log('gulp test - build and run unit/e2e tests');
     console.log('*************'.yellow);
 
   });
