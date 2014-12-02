@@ -69,7 +69,9 @@
 
   gulp.task('angular', ['angular:html2js', 'lint'], function () {
     return gulp.src([
-      'src/**/*.js',
+      'src/config/config.js',
+      'src/dtv-storage-selector.js',
+      'src/ctr-storage-selector.js',
       'tmp/ng-templates/*.js'])
 
       .pipe(concat('storage-selector.js'))
@@ -105,7 +107,8 @@
       "components/angular-mocks/angular-mocks.js",
       "node_modules/widget-tester/mocks/common-mock.js",
       "src/config/test.js",
-      "src/*.js",
+      "src/dtv-storage-selector.js",
+      "src/ctr-storage-selector.js",
       "test/unit/**/*spec.js"
     ]
   }));
