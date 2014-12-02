@@ -3,8 +3,8 @@
   "use strict";
 
   angular.module("risevision.widget.common.storage-selector", ["ui.bootstrap"])
-  .directive("storageSelector", ["$window", "$templateCache", "$modal", "$sce",
-    function($window, $templateCache, $modal, $sce){
+  .directive("storageSelector", ["$window", "$templateCache", "$modal", "$sce", "$log",
+    function($window, $templateCache, $modal, $sce, $log){
       return {
         restrict: "EA",
         scope : {
@@ -34,37 +34,18 @@
 
                 });
 
-                $window.addEventListener("message",
-                    function (event) {
-                        if (event.origin !== "http://storage.risevision.com") { return; }
-                        if (event.data === "close") {
-                            modalInstance.dismiss();
-                        }
-                        console.log(event.data);
-                    }, false);
+              modalInstance.result.then(function (files) {
+                // emit an event with name "files", passing the array of files selected from storage
+                scope.$emit("picked", files);
 
-                modalInstance.result.then(function(){
-                    console.log("Finished");
-                }, function(){
-                    console.log("Modal dismissed at : " + new Date());
-                });
+              }, function () {
+                $log.info("Modal dismissed at: " + new Date());
+              });
             };
         }
       };
    }
-  ])
-  .controller("StorageCtrl", function($scope, $modalInstance, storageUrl){
-          //add the scop
-          $scope.storageUrl = storageUrl;
-
-          $scope.ok = function(){
-              $modalInstance.close();
-          };
-
-          $scope.cancel = function () {
-              $modalInstance.dismiss("cancel");
-          };
-  });
+  ]);
 })();
 
 
