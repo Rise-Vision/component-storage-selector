@@ -1,23 +1,21 @@
 
 <h1>Storage Selector</h1>
 
-<p class="lead">This is a sample implementation of the storage selector</p>
+<p class="lead">An Angular directive that provides the Storage Icon button to launch a Storage modal and select a file</p>
 
-<p><strong>Dependencies</strong><span class="label label-info">Angular JS</span></p>
+<p><strong>Dependencies</strong> <span class="label label-info">Angular JS</span> <span class="label label-info">Angular Bootstrap</span></p>
 
 <h3>Usage</h3>
-<p>When a file is selected, the storage selector will send a message to its parent window.
-   The message will contain the url of the selected file.</p>
+<p>When clicking the Storage icon button, the Storage modal is launched and you may need to allow Rise Vision access to your Google account to verify who you are. Once verified, you can select a file from the list.</p>
 
-<p>The current window will load the iframe and is responsible for providing the Company ID
-as well as any desired styling on the iframe. </p>
+<p>The Storage Selector directive will <code>$emit</code> an event called <code>"picked"</code> if you click the "Select" button in the Storage modal and this event will provide an array of urls of the selected files.</p>
 
-<p>To retrieve the Company ID click on Settings from the menu of the Rise Vision Application.
-The ID for the currently selected Company can be found in the URL where the ID is everything to the right of "company=", for example:</p>
+<p>Alternatively, if you prefer not to use the <code>"picked"</code> event or you're implementing a vanilla JS approach for storage selection, when a file is selected, the Storage modal will send a message to its parent window. If you click "Select" button in the Storage modal the message will be an array of the urls of the selected files. If you click "X" in the Storage modal then the message will be a string stating <code>"close"</code>.</p>
+
+<p>This directive provides attributes <code>local</code> and <code>companyid</code>. The local attribute tells the directive if it should use local files list. If the local attribute is not present than it is to use a company id to view it's storage bucket. To retrieve the Company ID click on Settings from the menu of the Rise Vision Application. The ID for the currently selected Company can be found in the URL where the ID is everything to the right of "company=", for example:</p>
 <hljs>http://rva.risevision.com/#COMPANY_MANAGE/company=XXXXXXXX-XXXX-XXXX-XXXXXXXXXXXX</hljs>
 
-<p>The custom directive has options to point to a different template and controller that you could provide.  The local attribute
-tells the directive if it should use local files list or actually use a company id to view it's storage bucket.</p>
+<p>The directive also has attribute options <code>instanceTemplate</code> to point to a different template, and <code>useCtrl</code> to point to a different controller.</p>
 
 <h3>Module Includes</h3>
 <code>angular.module('myApp', ['risevision.widget.common.storage-selector']);</code>
@@ -27,7 +25,8 @@ tells the directive if it should use local files list or actually use a company 
 <p>Make sure you include the following files in <code>index.html</code></p>
 <hljs>
 bower_components/angular/angular.js
-bower_components/component-storage-loader/dist/storage-selector.js
+bower_components/angular-bootstrap/ui-bootstrap-tpls.js
+bower_components/component-storage-selector/dist/storage-selector.js
 </hljs>
 
 <h3>Usage</h3>
@@ -58,7 +57,7 @@ bower_components/component-storage-loader/dist/storage-selector.js
 <storage-client-loader companyid="YOUR_COMPANY_ID"></storage-client-loader>
 </script>
 <script type="text/ng-template" id="sample-angular-custom">
-    <storage-selector companyid="YOUR_COMPANY_ID" instance_template="storage.html" use_ctrl="StorageCtrl" local="local"></storage-selector>
+    <storage-selector instance_template="storage.html" use_ctrl="StorageCtrl" local="local"></storage-selector>
 </script>
 <script type="text/ng-template" id="sample-js">
   function loadStorageSelector() {
