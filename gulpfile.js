@@ -51,7 +51,10 @@
       'test/**/*.js'])
       .pipe(jshint())
       .pipe(jshint.reporter('jshint-stylish'))
-      .pipe(jshint.reporter('fail'));
+      .pipe(jshint.reporter('fail'))
+      .on("error", function () {
+        process.exit(1);
+      });
   });
 
 
@@ -95,17 +98,21 @@
   gulp.task("e2e:server", factory.testServer());
   gulp.task("webdriver_update", factory.webdriveUpdate());
   gulp.task("test:ensure-directory", factory.ensureReportDirectory());
+  gulp.task("test:e2e:ng:core", factory.testE2EAngular());
 
   gulp.task('test:metrics', factory.metrics());
 
-  gulp.task("test:e2e:ng", ["webdriver_update"], factory.testE2EAngular());
+  gulp.task("test:e2e:ng", ["webdriver_update"], function (cb) {
+    return runSequence("e2e:server", "test:e2e:ng:core", "e2e:server-close", cb);
+  });
 
   gulp.task("test:unit:ng", factory.testUnitAngular({
     testFiles: [
+      "components/jquery/dist/jquery.js",
       "components/q/q.js",
       "components/angular/angular.js",
+      "components/angular-bootstrap/ui-bootstrap-tpls.js",
       "components/angular-mocks/angular-mocks.js",
-      "node_modules/widget-tester/mocks/common-mock.js",
       "src/config/test.js",
       "src/dtv-storage-selector.js",
       "src/ctr-storage-selector.js",

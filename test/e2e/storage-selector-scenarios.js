@@ -10,7 +10,7 @@
   var chaiAsPromised = require("chai-as-promised");
 
   chai.use(chaiAsPromised);
-  //var expect = chai.expect;
+  var expect = chai.expect;
 
   browser.driver.manage().window().setSize(1024, 768);
 
@@ -19,8 +19,9 @@
       browser.get("/test/e2e/storage-selector-scenarios.html");
     });
 
-    xit("Should do something", function () {
-      // expect something
+    it("Should correctly load", function () {
+      expect(element(by.css(".btn-widget-icon-storage")).isPresent()).
+        to.eventually.be.true;
     });
 
   });
