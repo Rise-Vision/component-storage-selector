@@ -1,0 +1,22 @@
+dependencies:
+  pre:
+    - npm install -g gulp
+    - npm install -g casperjs
+  post:
+    - bower install
+    - wget http://selenium-release.storage.googleapis.com/2.44/selenium-server-standalone-2.44.0.jar
+    - nohup bash -c "java -jar selenium-server-standalone-2.44.0.jar &"
+test:
+  override:
+    - NODE_ENV=prod npm run test
+deployment:
+  staging:
+    branch: /(feature|fix|chore).*/
+    commands:
+      - NODE_ENV=test npm run build
+  production:
+    branch: master
+    commands:
+      - NODE_ENV=prod npm run build
+      - echo "Trigger style-guide build"
+      - curl -X POST https://circleci.com/api/v1/project/Rise-Vision/style-guide/tree/master?circle-token=$RISE_CIRCLE_TOKEN

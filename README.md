@@ -1,4 +1,4 @@
-# Storage Selector [![Build Status](http://devtools1.risevision.com:8080/job/Component-Storage-Selector-Master/badge/icon)](http://devtools1.risevision.com:8080/job/Component-Storage-Selector-Master/)
+# Storage Selector [![Circle CI](https://circleci.com/gh/Rise-Vision/component-storage-selector/tree/master.svg?style=svg)](https://circleci.com/gh/Rise-Vision/component-storage-selector/tree/master)
 
 ## Introduction
 
