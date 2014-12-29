@@ -97,7 +97,6 @@
   gulp.task("e2e:server-close", factory.testServerClose());
   gulp.task("e2e:server", factory.testServer());
   gulp.task("webdriver_update", factory.webdriveUpdate());
-  gulp.task("test:ensure-directory", factory.ensureReportDirectory());
   gulp.task("test:e2e:ng:core", factory.testE2EAngular());
 
   gulp.task('test:metrics', factory.metrics());
