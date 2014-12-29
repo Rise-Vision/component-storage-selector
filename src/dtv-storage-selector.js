@@ -8,40 +8,48 @@
       return {
         restrict: "EA",
         scope : {
-           local: "@",
-           useCtrl: "@",
-           companyid : "="
+          local: "@",
+          useCtrl: "@",
+          instanceTemplate: "@",
+          companyid : "="
         },
         template: $templateCache.get("storage-selector.html"),
-        link: function (scope, attrs) {
-            if (scope.local){
-                scope.storageUrl = "http://storage.risevision.com/storage-modal.html#/files/local";
-            }
-            else{
-                scope.storageUrl = "http://storage.risevision.com/storage-modal.html#/files/" + attrs.companyId;
-            }
-            scope.open = function() {
-                var modalInstance = $modal.open({
-                    templateUrl: attrs.instanceTemplate || "storage.html",
-                    controller: scope.useCtrl || "StorageCtrl",
-                    size: "lg",
-                    backdrop: true,
-                    resolve: {
-                        storageUrl: function () {
-                            return {url: $sce.trustAsResourceUrl(scope.storageUrl)};
-                        }
-                    }
+        link: function (scope) {
 
-                });
+          scope.storageUrl = "";
 
-              modalInstance.result.then(function (files) {
-                // emit an event with name "files", passing the array of files selected from storage
-                scope.$emit("picked", files);
+          scope.open = function() {
+            var modalInstance = $modal.open({
+              templateUrl: scope.instanceTemplate || "storage.html",
+              controller: scope.useCtrl || "StorageCtrl",
+              size: "lg",
+              backdrop: true,
+              resolve: {
+                storageUrl: function () {
+                  return {url: $sce.trustAsResourceUrl(scope.storageUrl)};
+                }
+              }
+            });
 
-              }, function () {
-                $log.info("Modal dismissed at: " + new Date());
-              });
-            };
+            modalInstance.result.then(function (files) {
+              // emit an event with name "files", passing the array of files selected from storage
+              scope.$emit("picked", files);
+
+            }, function () {
+              $log.info("Modal dismissed at: " + new Date());
+            });
+
+          };
+
+          if (scope.local){
+            scope.storageUrl = "http://storage.risevision.com/storage-modal.html#/files/local";
+          } else {
+            scope.$watch("companyid", function (companyid) {
+              if (companyid) {
+                scope.storageUrl = "http://storage.risevision.com/storage-modal.html#/files/" + companyid;
+              }
+            });
+          }
         }
       };
    }
