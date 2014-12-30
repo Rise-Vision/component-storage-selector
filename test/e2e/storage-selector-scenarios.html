@@ -10,7 +10,7 @@
 <div>
   <h2 class="text-center">Storage Selector - e2e Testing</h2>
   <hr>
-  <storage-selector local="local"></storage-selector>
+  <storage-selector company-id="{{settings.params.companyId}}"></storage-selector>
 </div>
 
 <script type="text/javascript" src="/components/angular/angular.js"></script>
@@ -27,7 +27,11 @@
   angular.module("testapp", ["risevision.widget.common.storage-selector"])
     .controller("mainController", ["$scope", "$window",
       function ($scope, $window) {
-        // TODO: any logic needed?
+        $scope.settings = {
+          params: {
+            companyId: "12345"
+          }
+        }
       }]);
 </script>
 </body>
