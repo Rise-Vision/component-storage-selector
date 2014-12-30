@@ -19,7 +19,7 @@ if (typeof CONFIG === "undefined") {
           local: "@",
           useCtrl: "@",
           instanceTemplate: "@",
-          companyid : "="
+          companyId : "@"
         },
         template: $templateCache.get("storage-selector.html"),
         link: function (scope) {
@@ -52,9 +52,9 @@ if (typeof CONFIG === "undefined") {
           if (scope.local){
             scope.storageUrl = "http://storage.risevision.com/storage-modal.html#/files/local";
           } else {
-            scope.$watch("companyid", function (companyid) {
-              if (companyid) {
-                scope.storageUrl = "http://storage.risevision.com/storage-modal.html#/files/" + companyid;
+            scope.$watch("companyId", function (companyId) {
+              if (companyId) {
+                scope.storageUrl = "http://storage.risevision.com/storage-modal.html#/files/" + companyId;
               }
             });
           }
