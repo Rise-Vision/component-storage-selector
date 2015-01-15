@@ -4,15 +4,23 @@ if (typeof CONFIG === "undefined") {
   var CONFIG = {
     // variables go here
   };
+
+  if (typeof angular !== "undefined") {
+    angular.module("risevision.widget.common.storage-selector.config", [])
+      .constant("STORAGE_MODAL", "http://storage.risevision.com/~rvi/storage-client-rva-test/storage-modal.html#/files/");
+  }
 }
 
 (function () {
 
   "use strict";
 
-  angular.module("risevision.widget.common.storage-selector", ["ui.bootstrap"])
-  .directive("storageSelector", ["$window", "$templateCache", "$modal", "$sce", "$log",
-    function($window, $templateCache, $modal, $sce, $log){
+  angular.module("risevision.widget.common.storage-selector", [
+    "ui.bootstrap",
+    "risevision.widget.common.storage-selector.config"
+  ])
+  .directive("storageSelector", ["$window", "$templateCache", "$modal", "$sce", "$log", "STORAGE_MODAL",
+    function($window, $templateCache, $modal, $sce, $log, STORAGE_MODAL){
       return {
         restrict: "EA",
         scope : {
@@ -50,11 +58,11 @@ if (typeof CONFIG === "undefined") {
           };
 
           if (scope.local){
-            scope.storageUrl = "http://storage.risevision.com/storage-modal.html#/files/local";
+            scope.storageUrl = STORAGE_MODAL + "local";
           } else {
             scope.$watch("companyId", function (companyId) {
               if (companyId) {
-                scope.storageUrl = "http://storage.risevision.com/storage-modal.html#/files/" + companyId;
+                scope.storageUrl = STORAGE_MODAL + companyId;
               }
             });
           }
