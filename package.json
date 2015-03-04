@@ -18,18 +18,18 @@
   },
   "homepage": "https://github.com/Rise-Vision/component-storage-selector",
   "devDependencies": {
-    "casperjs": "^1.1.0-beta3",
     "chai": "~1.9.1",
     "chai-as-promised": "~4.1.1",
+    "del": "~1.1.1",
     "express": "^4.6.1",
     "gulp": "~3.8.1",
+    "gulp-bower": "~0.0.10",
     "gulp-bump": "~0.1.8",
     "gulp-concat": "^2.2.0",
     "gulp-html2js": "^0.1.0",
     "gulp-jshint": "~1.5.5",
     "gulp-protractor": "~0.0.8",
     "gulp-rename": "~1.2.0",
-    "gulp-rimraf": "^0.1.0",
     "gulp-uglify": "^0.3.1",
     "gulp-util": "~2.2.17",
     "gulp-watch": "^0.6.8",
@@ -48,7 +48,6 @@
     "protractor": "~1.0.0",
     "run-sequence": "^0.3.2",
     "sinon-chai": "^2.6.0",
-    "spawn-cmd": "0.0.2",
     "widget-tester": "git://github.com/Rise-Vision/widget-tester.git"
   },
   "dependencies": {
