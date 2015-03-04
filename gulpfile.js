@@ -7,7 +7,6 @@
   var gutil = require('gulp-util');
   var colors = require('colors');
 
-  var rimraf = require('gulp-rimraf');
   var concat = require('gulp-concat');
   var bump = require('gulp-bump');
   var html2js = require('gulp-html2js');
@@ -17,15 +16,19 @@
   var path = require('path');
   var rename = require('gulp-rename');
   var factory = require('widget-tester').gulpTaskFactory;
+  var bower = require("gulp-bower");
+  var del = require("del");
 
-  gulp.task('clean-dist', function () {
-    return gulp.src('dist', {read: false})
-      .pipe(rimraf());
+  gulp.task("clean-bower", function(cb){
+    del(["./components/**"], cb);
   });
 
-  gulp.task('clean-tmp', function () {
-    return gulp.src('tmp', {read: false})
-      .pipe(rimraf());
+  gulp.task("clean-dist", function (cb) {
+    del(['./dist/**'], cb);
+  });
+
+  gulp.task("clean-tmp", function (cb) {
+    del(['./tmp/**'], cb);
   });
 
   gulp.task('clean', ['clean-dist', 'clean-tmp']);
@@ -45,19 +48,12 @@
       .pipe(gulp.dest('./'));
   });
 
-  gulp.task('lint', function() {
-    return gulp.src([
-      'src/**/*.js',
-      'test/**/*.js'])
+  gulp.task("lint", function() {
+    return gulp.src('src/**/*.js')
       .pipe(jshint())
-      .pipe(jshint.reporter('jshint-stylish'))
-      .pipe(jshint.reporter('fail'))
-      .on("error", function () {
-        process.exit(1);
-      });
+      .pipe(jshint.reporter("jshint-stylish"))
+      .pipe(jshint.reporter("fail"));
   });
-
-
 
   gulp.task('angular:html2js', function() {
     return gulp.src('src/*.html')
@@ -90,10 +86,6 @@
       .pipe(gulp.dest('dist'));
   });
 
-  gulp.task('build', function (cb) {
-    runSequence(['clean', 'config'], ['js-uglify'], cb);
-  });
-
   gulp.task("e2e:server-close", factory.testServerClose());
   gulp.task("e2e:server", factory.testServer());
   gulp.task("webdriver_update", factory.webdriveUpdate());
@@ -119,21 +111,29 @@
     ]
   }));
 
+  // ***** Primary Tasks ***** //
+
+  gulp.task("bower-clean-install", ["clean-bower"], function(cb){
+    return bower().on("error", function(err) {
+      console.log(err);
+      cb();
+    });
+  });
+
   gulp.task('test', ['build'], function (cb) {
     return runSequence("test:unit:ng", "test:e2e:ng", "test:metrics", cb);
   });
 
-  gulp.task('dev',function(){
-    gulp.watch('./src/**/*', ['build']);
+  gulp.task('build', function (cb) {
+    runSequence(['clean', 'config'], ['js-uglify'], cb);
   });
 
   gulp.task('default', function(){
-    console.log('*************'.yellow);
-    console.log('gulp dev - watch source files and auto build dist on change'.yellow);
-    console.log('gulp build - one time build of dist'.yellow);
-    console.log('gulp test - build and run unit/e2e tests');
-    console.log('*************'.yellow);
-
+    console.log('*****************************************************************'.yellow);
+    console.log('gulp bower-clean-install : delete and re-install bower components'.yellow);
+    console.log('gulp build : one time build of dist'.yellow);
+    console.log('gulp test : build and run unit/e2e tests'.yellow);
+    console.log('*****************************************************************'.yellow);
   });
 
 })();
