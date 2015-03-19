@@ -5,7 +5,7 @@ angular.module("risevision.widget.common.storage-selector")
     $scope.storageUrl = storageUrl;
 
     $window.addEventListener("message", function (event) {
-      var storageTest = "storage-stage.risevision.com",
+      var storageTest = "storage-stage-rva-test.risevision.com",
         storageProd = "storage.risevision.com";
 
       if (event.origin.indexOf(storageTest) === -1 && event.origin.indexOf(storageProd) === -1) {
