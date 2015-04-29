@@ -1,29 +1,26 @@
 
 <h1>Storage Selector</h1>
 
-<p class="lead">An Angular directive that provides the Storage Icon button to launch a Storage modal and select a file</p>
+<p class="lead">An Angular directive that provides the Storage Icon button to launch a Storage modal and select a file or folder</p>
 
 <p><strong>Dependencies</strong> <span class="label label-info">Angular JS</span> <span class="label label-info">Angular Bootstrap</span></p>
 
 <h3>Usage</h3>
-<p>When clicking the Storage icon button, the Storage modal is launched and you may need to allow Rise Vision access to your Google account to verify who you are. Once verified, you can select a file from the list.</p>
+<p>When clicking the Storage icon button, a modal is launched containing Storage selection. You may need to allow Rise Vision access to your Google account to verify who you are. Once verified, you can select a file or folder.</p>
 
-<p>The Storage Selector directive will <code>$emit</code> an event called <code>"picked"</code> if you click the "Select" button in the Storage modal and this event will provide an array of urls of the selected files.</p>
+<p>The Storage Selector directive will <code>$emit</code> an event called <code>"picked"</code> when you make a selection from Storage and this event will provide an array of urls of the selected files.</p>
 
-<p>Alternatively, if you prefer not to use the <code>"picked"</code> event or you're implementing a vanilla JS approach for storage selection, when a file is selected, the Storage modal will send a message to its parent window. If you click "Select" button in the Storage modal the message will be an array of the urls of the selected files. If you click "X" in the Storage modal then the message will be a string stating <code>"close"</code>.</p>
-
-<p>This directive provides attributes <code>local</code> and <code>companyid</code>. The local attribute tells the directive if it should use local files list. If the local attribute is not present than it is to use a company id to view it's storage bucket. To retrieve the Company ID click on Settings from the menu of the Rise Vision Application. The ID for the currently selected Company can be found in the URL where the ID is everything to the right of "company=", for example:</p>
+<p>This directive provides attributes <code>type</code> and <code>companyid</code>. The type attribute tells the directive what specific selector type it should use for configuring the Storage selection. Acceptable values are <code>single-file</code>, <code>multiple-file</code> and <code>single-folder</code>. To retrieve the Company ID click on Settings from the menu of the Rise Vision Application. The ID for the currently selected Company can be found in the URL where the ID is everything to the right of "company=", for example:</p>
 <hljs>http://rva.risevision.com/#COMPANY_MANAGE/company=XXXXXXXX-XXXX-XXXX-XXXXXXXXXXXX</hljs>
-
-<p>The directive also has attribute options <code>instanceTemplate</code> to point to a different template, and <code>useCtrl</code> to point to a different controller.</p>
 
 <h3>Module Includes</h3>
 <code>angular.module('myApp', ['risevision.widget.common.storage-selector']);</code>
 
 
 <h3>Script Includes</h3>
-<p>Make sure you include the following files in <code>index.html</code></p>
+<p>Make sure you include the following dependency files:</p>
 <hljs>
+bower_components/common-style/dist/css/rise.min.css
 bower_components/angular/angular.js
 bower_components/angular-bootstrap/ui-bootstrap-tpls.js
 bower_components/component-storage-selector/dist/storage-selector.js
@@ -33,15 +30,11 @@ bower_components/component-storage-selector/dist/storage-selector.js
 <div class="btn-group" data-toggle="buttons">
   <form>
     <input type="radio"  ng-model="storageClientSource" value="angular"> AngularJs
-    <input type="radio"  ng-model="storageClientSource" value="angularCustom"> AngularJs Custom
     <input type="radio"  ng-model="storageClientSource" value="js"> Javascript
   </form>
 </div>
 <div ng-show="storageClientSource === 'angular'">
   <hljs include="'sample-angular'"></hljs>
-</div>
-<div ng-show="storageClientSource === 'angularCustom'">
-    <hljs include="'sample-angular-custom'"></hljs>
 </div>
 <div ng-show="storageClientSource === 'js'">
   <hljs include="'sample-js'"></hljs>
@@ -50,22 +43,20 @@ bower_components/component-storage-selector/dist/storage-selector.js
 </div>
 
 <div class="add-bottom">
-  <ng-include src="'sample-angular-custom'"></ng-include>
+  <ng-include src="'sample-angular'"></ng-include>
 </div>
 
 <script type="text/ng-template" id="sample-angular">
-<storage-selector company-id="YOUR_COMPANY_ID"></storage-selector>
+  <storage-selector company-id="abc123" type="single-file"></storage-selector>
 </script>
-<script type="text/ng-template" id="sample-angular-custom">
-    <storage-selector instance-template="storage.html" use-ctrl="StorageCtrl" local="local"></storage-selector>
-</script>
+
 <script type="text/ng-template" id="sample-js">
   function loadStorageSelector() {
     backDrop = document.createElement("div");
     backDrop.className = "storage-selector-backdrop";
     document.body.appendChild(backDrop);
     storageModal = document.createElement("iframe");
-    storageModal.src = "http://storage.risevision.com/storage-modal.html#/files/YOUR_COMPANY_ID";
+    storageModal.src = "http://storage.risevision.com/files/{YOUR_COMPANY_ID}?selector-type={YOUR_TYPE}";
     storageModal.className = "storage-selector-iframe";
     storageModal = document.body.appendChild(storageModal);
   }

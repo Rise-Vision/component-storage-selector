@@ -1,6 +1,10 @@
 if (typeof angular !== "undefined") {
   angular.module("risevision.widget.common.storage-selector.config", [])
-    .value("STORAGE_MODAL", "http://storage.risevision.com/storage-modal.html#/files/");
+    // ** NOTE **
+    // Due to the build infrastructure and how Widgets import the compiled dist/storage-selector.js version,
+    // the value here will not be used. It is for reference so that it can be used to override the value
+    // in the Widgets config/dev.js file
+    .value("STORAGE_MODAL", "https://storage-stage-rva-test.risevision.com/files/");
 }
 
 (function () {
@@ -11,25 +15,33 @@ if (typeof angular !== "undefined") {
     "ui.bootstrap",
     "risevision.widget.common.storage-selector.config"
   ])
-  .directive("storageSelector", ["$window", "$templateCache", "$modal", "$sce", "$log", "STORAGE_MODAL",
-    function($window, $templateCache, $modal, $sce, $log, STORAGE_MODAL){
+  .directive("storageSelector", ["$templateCache", "$modal", "$sce", "$log", "STORAGE_MODAL",
+    function($templateCache, $modal, $sce, $log, STORAGE_MODAL){
       return {
         restrict: "EA",
         scope : {
-          local: "@",
-          useCtrl: "@",
-          instanceTemplate: "@",
-          companyId : "@"
+          companyId : "@",
+          type: "@"
         },
         template: $templateCache.get("storage-selector.html"),
         link: function (scope) {
 
+          function updateStorageUrl() {
+            if (typeof scope.type !== "undefined" && scope.type !== "") {
+              scope.storageUrl = STORAGE_MODAL + scope.companyId + "?selector-type=" + scope.type;
+            } else {
+              // If no "type" value then omit the selector-type param to allow In-App Storage to apply a default
+              scope.storageUrl = STORAGE_MODAL + scope.companyId;
+            }
+          }
+
           scope.storageUrl = "";
 
           scope.open = function() {
-            var modalInstance = $modal.open({
-              templateUrl: scope.instanceTemplate || "storage.html",
-              controller: scope.useCtrl || "StorageCtrl",
+
+            scope.modalInstance = $modal.open({
+              templateUrl: "storage.html",
+              controller: "StorageCtrl",
               size: "lg",
               backdrop: true,
               resolve: {
@@ -39,25 +51,34 @@ if (typeof angular !== "undefined") {
               }
             });
 
-            modalInstance.result.then(function (files) {
+            scope.modalInstance.result.then(function (files) {
+              // for unit test purposes
+              scope.files = files;
+
               // emit an event with name "files", passing the array of files selected from storage
               scope.$emit("picked", files);
 
             }, function () {
+              // for unit test purposes
+              scope.canceled = true;
+
               $log.info("Modal dismissed at: " + new Date());
+
             });
 
           };
 
-          if (scope.local){
-            scope.storageUrl = STORAGE_MODAL + "local";
-          } else {
-            scope.$watch("companyId", function (companyId) {
-              if (companyId) {
-                scope.storageUrl = STORAGE_MODAL + companyId;
-              }
-            });
-          }
+          scope.$watch("companyId", function (companyId) {
+            if (companyId) {
+              updateStorageUrl();
+            }
+          });
+
+          scope.$watch("type", function (type) {
+            if (type) {
+              updateStorageUrl();
+            }
+          });
         }
       };
    }
@@ -67,27 +88,33 @@ if (typeof angular !== "undefined") {
 
 
 angular.module("risevision.widget.common.storage-selector")
-  .controller("StorageCtrl", ["$scope", "$modalInstance", "storageUrl", "$window", "$log",
-    function($scope, $modalInstance, storageUrl, $window/*, $log*/){
+  .controller("StorageCtrl", ["$scope", "$modalInstance", "storageUrl", "$window", "$log", "STORAGE_MODAL",
+    function($scope, $modalInstance, storageUrl, $window, $log, STORAGE_MODAL){
 
-    $scope.storageUrl = storageUrl;
+      $scope.storageUrl = storageUrl;
 
-    $window.addEventListener("message", function (event) {
-      var storageTest = "storage-stage-rva-test.risevision.com",
-        storageProd = "storage.risevision.com";
+      $scope.isSameOrigin = function (origin) {
+        var parser = document.createElement("a");
+        parser.href = STORAGE_MODAL;
 
-      if (event.origin.indexOf(storageTest) === -1 && event.origin.indexOf(storageProd) === -1) {
-        return;
-      }
+        return origin.indexOf(parser.host) !== -1;
+      };
 
-      if (Array.isArray(event.data)) {
-        $modalInstance.close(event.data);
-      } else if (typeof event.data === "string") {
-        if (event.data === "close") {
-          $modalInstance.dismiss("cancel");
+      $scope.messageHandler = function (event) {
+        if (!$scope.isSameOrigin(event.origin)) {
+          return;
         }
-      }
-    });
+
+        if (Array.isArray(event.data)) {
+          $modalInstance.close(event.data);
+        } else if (typeof event.data === "string") {
+          if (event.data === "close") {
+            $modalInstance.dismiss("cancel");
+          }
+        }
+      };
+
+      $window.addEventListener("message", $scope.messageHandler);
 
   }]);
 

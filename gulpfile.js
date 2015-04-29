@@ -99,12 +99,10 @@
 
   gulp.task("test:unit:ng", factory.testUnitAngular({
     testFiles: [
-      "components/jquery/dist/jquery.js",
-      "components/q/q.js",
       "components/angular/angular.js",
       "components/angular-bootstrap/ui-bootstrap-tpls.js",
       "components/angular-mocks/angular-mocks.js",
-      "src/config/test.js",
+      "src/config/dev.js",
       "src/dtv-storage-selector.js",
       "src/ctr-storage-selector.js",
       "test/unit/**/*spec.js"

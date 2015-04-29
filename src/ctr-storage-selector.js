@@ -1,24 +1,30 @@
 angular.module("risevision.widget.common.storage-selector")
-  .controller("StorageCtrl", ["$scope", "$modalInstance", "storageUrl", "$window", "$log",
-    function($scope, $modalInstance, storageUrl, $window/*, $log*/){
+  .controller("StorageCtrl", ["$scope", "$modalInstance", "storageUrl", "$window", "$log", "STORAGE_MODAL",
+    function($scope, $modalInstance, storageUrl, $window, $log, STORAGE_MODAL){
 
-    $scope.storageUrl = storageUrl;
+      $scope.storageUrl = storageUrl;
 
-    $window.addEventListener("message", function (event) {
-      var storageTest = "storage-stage-rva-test.risevision.com",
-        storageProd = "storage.risevision.com";
+      $scope.isSameOrigin = function (origin) {
+        var parser = document.createElement("a");
+        parser.href = STORAGE_MODAL;
 
-      if (event.origin.indexOf(storageTest) === -1 && event.origin.indexOf(storageProd) === -1) {
-        return;
-      }
+        return origin.indexOf(parser.host) !== -1;
+      };
 
-      if (Array.isArray(event.data)) {
-        $modalInstance.close(event.data);
-      } else if (typeof event.data === "string") {
-        if (event.data === "close") {
-          $modalInstance.dismiss("cancel");
+      $scope.messageHandler = function (event) {
+        if (!$scope.isSameOrigin(event.origin)) {
+          return;
         }
-      }
-    });
+
+        if (Array.isArray(event.data)) {
+          $modalInstance.close(event.data);
+        } else if (typeof event.data === "string") {
+          if (event.data === "close") {
+            $modalInstance.dismiss("cancel");
+          }
+        }
+      };
+
+      $window.addEventListener("message", $scope.messageHandler);
 
   }]);
