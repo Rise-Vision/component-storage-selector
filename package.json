@@ -1,7 +1,7 @@
 {
   "name": "component-storage-selector",
-  "version": "0.0.2",
-  "description": "Angular Directive to simplify use of Rise-Vision/storage-client",
+  "version": "1.0.0",
+  "description": "An Angular directive that provides the Storage Icon button to launch a modal containing Storage selection",
   "main": "gulpfile.js",
   "scripts": {
     "test": "gulp test",

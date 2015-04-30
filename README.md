@@ -2,7 +2,7 @@
 
 ## Introduction
 
-The Storage Selector component is an Angular directive which provides the Storage Icon button to launch a Storage modal that displays a list of files for selection.
+The Storage Selector component is an Angular directive which provides the Storage Icon button to launch a modal containing Storage selection.
 
 For usage documentation and a visual example, visit the style guide for the Storage Selector component [here](http://rise-vision.github.io/style-guide/#/components/storage-selector).
 
@@ -12,6 +12,7 @@ At this time Chrome is the only browser that this project and Rise Vision suppor
 
 ## Built With
 - [AngularJS](https://angularjs.org/)
+- [Angular UI Bootstrap](https://angular-ui.github.io/bootstrap/)
 - [npm](https://www.npmjs.org)
 - [Bower](http://bower.io/)
 - [Gulp](http://gulpjs.com/)
@@ -80,9 +81,6 @@ What actually happened. (screenshots / video captures always help)
 ## Contributing
 All contributions are greatly appreciated and welcome! If you would first like to sound out your contribution ideas please post your thoughts to our [community](http://community.risevision.com), otherwise submit a pull request and we will do our best to incorporate it
 
-### Suggested Contributions
-- additional e2e and unit tests
-
 ## Resources
 If you have any questions or problems please don't hesitate to join our lively and responsive community at http://community.risevision.com.
 
@@ -92,5 +90,4 @@ If you would like more information on developing applications for Rise Vision pl
 
 **Facilitator**
 
-- [Tyler Johnson](https://github.com/tejohnso "Tyler Johnson")
-- [Stuart Lees](https://github.com/stulees "Stuart Lees")
+[Stuart Lees](https://github.com/stulees "Stuart Lees")

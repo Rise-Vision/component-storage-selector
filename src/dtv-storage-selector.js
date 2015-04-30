@@ -6,25 +6,33 @@
     "ui.bootstrap",
     "risevision.widget.common.storage-selector.config"
   ])
-  .directive("storageSelector", ["$window", "$templateCache", "$modal", "$sce", "$log", "STORAGE_MODAL",
-    function($window, $templateCache, $modal, $sce, $log, STORAGE_MODAL){
+  .directive("storageSelector", ["$templateCache", "$modal", "$sce", "$log", "STORAGE_MODAL",
+    function($templateCache, $modal, $sce, $log, STORAGE_MODAL){
       return {
         restrict: "EA",
         scope : {
-          local: "@",
-          useCtrl: "@",
-          instanceTemplate: "@",
-          companyId : "@"
+          companyId : "@",
+          type: "@"
         },
         template: $templateCache.get("storage-selector.html"),
         link: function (scope) {
 
+          function updateStorageUrl() {
+            if (typeof scope.type !== "undefined" && scope.type !== "") {
+              scope.storageUrl = STORAGE_MODAL + scope.companyId + "?selector-type=" + scope.type;
+            } else {
+              // If no "type" value then omit the selector-type param to allow In-App Storage to apply a default
+              scope.storageUrl = STORAGE_MODAL + scope.companyId;
+            }
+          }
+
           scope.storageUrl = "";
 
           scope.open = function() {
-            var modalInstance = $modal.open({
-              templateUrl: scope.instanceTemplate || "storage.html",
-              controller: scope.useCtrl || "StorageCtrl",
+
+            scope.modalInstance = $modal.open({
+              templateUrl: "storage.html",
+              controller: "StorageCtrl",
               size: "lg",
               backdrop: true,
               resolve: {
@@ -34,25 +42,34 @@
               }
             });
 
-            modalInstance.result.then(function (files) {
+            scope.modalInstance.result.then(function (files) {
+              // for unit test purposes
+              scope.files = files;
+
               // emit an event with name "files", passing the array of files selected from storage
               scope.$emit("picked", files);
 
             }, function () {
+              // for unit test purposes
+              scope.canceled = true;
+
               $log.info("Modal dismissed at: " + new Date());
+
             });
 
           };
 
-          if (scope.local){
-            scope.storageUrl = STORAGE_MODAL + "local";
-          } else {
-            scope.$watch("companyId", function (companyId) {
-              if (companyId) {
-                scope.storageUrl = STORAGE_MODAL + companyId;
-              }
-            });
-          }
+          scope.$watch("companyId", function (companyId) {
+            if (companyId) {
+              updateStorageUrl();
+            }
+          });
+
+          scope.$watch("type", function (type) {
+            if (type) {
+              updateStorageUrl();
+            }
+          });
         }
       };
    }

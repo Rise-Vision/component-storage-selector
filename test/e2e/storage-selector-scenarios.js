@@ -19,8 +19,15 @@
       browser.get("/test/e2e/storage-selector-scenarios.html");
     });
 
-    it("Should correctly load", function () {
+    it("Should correctly display icon button", function () {
       expect(element(by.css(".btn-widget-icon-storage")).isPresent()).
+        to.eventually.be.true;
+    });
+
+    it("Should launch the modal upon clicking the button", function () {
+      element(by.css("button.btn-widget-icon-storage")).click();
+
+      expect(element(by.css(".modal-content")).isPresent()).
         to.eventually.be.true;
     });
 

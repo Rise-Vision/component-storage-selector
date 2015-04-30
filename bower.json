@@ -1,11 +1,11 @@
 {
   "name": "component-storage-selector",
-  "version": "0.0.2",
+  "version": "1.0.0",
   "homepage": "https://github.com/Rise-Vision/component-storage-selector",
   "authors": [
     "Rise Vision"
   ],
-  "description": "Angular Directive to simplify use of Rise-Vision/storage-client",
+  "description": "An Angular directive that provides the Storage Icon button to launch a modal containing Storage selection",
   "license": "MIT",
   "private": false,
   "ignore": [
@@ -16,15 +16,11 @@
     "tmp"
   ],
   "devDependencies": {
-    "angular": "~1.2.18",
-    "angular-mocks": "1.2.18",
-    "q": "1.0.1",
-    "jquery": "1.11.0",
-    "sinon": "~1.10.2"
+    "angular-mocks": "~1.2.18"
   },
   "dependencies": {
-    "angular": "1.2.18",
-    "angular-bootstrap": "~0.11.0",
-    "common-style": "https://github.com/Rise-Vision/common-style.git"
+    "angular": "~1.2.18",
+    "angular-bootstrap": "~0.11.1",
+    "rv-common-style": "https://github.com/Rise-Vision/common-style.git"
   }
 }
