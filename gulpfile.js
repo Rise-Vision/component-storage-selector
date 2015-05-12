@@ -34,7 +34,7 @@
   gulp.task('clean', ['clean-dist', 'clean-tmp']);
 
   gulp.task("config", function() {
-    var env = process.env.NODE_ENV || "dev";
+    var env = process.env.NODE_ENV || "prod";
     gutil.log("Environment is", env);
 
     return gulp.src(["./src/config/" + env + ".js"])
