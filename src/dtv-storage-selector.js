@@ -12,23 +12,53 @@
         restrict: "EA",
         scope : {
           companyId : "@",
-          type: "@"
+          fileLabel: "@",
+          folderLabel: "@",
+          customLabel: "@",
         },
         template: $templateCache.get("storage-selector.html"),
         link: function (scope) {
 
-          function updateStorageUrl() {
-            if (typeof scope.type !== "undefined" && scope.type !== "") {
-              scope.storageUrl = STORAGE_MODAL + scope.companyId + "?selector-type=" + scope.type;
-            } else {
-              // If no "type" value then omit the selector-type param to allow In-App Storage to apply a default
-              scope.storageUrl = STORAGE_MODAL + scope.companyId;
+          scope.isFile = false;
+          scope.isFolder = false;
+          scope.isCustom = false;
+
+          scope.showFileSelector = function() {
+            scope.isFile = true;
+            scope.isFolder = scope.isCustom = false;
+
+            showStorageSelector(true);
+            scope.$emit("fileSelected");
+          };
+
+          scope.showFolderSelector = function() {
+            scope.isFolder = true;
+            scope.isFile = scope.isCustom = false;
+
+            showStorageSelector(false);
+            scope.$emit("folderSelected");
+          };
+
+          scope.onCustomSelected = function() {
+            scope.isCustom = true;
+            scope.isFile = scope.isFolder = false;
+
+            scope.$emit("customSelected");
+          };
+
+          function getStorageUrl(isFile) {
+            var baseUrl = STORAGE_MODAL + scope.companyId;
+
+            if (isFile) {
+              return baseUrl + "?selector-type=single-file";
+            }
+            else {
+              return baseUrl + "?selector-type=single-folder";
             }
           }
 
-          scope.storageUrl = "";
-
-          scope.open = function() {
+          function showStorageSelector(isFile) {
+            var storageUrl = getStorageUrl(isFile);
 
             scope.modalInstance = $modal.open({
               templateUrl: "storage.html",
@@ -37,7 +67,7 @@
               backdrop: true,
               resolve: {
                 storageUrl: function () {
-                  return {url: $sce.trustAsResourceUrl(scope.storageUrl)};
+                  return {url: $sce.trustAsResourceUrl(storageUrl)};
                 }
               }
             });
@@ -57,19 +87,7 @@
 
             });
 
-          };
-
-          scope.$watch("companyId", function (companyId) {
-            if (companyId) {
-              updateStorageUrl();
-            }
-          });
-
-          scope.$watch("type", function (type) {
-            if (type) {
-              updateStorageUrl();
-            }
-          });
+          }
         }
       };
    }

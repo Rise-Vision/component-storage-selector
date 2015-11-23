@@ -1,4 +1,20 @@
-<button class="btn btn-widget-icon-storage" ng-click="open()" type="button" />
+<div class="row half-top add-bottom">
+  <div class="col-md-12">
+    <button type="button" class="btn btn-default btn-fixed-width file" ng-class="{active: isFile}"
+      ng-click="showFileSelector()">
+      {{ fileLabel }}<img src="http://s3.amazonaws.com/Rise-Images/Icons/storage.png" class="storage-selector-icon icon-right">
+    </button>
+    <button type="button" class="btn btn-default btn-fixed-width folder" ng-class="{active: isFolder}"
+      ng-click="showFolderSelector()">
+      {{ folderLabel }}<img src="http://s3.amazonaws.com/Rise-Images/Icons/storage.png" class="storage-selector-icon icon-right">
+    </button>
+    <button type="button" class="btn btn-default btn-fixed-width custom" ng-class="{active: isCustom}"
+      ng-click="onCustomSelected()">
+      {{ customLabel }}<i class="fa fa-link fa-large"></i>
+    </button>
+  </div>
+</div><!-- .row -->
+
 <script type="text/ng-template" id="storage.html">
-        <iframe class="modal-dialog" scrolling="no" marginwidth="0" src="{{ storageUrl.url }}"></iframe>
+  <iframe class="modal-dialog" scrolling="no" marginwidth="0" src="{{ storageUrl.url }}"></iframe>
 </script>

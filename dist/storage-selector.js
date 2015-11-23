@@ -17,23 +17,53 @@ if (typeof angular !== "undefined") {
         restrict: "EA",
         scope : {
           companyId : "@",
-          type: "@"
+          fileLabel: "@",
+          folderLabel: "@",
+          customLabel: "@",
         },
         template: $templateCache.get("storage-selector.html"),
         link: function (scope) {
 
-          function updateStorageUrl() {
-            if (typeof scope.type !== "undefined" && scope.type !== "") {
-              scope.storageUrl = STORAGE_MODAL + scope.companyId + "?selector-type=" + scope.type;
-            } else {
-              // If no "type" value then omit the selector-type param to allow In-App Storage to apply a default
-              scope.storageUrl = STORAGE_MODAL + scope.companyId;
+          scope.isFile = false;
+          scope.isFolder = false;
+          scope.isCustom = false;
+
+          scope.showFileSelector = function() {
+            scope.isFile = true;
+            scope.isFolder = scope.isCustom = false;
+
+            showStorageSelector(true);
+            scope.$emit("fileSelected");
+          };
+
+          scope.showFolderSelector = function() {
+            scope.isFolder = true;
+            scope.isFile = scope.isCustom = false;
+
+            showStorageSelector(false);
+            scope.$emit("folderSelected");
+          };
+
+          scope.onCustomSelected = function() {
+            scope.isCustom = true;
+            scope.isFile = scope.isFolder = false;
+
+            scope.$emit("customSelected");
+          };
+
+          function getStorageUrl(isFile) {
+            var baseUrl = STORAGE_MODAL + scope.companyId;
+
+            if (isFile) {
+              return baseUrl + "?selector-type=single-file";
+            }
+            else {
+              return baseUrl + "?selector-type=single-folder";
             }
           }
 
-          scope.storageUrl = "";
-
-          scope.open = function() {
+          function showStorageSelector(isFile) {
+            var storageUrl = getStorageUrl(isFile);
 
             scope.modalInstance = $modal.open({
               templateUrl: "storage.html",
@@ -42,7 +72,7 @@ if (typeof angular !== "undefined") {
               backdrop: true,
               resolve: {
                 storageUrl: function () {
-                  return {url: $sce.trustAsResourceUrl(scope.storageUrl)};
+                  return {url: $sce.trustAsResourceUrl(storageUrl)};
                 }
               }
             });
@@ -62,19 +92,7 @@ if (typeof angular !== "undefined") {
 
             });
 
-          };
-
-          scope.$watch("companyId", function (companyId) {
-            if (companyId) {
-              updateStorageUrl();
-            }
-          });
-
-          scope.$watch("type", function (type) {
-            if (type) {
-              updateStorageUrl();
-            }
-          });
+          }
         }
       };
    }
@@ -115,14 +133,30 @@ angular.module("risevision.widget.common.storage-selector")
   }]);
 
 (function(module) {
-try { app = angular.module("risevision.widget.common.storage-selector"); }
-catch(err) { app = angular.module("risevision.widget.common.storage-selector", []); }
-app.run(["$templateCache", function($templateCache) {
+try { module = angular.module("risevision.widget.common.storage-selector"); }
+catch(err) { module = angular.module("risevision.widget.common.storage-selector", []); }
+module.run(["$templateCache", function($templateCache) {
   "use strict";
   $templateCache.put("storage-selector.html",
-    "<button class=\"btn btn-widget-icon-storage\" ng-click=\"open()\" type=\"button\" />\n" +
+    "<div class=\"row half-top add-bottom\">\n" +
+    "  <div class=\"col-md-12\">\n" +
+    "    <button type=\"button\" class=\"btn btn-default btn-fixed-width file\" ng-class=\"{active: isFile}\"\n" +
+    "      ng-click=\"showFileSelector()\">\n" +
+    "      {{ fileLabel }}<img src=\"http://s3.amazonaws.com/Rise-Images/Icons/storage.png\" class=\"storage-selector-icon icon-right\">\n" +
+    "    </button>\n" +
+    "    <button type=\"button\" class=\"btn btn-default btn-fixed-width folder\" ng-class=\"{active: isFolder}\"\n" +
+    "      ng-click=\"showFolderSelector()\">\n" +
+    "      {{ folderLabel }}<img src=\"http://s3.amazonaws.com/Rise-Images/Icons/storage.png\" class=\"storage-selector-icon icon-right\">\n" +
+    "    </button>\n" +
+    "    <button type=\"button\" class=\"btn btn-default btn-fixed-width custom\" ng-class=\"{active: isCustom}\"\n" +
+    "      ng-click=\"onCustomSelected()\">\n" +
+    "      {{ customLabel }}<i class=\"fa fa-link fa-large\"></i>\n" +
+    "    </button>\n" +
+    "  </div>\n" +
+    "</div><!-- .row -->\n" +
+    "\n" +
     "<script type=\"text/ng-template\" id=\"storage.html\">\n" +
-    "        <iframe class=\"modal-dialog\" scrolling=\"no\" marginwidth=\"0\" src=\"{{ storageUrl.url }}\"></iframe>\n" +
+    "  <iframe class=\"modal-dialog\" scrolling=\"no\" marginwidth=\"0\" src=\"{{ storageUrl.url }}\"></iframe>\n" +
     "</script>\n" +
     "");
 }]);
