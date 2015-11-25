@@ -17,7 +17,9 @@ if (typeof angular !== "undefined") {
         restrict: "EA",
         scope : {
           companyId : "@",
-          type: "@"
+          type: "@",
+          label: "@",
+          selected: "="
         },
         template: $templateCache.get("storage-selector.html"),
         link: function (scope) {
@@ -51,8 +53,8 @@ if (typeof angular !== "undefined") {
               // for unit test purposes
               scope.files = files;
 
-              // emit an event with name "files", passing the array of files selected from storage
-              scope.$emit("picked", files);
+              // emit an event with name "files", passing the array of files selected from storage and the selector type
+              scope.$emit("picked", files, scope.type);
 
             }, function () {
               // for unit test purposes
@@ -115,12 +117,15 @@ angular.module("risevision.widget.common.storage-selector")
   }]);
 
 (function(module) {
-try { app = angular.module("risevision.widget.common.storage-selector"); }
-catch(err) { app = angular.module("risevision.widget.common.storage-selector", []); }
-app.run(["$templateCache", function($templateCache) {
+try { module = angular.module("risevision.widget.common.storage-selector"); }
+catch(err) { module = angular.module("risevision.widget.common.storage-selector", []); }
+module.run(["$templateCache", function($templateCache) {
   "use strict";
   $templateCache.put("storage-selector.html",
-    "<button class=\"btn btn-widget-icon-storage\" ng-click=\"open()\" type=\"button\" />\n" +
+    "<button class=\"btn btn-default\" ng-class=\"{active: selected}\" ng-click=\"open()\" type=\"button\" >\n" +
+    "  {{ label }}<img src=\"http://s3.amazonaws.com/Rise-Images/Icons/storage.png\" class=\"storage-selector-icon\" ng-class=\"{'icon-right': label}\">\n" +
+    "</button>\n" +
+    "\n" +
     "<script type=\"text/ng-template\" id=\"storage.html\">\n" +
     "        <iframe class=\"modal-dialog\" scrolling=\"no\" marginwidth=\"0\" src=\"{{ storageUrl.url }}\"></iframe>\n" +
     "</script>\n" +

@@ -12,7 +12,9 @@
         restrict: "EA",
         scope : {
           companyId : "@",
-          type: "@"
+          type: "@",
+          label: "@",
+          selected: "="
         },
         template: $templateCache.get("storage-selector.html"),
         link: function (scope) {
@@ -46,8 +48,8 @@
               // for unit test purposes
               scope.files = files;
 
-              // emit an event with name "files", passing the array of files selected from storage
-              scope.$emit("picked", files);
+              // emit an event with name "files", passing the array of files selected from storage and the selector type
+              scope.$emit("picked", files, scope.type);
 
             }, function () {
               // for unit test purposes
