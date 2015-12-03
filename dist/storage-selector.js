@@ -40,7 +40,7 @@ if (typeof angular !== "undefined") {
             scope.modalInstance = $modal.open({
               templateUrl: "storage.html",
               controller: "StorageCtrl",
-              size: "lg",
+              size: "md",
               backdrop: true,
               resolve: {
                 storageUrl: function () {
