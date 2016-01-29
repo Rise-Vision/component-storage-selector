@@ -1,9 +1,7 @@
-<button class="btn btn-default" ng-class="{active: selected}" ng-click="open()" type="button" >
-  {{ label }}<img src="http://s3.amazonaws.com/Rise-Images/Icons/storage.png" class="storage-selector-icon" ng-class="{'icon-right': label}">
-</button>
 
 <script type="text/ng-template" id="storage.html">  //prototype modal
         
+<div style="padding:22px">
 
 
               <button type="button" class="close" data-dismiss="modal" ng-click="closeButtonClick()">
@@ -59,28 +57,26 @@
     </tr>
   </thead>
   <tbody>
-    <tr class="clickable-row ng-scope no-select-row" ng-click="fileClick(file);" ng-class="{'active': file.isChecked, 'blocked-file': file.isThrottled, 'back-btn': file.currentFolder, 'no-select-row': file.currentFolder || fileIsTrash(file) || (fileIsFolder(file) &amp;&amp; !storageFull) }" ng-repeat="file in filesDetails.files | filter:query | orderBy:orderByAttribute:reverseSort track by $index">
+    <tr class="clickable-row no-select-row">
       <td colspan="4">
-        <span class="folder ng-binding">000folder/</span>
+        <span class="folder">000folder/</span>
       </td>
     </tr>
-
-    <tr class="clickable-row ng-scope no-select-row" ng-click="fileClick(file);" ng-class="{'active': file.isChecked, 'blocked-file': file.isThrottled, 'back-btn': file.currentFolder, 'no-select-row': file.currentFolder || fileIsTrash(file) || (fileIsFolder(file) &amp;&amp; !storageFull) }" ng-repeat="file in filesDetails.files | filter:query | orderBy:orderByAttribute:reverseSort track by $index">
+     <tr class="clickable-row no-select-row">
       <td colspan="4">
-        <span class="folder ng-binding">000folder/</span>
+        <span class="folder">000folder/</span>
       </td>
     </tr>
-
-    <tr class="clickable-row ng-scope no-select-row" ng-click="fileClick(file);" ng-class="{'active': file.isChecked, 'blocked-file': file.isThrottled, 'back-btn': file.currentFolder, 'no-select-row': file.currentFolder || fileIsTrash(file) || (fileIsFolder(file) &amp;&amp; !storageFull) }" ng-repeat="file in filesDetails.files | filter:query | orderBy:orderByAttribute:reverseSort track by $index">
+     <tr class="clickable-row no-select-row">
       <td colspan="4">
-        <span class="folder ng-binding">000folder/</span>
+        <span class="folder">000folder/</span>
       </td>
     </tr>
   </tbody>
 </table>
 
           
-
+</div>
 
 
 

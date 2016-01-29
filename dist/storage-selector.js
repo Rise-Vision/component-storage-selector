@@ -122,12 +122,10 @@ catch(err) { module = angular.module("risevision.widget.common.storage-selector"
 module.run(["$templateCache", function($templateCache) {
   "use strict";
   $templateCache.put("storage-selector.html",
-    "<button class=\"btn btn-default\" ng-class=\"{active: selected}\" ng-click=\"open()\" type=\"button\" >\n" +
-    "  {{ label }}<img src=\"http://s3.amazonaws.com/Rise-Images/Icons/storage.png\" class=\"storage-selector-icon\" ng-class=\"{'icon-right': label}\">\n" +
-    "</button>\n" +
     "\n" +
     "<script type=\"text/ng-template\" id=\"storage.html\">  //prototype modal\n" +
     "        \n" +
+    "<div style=\"padding:22px\">\n" +
     "\n" +
     "\n" +
     "              <button type=\"button\" class=\"close\" data-dismiss=\"modal\" ng-click=\"closeButtonClick()\">\n" +
@@ -183,28 +181,26 @@ module.run(["$templateCache", function($templateCache) {
     "    </tr>\n" +
     "  </thead>\n" +
     "  <tbody>\n" +
-    "    <tr class=\"clickable-row ng-scope no-select-row\" ng-click=\"fileClick(file);\" ng-class=\"{'active': file.isChecked, 'blocked-file': file.isThrottled, 'back-btn': file.currentFolder, 'no-select-row': file.currentFolder || fileIsTrash(file) || (fileIsFolder(file) &amp;&amp; !storageFull) }\" ng-repeat=\"file in filesDetails.files | filter:query | orderBy:orderByAttribute:reverseSort track by $index\">\n" +
+    "    <tr class=\"clickable-row no-select-row\">\n" +
     "      <td colspan=\"4\">\n" +
-    "        <span class=\"folder ng-binding\">000folder/</span>\n" +
+    "        <span class=\"folder\">000folder/</span>\n" +
     "      </td>\n" +
     "    </tr>\n" +
-    "\n" +
-    "    <tr class=\"clickable-row ng-scope no-select-row\" ng-click=\"fileClick(file);\" ng-class=\"{'active': file.isChecked, 'blocked-file': file.isThrottled, 'back-btn': file.currentFolder, 'no-select-row': file.currentFolder || fileIsTrash(file) || (fileIsFolder(file) &amp;&amp; !storageFull) }\" ng-repeat=\"file in filesDetails.files | filter:query | orderBy:orderByAttribute:reverseSort track by $index\">\n" +
+    "     <tr class=\"clickable-row no-select-row\">\n" +
     "      <td colspan=\"4\">\n" +
-    "        <span class=\"folder ng-binding\">000folder/</span>\n" +
+    "        <span class=\"folder\">000folder/</span>\n" +
     "      </td>\n" +
     "    </tr>\n" +
-    "\n" +
-    "    <tr class=\"clickable-row ng-scope no-select-row\" ng-click=\"fileClick(file);\" ng-class=\"{'active': file.isChecked, 'blocked-file': file.isThrottled, 'back-btn': file.currentFolder, 'no-select-row': file.currentFolder || fileIsTrash(file) || (fileIsFolder(file) &amp;&amp; !storageFull) }\" ng-repeat=\"file in filesDetails.files | filter:query | orderBy:orderByAttribute:reverseSort track by $index\">\n" +
+    "     <tr class=\"clickable-row no-select-row\">\n" +
     "      <td colspan=\"4\">\n" +
-    "        <span class=\"folder ng-binding\">000folder/</span>\n" +
+    "        <span class=\"folder\">000folder/</span>\n" +
     "      </td>\n" +
     "    </tr>\n" +
     "  </tbody>\n" +
     "</table>\n" +
     "\n" +
     "          \n" +
-    "\n" +
+    "</div>\n" +
     "\n" +
     "\n" +
     "\n" +
