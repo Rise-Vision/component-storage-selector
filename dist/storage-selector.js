@@ -126,8 +126,8 @@ module.run(["$templateCache", function($templateCache) {
     "  {{ label }}<img src=\"http://s3.amazonaws.com/Rise-Images/Icons/storage.png\" class=\"storage-selector-icon\" ng-class=\"{'icon-right': label}\">\n" +
     "</button>\n" +
     "\n" +
-    "<script type=\"text/ng-template\" id=\"storage.html\">\n" +
-    "        <iframe class=\"modal-dialog\" scrolling=\"no\" marginwidth=\"0\" src=\"{{ storageUrl.url }}\"></iframe>\n" +
+    "<script type=\"text/ng-template\" id=\"storage.html\">  //prototype modal\n" +
+    "        <div> TEST WORKS </div>\n" +
     "</script>\n" +
     "");
 }]);

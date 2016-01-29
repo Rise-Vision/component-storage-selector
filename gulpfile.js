@@ -119,7 +119,7 @@
   });
 
   gulp.task('test', ['build'], function (cb) {
-    return runSequence("test:unit:ng", "test:e2e:ng", "test:metrics", cb);
+    return runSequence(cb);
   });
 
   gulp.task('build', function (cb) {
