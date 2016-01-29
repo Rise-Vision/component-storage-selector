@@ -3,5 +3,1114 @@
 </button>
 
 <script type="text/ng-template" id="storage.html">  //prototype modal
-        <div> TEST WORKS </div>
+        
+
+<html>
+
+  <body marginwidth="0">
+    <div ng-controller="ModalWindowController" class="ng-scope">
+      <!-- ngIf: !FULLSCREEN --><div id="storage-content" class="storage-modal ng-scope" ng-if="!FULLSCREEN">
+        <div ng-controller="modalContainerController" ng-click="closeThrottleNotice()" class="ng-scope">
+          <div ng-controller="TopButtonsController" class="ng-scope">
+            <div>
+              <button type="button" class="close" data-dismiss="modal" ng-click="closeButtonClick()">
+                <i class="fa fa-times"></i>
+              </button>
+              <div style="clear: both" class="visible-xs"></div>
+              <div ng-controller="SubscriptionStatusController" class="visible-xs ng-scope">
+                <div id="subscription-status" subscription-status="" product-id="24" product-code="b0cba08a4baa0c62b8cdc621b6f6a124f89a03db" company-id="f114ad26-949d-44b4-87e9-8528afc76ce4" ng-model="subscriptionStatus.result" show-store-modal="showStoreModal" expanded-format="true" class="ng-untouched ng-valid ng-isolate-scope ng-dirty ng-valid-parse"><div ng-show="!expandedFormat" class="ng-hide">
+  <h3 ng-disable-right-click="">
+    <span ng-show="subscriptionStatus.statusCode !== 'not-subscribed'" ng-bind-html="'subscription-status.' + subscriptionStatus.statusCode + subscriptionStatus.plural | translate:subscriptionStatus | to_trusted" class="ng-binding">Subscribed</span>
+  </h3>
+  
+  <span ng-show="subscriptionStatus.statusCode === 'trial-available'" class="ng-hide">
+    <button class="btn btn-primary btn-xs" ng-click="showStoreModal = true;">
+      <span translate="subscription-status.start-trial" class="ng-scope">Start Trial</span>
+    </button>
+  </span>
+  <span ng-show="['on-trial', 'trial-expired', 'cancelled', 'not-subscribed'].indexOf(subscriptionStatus.statusCode) >= 0" class="ng-hide">
+    <button class="btn btn-primary btn-xs" ng-click="showStoreModal = true;">
+      <span translate="subscription-status.subscribe" class="ng-scope">Subscribe</span>
+    </button>
+  </span>
+  <span ng-show="['suspended'].indexOf(subscriptionStatus.statusCode) >= 0" class="ng-hide">
+    <button class="btn btn-primary btn-xs" ng-click="showStoreAccountModal = true;">
+      <span translate="subscription-status.view-account" class="ng-scope">View Account</span>
+    </button>
+  </span>
+</div>
+
+<div ng-show="expandedFormat">
+  <div class="subscription-status trial ng-hide" ng-show="subscriptionStatus.statusCode === 'on-trial'">
+    <span ng-bind-html="'subscription-status.expanded-' + subscriptionStatus.statusCode + subscriptionStatus.plural | translate:subscriptionStatus | to_trusted" class="ng-binding">subscription-status.expanded-subscribed</span>
+    <button type="button" class="btn btn-primary add-left" ng-click="showStoreModal = true;">
+      <span translate="subscription-status.subscribe-now" class="ng-scope">Subscribe Now!</span>
+    </button>
+  </div>
+  <div class="subscription-status expired ng-hide" ng-show="subscriptionStatus.statusCode === 'trial-expired'">
+    <span translate="subscription-status.expanded-expired" class="ng-scope">Your trial has expired</span>
+    <button type="button" class="btn btn-primary add-left" ng-click="showStoreModal = true;">
+      <span translate="subscription-status.subscribe-now" class="ng-scope">Subscribe Now!</span>
+    </button>
+  </div>
+  <div class="subscription-status cancelled ng-hide" ng-show="subscriptionStatus.statusCode === 'cancelled'">
+   <span translate="subscription-status.expanded-cancelled" class="ng-scope">Your subscription was cancelled</span>
+    <button type="button" class="btn btn-primary add-left" ng-click="showStoreModal = true;">
+      <span translate="subscription-status.subscribe-now" class="ng-scope">Subscribe Now!</span>
+    </button>
+  </div>
+  <div class="subscription-status suspended ng-hide" ng-show="subscriptionStatus.statusCode === 'suspended'">
+    <span translate="subscription-status.expanded-suspended" class="ng-scope">Your account is suspended</span>
+    <button type="button" class="btn btn-primary add-left" ng-click="showStoreAccountModal = true;">
+      <span translate="subscription-status.view-invoices" class="ng-scope">View Invoices</span>
+    </button>
+  </div>
+</div>
+</div>
+              </div>
+              <h3 update-title="" translate="storage-client.select-single-folder" class="ng-scope">Select a Folder</h3>
+              <div class="selector-header">
+
+                <div class="icon-nav pull-right" ng-hide="activeSearch || trialAvailable">
+                  <button class="btn btn-link" ng-hide="statusDetails.code!==200 || fileListStatus.code===404" ng-click="newFolderButtonClick('md')" ng-disabled="isTrashFolder()">
+                    <svg-icon p="iconNewFolder"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M30.7 8c-0.8-0.8-1.9-1-3.1-1H15V5.9c0-1.2-0.5-2-1.4-2.8C12.8 2.2 11.7 2 10.5 2H4.3C3.1 2 2.1 2.2 1.3 3.1 0.4 3.9 0 4.7 0 5.9v18.5c0 1.2 0.4 2.3 1.3 3.2C2.1 28.5 3.1 29 4.3 29h23.3c1.2 0 2.2-0.5 3.1-1.4 0.9-0.9 1.3-2 1.3-3.2V10.8C32 9.6 31.6 8.9 30.7 8zM23 20h-5v5h-4v-5H9v-4h5v-5h4v5h5V20"></path><path d=""></path></svg></svg-icon>
+                  </button>
+                  <label for="upload-files" class="btn btn-link ng-hide" ng-hide="statusDetails.code!==200 || fileListStatus.code===404 || singleFolderSelector" ng-disabled="!(filesDetails.localFiles === false &amp;&amp; !isTrashFolder())">
+                    <i class="fa fa-cloud-upload"></i>
+                  </label>
+                  <button class="btn btn-link" ng-click="showSelectorFileSearch()">
+                    <i class="fa fa-search"></i>
+                  </button>
+                </div>
+        
+                <div class="description" ng-hide="activeSearch">
+                  <p><strong class="ng-binding">Rise Vision Inc.</strong></p>
+                </div>
+        
+                <div class="icon-nav ng-hide" ng-show="activeSearch &amp;&amp; !trialAvailable">
+                  <div class="input-group">
+                    <input id="selectorQuery" ng-model="query" type="text" class="form-control ng-pristine ng-untouched ng-valid" placeholder="Search files or folders">
+                    <span ng-click="hideSelectorFileSearch()" class="input-group-addon clickable"><i class="fa fa-times"></i></span>
+                  </div>
+                </div>
+              </div>
+
+              <div ng-controller="SubscriptionStatusController" class="hidden-xs ng-scope">
+                <div id="subscription-status" subscription-status="" product-id="24" product-code="b0cba08a4baa0c62b8cdc621b6f6a124f89a03db" company-id="f114ad26-949d-44b4-87e9-8528afc76ce4" ng-model="subscriptionStatus.result" show-store-modal="showStoreModal" expanded-format="true" class="ng-untouched ng-valid ng-isolate-scope ng-dirty ng-valid-parse"><div ng-show="!expandedFormat" class="ng-hide">
+  <h3 ng-disable-right-click="">
+    <span ng-show="subscriptionStatus.statusCode !== 'not-subscribed'" ng-bind-html="'subscription-status.' + subscriptionStatus.statusCode + subscriptionStatus.plural | translate:subscriptionStatus | to_trusted" class="ng-binding">Subscribed</span>
+  </h3>
+  
+  <span ng-show="subscriptionStatus.statusCode === 'trial-available'" class="ng-hide">
+    <button class="btn btn-primary btn-xs" ng-click="showStoreModal = true;">
+      <span translate="subscription-status.start-trial" class="ng-scope">Start Trial</span>
+    </button>
+  </span>
+  <span ng-show="['on-trial', 'trial-expired', 'cancelled', 'not-subscribed'].indexOf(subscriptionStatus.statusCode) >= 0" class="ng-hide">
+    <button class="btn btn-primary btn-xs" ng-click="showStoreModal = true;">
+      <span translate="subscription-status.subscribe" class="ng-scope">Subscribe</span>
+    </button>
+  </span>
+  <span ng-show="['suspended'].indexOf(subscriptionStatus.statusCode) >= 0" class="ng-hide">
+    <button class="btn btn-primary btn-xs" ng-click="showStoreAccountModal = true;">
+      <span translate="subscription-status.view-account" class="ng-scope">View Account</span>
+    </button>
+  </span>
+</div>
+
+<div ng-show="expandedFormat">
+  <div class="subscription-status trial ng-hide" ng-show="subscriptionStatus.statusCode === 'on-trial'">
+    <span ng-bind-html="'subscription-status.expanded-' + subscriptionStatus.statusCode + subscriptionStatus.plural | translate:subscriptionStatus | to_trusted" class="ng-binding">subscription-status.expanded-subscribed</span>
+    <button type="button" class="btn btn-primary add-left" ng-click="showStoreModal = true;">
+      <span translate="subscription-status.subscribe-now" class="ng-scope">Subscribe Now!</span>
+    </button>
+  </div>
+  <div class="subscription-status expired ng-hide" ng-show="subscriptionStatus.statusCode === 'trial-expired'">
+    <span translate="subscription-status.expanded-expired" class="ng-scope">Your trial has expired</span>
+    <button type="button" class="btn btn-primary add-left" ng-click="showStoreModal = true;">
+      <span translate="subscription-status.subscribe-now" class="ng-scope">Subscribe Now!</span>
+    </button>
+  </div>
+  <div class="subscription-status cancelled ng-hide" ng-show="subscriptionStatus.statusCode === 'cancelled'">
+   <span translate="subscription-status.expanded-cancelled" class="ng-scope">Your subscription was cancelled</span>
+    <button type="button" class="btn btn-primary add-left" ng-click="showStoreModal = true;">
+      <span translate="subscription-status.subscribe-now" class="ng-scope">Subscribe Now!</span>
+    </button>
+  </div>
+  <div class="subscription-status suspended ng-hide" ng-show="subscriptionStatus.statusCode === 'suspended'">
+    <span translate="subscription-status.expanded-suspended" class="ng-scope">Your account is suspended</span>
+    <button type="button" class="btn btn-primary add-left" ng-click="showStoreAccountModal = true;">
+      <span translate="subscription-status.view-invoices" class="ng-scope">View Invoices</span>
+    </button>
+  </div>
+</div>
+</div>
+              </div>
+            </div>
+            
+            <!--Body content-->
+            <!-- uiView:  --><div ui-view="" ng-show="!trialAvailable" class="ng-scope"><div ng-controller="UploadController" class="ng-scope">
+  <div class="content-box animated fadeInDown upload-panel ng-hide" ng-show="uploader.queue.length > 0">
+    
+      <div ng-click="isCollapsed = !isCollapsed">
+        <div class="content-box-header">
+          <span class="collapse-control">
+            <i class="fa fa-chevron-down" ng-class="{false: 'fa-chevron-up', true:'fa-chevron-down'}[!isCollapsed]"></i>
+          </span>
+          <p>
+            <strong translate="storage-client.upload-status" class="ng-scope">Upload Status</strong>:
+            <span ng-show="activeUploadCount() === 1" translate="storage-client.uploading-one-file" class="ng-scope ng-hide">Uploading 1 file</span>
+            <span ng-show="activeUploadCount() !== 1" translate="storage-client.uploading-count-files" translate-values="{ count: activeUploadCount() }" class="ng-scope">Uploading 0 files</span>
+          </p>
+
+          <div class="actions-block">
+            <button class="btn btn-default btn-sm" type="button" ng-click="cancelAllUploads()" title="Cancel All">
+              <span translate="storage-client.cancel-uploads" class="ng-scope">Cancel All</span>
+            </button>
+            <button class="btn btn-default btn-sm ng-hide" type="button" ng-click="retryFailedUploads()" ng-show="getErrorCount() > 0 &amp;&amp; getNotErrorCount() === 0" title="Retry failed uploads">
+            <span translate="storage-client.retry-failed-uploads" class="ng-scope">Retry failed uploads</span>
+            </button>
+          </div>
+          
+        </div><!--content-box-header-->
+
+      </div>
+      <div ng-show="!isCollapsed">
+      <div class="content-box-body">
+        <!-- ngRepeat: item in uploader.queue -->
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" tabindex="-1">
+    <form id="uploadform" class="ng-pristine ng-valid">
+      <input type="file" id="upload-files" storage-file-select="" uploader="uploader" multiple="">
+      <input type="file" id="upload-folders" storage-file-select="" uploader="uploader" webkitdirectory="">
+    </form>
+  </div>
+</div>
+
+<!-- uiView:  --><div ui-view="" class="ng-scope"><div ng-controller="FileListCtrl" id="list" class="ng-scope">
+
+<div class="container ng-scope ng-hide" id="fileinspector_noFiles" ng-show="statusDetails.code!==202 &amp;&amp; !filesDetails.bucketExists">
+<div class="file-empty-state">
+  <div class="product-graphic">
+    <svg-icon p="riseStorage"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M8 32h20.2c2.1 0 3.8-1.7 3.8-3.8V9L8 32zM19 29v-4h4.3L19 29zM25 23v-4h4.3L25 23zM24 31v-7h7.3L24 31z"></path><path d="M1.8 9.1c1.2 0.7 2.9 1.3 5 1.7 2.1 0.4 4.4 0.6 6.9 0.6 2.5 0 4.8-0.2 6.9-0.6 2.1-0.4 3.5-1 4.8-1.7C26.6 8.4 27 7.7 27 6.9V4.6c0-0.8-0.4-1.6-1.6-2.3 -1.2-0.7-2.8-1.3-4.9-1.7C18.4 0.2 16.1 0 13.7 0c-2.5 0-4.7 0.2-6.8 0.6C4.7 1 3 1.6 1.8 2.3 0.6 3 0 3.7 0 4.6v2.3C0 7.7 0.6 8.4 1.8 9.1zM1.8 16c1.2 0.7 2.9 1.3 5 1.7 2.1 0.4 4.4 0.6 6.9 0.6 2 0 3.9-0.1 5.7-0.4l6.6-6.4c-1.2 0.6-2.7 1.1-4.5 1.5 -2.5 0.5-5.1 0.8-7.9 0.8 -2.8 0-5.5-0.3-7.9-0.8C3.3 12.4 1 11.7 0 10.7v3C0 14.5 0.6 15.3 1.8 16zM1.8 22.9c1.2 0.7 2.9 1.3 5 1.7 1.6 0.3 3.3 0.5 5.1 0.6l4.8-4.6c-1 0.1-2 0.1-3 0.1 -2.8 0-5.5-0.3-7.9-0.8C3.3 19.3 1 18.5 0 17.5v3C0 21.4 0.6 22.2 1.8 22.9zM5.8 26.7C3.3 26.1 1 25.4 0 24.4v3c0 0.8 0.6 1.6 1.9 2.3 1 0.6 2.3 1 3.8 1.4l4-3.9C8.3 27.1 7 26.9 5.8 26.7z"></path></svg></svg-icon>
+  </div>
+  <p>You haven't added files yet! </p>
+  <br>
+  <span> Select 
+    <button type="button" class="btn btn-link" title="Upload" disabled="disabled">
+      <i class="fa fa-cloud-upload fa-2x"></i>
+    </button>
+    above to upload a file,<br>
+    or 
+    <button type="button" class="btn btn-link" title="Add Folder" disabled="disabled">
+      <svg-icon p="iconNewFolder"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M30.7 8c-0.8-0.8-1.9-1-3.1-1H15V5.9c0-1.2-0.5-2-1.4-2.8C12.8 2.2 11.7 2 10.5 2H4.3C3.1 2 2.1 2.2 1.3 3.1 0.4 3.9 0 4.7 0 5.9v18.5c0 1.2 0.4 2.3 1.3 3.2C2.1 28.5 3.1 29 4.3 29h23.3c1.2 0 2.2-0.5 3.1-1.4 0.9-0.9 1.3-2 1.3-3.2V10.8C32 9.6 31.6 8.9 30.7 8zM23 20h-5v5h-4v-5H9v-4h5v-5h4v5h5V20"></path><path d=""></path></svg></svg-icon>
+    </button>
+    to create a folder.
+  </span>
+</div>
+</div>
+
+<div class="alert alert-danger ng-hide" ng-show="statusDetails.code===403">
+  <span translate="storage-client.not-authorized" class="ng-scope">Your account  doesn't have access to this company.  Please login with a different account and try again.</span>
+</div>
+<div id="cookieTester" ng-controller="cookieTesterController as cookieController" class="ng-scope">
+  <div class="alert alert-danger ng-binding ng-hide" ng-hide="true">
+      Cookie enablement verified
+  </div>
+  <div ng-hide="!cookieController.status.passed" class="">
+    <div id="oauthNotice" class="alert alert-danger ng-hide" ng-hide="statusDetails.code !== 401 &amp;&amp; statusDetails.code !== 400 &amp;&amp; isAuthed === true">
+      <span translate="common.required-credentials" class="ng-scope">Rise Vision needs access to your Google account to verify who you are</span>
+      <button class="btn btn-primary btn-sm" type="button" ng-click="login()">
+        <span title="storage-client.permission-request" class="fa fa-check"> <span translate="common.ok" class="ng-scope">Okay</span></span>
+      </button>
+    </div>
+  </div>
+</div>
+<div class="content-box ng-hide" ng-show="activeFolderDownloads.length > 0">
+  <div class="content-box-body">
+    <!-- ngRepeat: folder in activeFolderDownloads -->
+  </div>
+</div>
+<div class="content-box" ng-show="filesDetails.bucketExists">
+<div class="scrollable-list">
+<div class="content-box-body ng-hide" ng-show="statusDetails.code!==202 &amp;&amp; !isFileListVisible()">
+  <p class="text-center text-muted">No Files</p>
+</div>
+<table class="table-2 table-hover table-selector single-selector" ng-class="storageFull || multipleFileSelector ? 'multiple-selector' : 'single-selector'" ng-show="statusDetails.code!==202 &amp;&amp; statusDetails.code!==404 &amp;&amp; isFileListVisible()">
+  <thead>
+    <tr>
+      <th class="col-sm-6">
+        <input type="checkbox" class="add-right ng-pristine ng-untouched ng-valid" ng-model="selectAll">
+        <label ng-click="selectAllCheckboxes(query)" ng-show="storageFull || multipleFileSelector" class="ng-hide"></label>
+        <a href="" ng-click="orderByAttribute = fileNameOrderFunction; reverseSort = !reverseSort">
+          <span translate="common.file-name" class="ng-scope">Name</span>
+          <span ng-show="orderByAttribute==fileNameOrderFunction">
+            <span ng-show="reverseSort" class="ng-hide">
+              <i class="fa fa-long-arrow-up"></i>
+            </span>
+            <span ng-show="!reverseSort">
+              <i class="fa fa-long-arrow-down"></i>
+            </span>
+          </span>
+        </a>
+      </th>
+      <th class="col-sm-2 hidden-xs" ng-click="orderByAttribute = fileExtOrderFunction; reverseSort = !reverseSort">
+        <a href=""><span translate="common.file-type" class="ng-scope">Type</span>
+          <span ng-show="orderByAttribute==fileExtOrderFunction" class="ng-hide">
+            <span ng-show="reverseSort" class="ng-hide">
+              <i class="fa fa-long-arrow-up"></i>
+            </span>
+            <span ng-show="!reverseSort">
+              <i class="fa fa-long-arrow-down"></i>
+            </span>
+          </span>
+        </a>
+      </th>
+      <th class="col-sm-2 visible-lg" ng-click="orderByAttribute = fileSizeOrderFunction; reverseSort = !reverseSort">
+        <a href=""><span translate="common.file-size" class="ng-scope">Size</span>
+          <span ng-show="orderByAttribute==fileSizeOrderFunction" class="ng-hide">
+            <span ng-show="reverseSort" class="ng-hide">
+              <i class="fa fa-long-arrow-up"></i>
+            </span>
+            <span ng-show="!reverseSort">
+              <i class="fa fa-long-arrow-down"></i>
+            </span>
+          </span>
+        </a>
+      </th>
+      <th class="col-sm-2 visible-lg" ng-click="orderByAttribute = dateModifiedOrderFunction; reverseSort = !reverseSort">
+        <a href=""><span translate="common.file-date-mod" class="ng-scope">Modified</span>
+          <span ng-show="orderByAttribute==dateModifiedOrderFunction" class="ng-hide">
+            <span ng-show="reverseSort" class="ng-hide">
+              <i class="fa fa-long-arrow-up"></i>
+            </span>
+            <span ng-show="!reverseSort">
+              <i class="fa fa-long-arrow-down"></i>
+            </span>
+          </span>
+        </a>
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <!-- ngRepeat: file in filesDetails.files | filter:query | orderBy:orderByAttribute:reverseSort track by $index --><tr class="clickable-row ng-scope no-select-row" ng-click="fileClick(file);" ng-class="{'active': file.isChecked, 'blocked-file': file.isThrottled, 'back-btn': file.currentFolder, 'no-select-row': file.currentFolder || fileIsTrash(file) || (fileIsFolder(file) &amp;&amp; !storageFull) }" ng-repeat="file in filesDetails.files | filter:query | orderBy:orderByAttribute:reverseSort track by $index">
+      <!-- ngIf: fileIsFolder(file) && (!fileIsTrash(file) || storageFull) --><td colspan="4" ng-if="fileIsFolder(file) &amp;&amp; (!fileIsTrash(file) || storageFull)" class="ng-scope">
+        <span class="folder ng-binding">000folder/</span>
+      </td><!-- end ngIf: fileIsFolder(file) && (!fileIsTrash(file) || storageFull) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+    </tr><!-- end ngRepeat: file in filesDetails.files | filter:query | orderBy:orderByAttribute:reverseSort track by $index --><tr class="clickable-row ng-scope no-select-row" ng-click="fileClick(file);" ng-class="{'active': file.isChecked, 'blocked-file': file.isThrottled, 'back-btn': file.currentFolder, 'no-select-row': file.currentFolder || fileIsTrash(file) || (fileIsFolder(file) &amp;&amp; !storageFull) }" ng-repeat="file in filesDetails.files | filter:query | orderBy:orderByAttribute:reverseSort track by $index">
+      <!-- ngIf: fileIsFolder(file) && (!fileIsTrash(file) || storageFull) --><td colspan="4" ng-if="fileIsFolder(file) &amp;&amp; (!fileIsTrash(file) || storageFull)" class="ng-scope">
+        <span class="folder ng-binding">000test/</span>
+      </td><!-- end ngIf: fileIsFolder(file) && (!fileIsTrash(file) || storageFull) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+    </tr><!-- end ngRepeat: file in filesDetails.files | filter:query | orderBy:orderByAttribute:reverseSort track by $index --><tr class="clickable-row ng-scope no-select-row" ng-click="fileClick(file);" ng-class="{'active': file.isChecked, 'blocked-file': file.isThrottled, 'back-btn': file.currentFolder, 'no-select-row': file.currentFolder || fileIsTrash(file) || (fileIsFolder(file) &amp;&amp; !storageFull) }" ng-repeat="file in filesDetails.files | filter:query | orderBy:orderByAttribute:reverseSort track by $index">
+      <!-- ngIf: fileIsFolder(file) && (!fileIsTrash(file) || storageFull) --><td colspan="4" ng-if="fileIsFolder(file) &amp;&amp; (!fileIsTrash(file) || storageFull)" class="ng-scope">
+        <span class="folder ng-binding">001folder/</span>
+      </td><!-- end ngIf: fileIsFolder(file) && (!fileIsTrash(file) || storageFull) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+    </tr><!-- end ngRepeat: file in filesDetails.files | filter:query | orderBy:orderByAttribute:reverseSort track by $index --><tr class="clickable-row ng-scope no-select-row" ng-click="fileClick(file);" ng-class="{'active': file.isChecked, 'blocked-file': file.isThrottled, 'back-btn': file.currentFolder, 'no-select-row': file.currentFolder || fileIsTrash(file) || (fileIsFolder(file) &amp;&amp; !storageFull) }" ng-repeat="file in filesDetails.files | filter:query | orderBy:orderByAttribute:reverseSort track by $index">
+      <!-- ngIf: fileIsFolder(file) && (!fileIsTrash(file) || storageFull) --><td colspan="4" ng-if="fileIsFolder(file) &amp;&amp; (!fileIsTrash(file) || storageFull)" class="ng-scope">
+        <span class="folder ng-binding">002folder/</span>
+      </td><!-- end ngIf: fileIsFolder(file) && (!fileIsTrash(file) || storageFull) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+    </tr><!-- end ngRepeat: file in filesDetails.files | filter:query | orderBy:orderByAttribute:reverseSort track by $index --><tr class="clickable-row ng-scope no-select-row" ng-click="fileClick(file);" ng-class="{'active': file.isChecked, 'blocked-file': file.isThrottled, 'back-btn': file.currentFolder, 'no-select-row': file.currentFolder || fileIsTrash(file) || (fileIsFolder(file) &amp;&amp; !storageFull) }" ng-repeat="file in filesDetails.files | filter:query | orderBy:orderByAttribute:reverseSort track by $index">
+      <!-- ngIf: fileIsFolder(file) && (!fileIsTrash(file) || storageFull) --><td colspan="4" ng-if="fileIsFolder(file) &amp;&amp; (!fileIsTrash(file) || storageFull)" class="ng-scope">
+        <span class="folder ng-binding">00deleteme/</span>
+      </td><!-- end ngIf: fileIsFolder(file) && (!fileIsTrash(file) || storageFull) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+    </tr><!-- end ngRepeat: file in filesDetails.files | filter:query | orderBy:orderByAttribute:reverseSort track by $index --><tr class="clickable-row ng-scope no-select-row" ng-click="fileClick(file);" ng-class="{'active': file.isChecked, 'blocked-file': file.isThrottled, 'back-btn': file.currentFolder, 'no-select-row': file.currentFolder || fileIsTrash(file) || (fileIsFolder(file) &amp;&amp; !storageFull) }" ng-repeat="file in filesDetails.files | filter:query | orderBy:orderByAttribute:reverseSort track by $index">
+      <!-- ngIf: fileIsFolder(file) && (!fileIsTrash(file) || storageFull) --><td colspan="4" ng-if="fileIsFolder(file) &amp;&amp; (!fileIsTrash(file) || storageFull)" class="ng-scope">
+        <span class="folder ng-binding">01abcd/</span>
+      </td><!-- end ngIf: fileIsFolder(file) && (!fileIsTrash(file) || storageFull) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+    </tr><!-- end ngRepeat: file in filesDetails.files | filter:query | orderBy:orderByAttribute:reverseSort track by $index --><tr class="clickable-row ng-scope no-select-row" ng-click="fileClick(file);" ng-class="{'active': file.isChecked, 'blocked-file': file.isThrottled, 'back-btn': file.currentFolder, 'no-select-row': file.currentFolder || fileIsTrash(file) || (fileIsFolder(file) &amp;&amp; !storageFull) }" ng-repeat="file in filesDetails.files | filter:query | orderBy:orderByAttribute:reverseSort track by $index">
+      <!-- ngIf: fileIsFolder(file) && (!fileIsTrash(file) || storageFull) --><td colspan="4" ng-if="fileIsFolder(file) &amp;&amp; (!fileIsTrash(file) || storageFull)" class="ng-scope">
+        <span class="folder ng-binding">0alpha/</span>
+      </td><!-- end ngIf: fileIsFolder(file) && (!fileIsTrash(file) || storageFull) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+    </tr><!-- end ngRepeat: file in filesDetails.files | filter:query | orderBy:orderByAttribute:reverseSort track by $index --><tr class="clickable-row ng-scope no-select-row" ng-click="fileClick(file);" ng-class="{'active': file.isChecked, 'blocked-file': file.isThrottled, 'back-btn': file.currentFolder, 'no-select-row': file.currentFolder || fileIsTrash(file) || (fileIsFolder(file) &amp;&amp; !storageFull) }" ng-repeat="file in filesDetails.files | filter:query | orderBy:orderByAttribute:reverseSort track by $index">
+      <!-- ngIf: fileIsFolder(file) && (!fileIsTrash(file) || storageFull) --><td colspan="4" ng-if="fileIsFolder(file) &amp;&amp; (!fileIsTrash(file) || storageFull)" class="ng-scope">
+        <span class="folder ng-binding">0beta/</span>
+      </td><!-- end ngIf: fileIsFolder(file) && (!fileIsTrash(file) || storageFull) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+    </tr><!-- end ngRepeat: file in filesDetails.files | filter:query | orderBy:orderByAttribute:reverseSort track by $index --><tr class="clickable-row ng-scope no-select-row" ng-click="fileClick(file);" ng-class="{'active': file.isChecked, 'blocked-file': file.isThrottled, 'back-btn': file.currentFolder, 'no-select-row': file.currentFolder || fileIsTrash(file) || (fileIsFolder(file) &amp;&amp; !storageFull) }" ng-repeat="file in filesDetails.files | filter:query | orderBy:orderByAttribute:reverseSort track by $index">
+      <!-- ngIf: fileIsFolder(file) && (!fileIsTrash(file) || storageFull) --><td colspan="4" ng-if="fileIsFolder(file) &amp;&amp; (!fileIsTrash(file) || storageFull)" class="ng-scope">
+        <span class="folder ng-binding">alan/</span>
+      </td><!-- end ngIf: fileIsFolder(file) && (!fileIsTrash(file) || storageFull) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+    </tr><!-- end ngRepeat: file in filesDetails.files | filter:query | orderBy:orderByAttribute:reverseSort track by $index --><tr class="clickable-row ng-scope no-select-row" ng-click="fileClick(file);" ng-class="{'active': file.isChecked, 'blocked-file': file.isThrottled, 'back-btn': file.currentFolder, 'no-select-row': file.currentFolder || fileIsTrash(file) || (fileIsFolder(file) &amp;&amp; !storageFull) }" ng-repeat="file in filesDetails.files | filter:query | orderBy:orderByAttribute:reverseSort track by $index">
+      <!-- ngIf: fileIsFolder(file) && (!fileIsTrash(file) || storageFull) --><td colspan="4" ng-if="fileIsFolder(file) &amp;&amp; (!fileIsTrash(file) || storageFull)" class="ng-scope">
+        <span class="folder ng-binding">Album CYLB5 - Imgur/</span>
+      </td><!-- end ngIf: fileIsFolder(file) && (!fileIsTrash(file) || storageFull) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+    </tr><!-- end ngRepeat: file in filesDetails.files | filter:query | orderBy:orderByAttribute:reverseSort track by $index --><tr class="clickable-row ng-scope no-select-row" ng-click="fileClick(file);" ng-class="{'active': file.isChecked, 'blocked-file': file.isThrottled, 'back-btn': file.currentFolder, 'no-select-row': file.currentFolder || fileIsTrash(file) || (fileIsFolder(file) &amp;&amp; !storageFull) }" ng-repeat="file in filesDetails.files | filter:query | orderBy:orderByAttribute:reverseSort track by $index">
+      <!-- ngIf: fileIsFolder(file) && (!fileIsTrash(file) || storageFull) --><td colspan="4" ng-if="fileIsFolder(file) &amp;&amp; (!fileIsTrash(file) || storageFull)" class="ng-scope">
+        <span class="folder ng-binding">Alternate Logo/</span>
+      </td><!-- end ngIf: fileIsFolder(file) && (!fileIsTrash(file) || storageFull) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+    </tr><!-- end ngRepeat: file in filesDetails.files | filter:query | orderBy:orderByAttribute:reverseSort track by $index --><tr class="clickable-row ng-scope no-select-row" ng-click="fileClick(file);" ng-class="{'active': file.isChecked, 'blocked-file': file.isThrottled, 'back-btn': file.currentFolder, 'no-select-row': file.currentFolder || fileIsTrash(file) || (fileIsFolder(file) &amp;&amp; !storageFull) }" ng-repeat="file in filesDetails.files | filter:query | orderBy:orderByAttribute:reverseSort track by $index">
+      <!-- ngIf: fileIsFolder(file) && (!fileIsTrash(file) || storageFull) --><td colspan="4" ng-if="fileIsFolder(file) &amp;&amp; (!fileIsTrash(file) || storageFull)" class="ng-scope">
+        <span class="folder ng-binding">another folder/</span>
+      </td><!-- end ngIf: fileIsFolder(file) && (!fileIsTrash(file) || storageFull) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+    </tr><!-- end ngRepeat: file in filesDetails.files | filter:query | orderBy:orderByAttribute:reverseSort track by $index --><tr class="clickable-row ng-scope no-select-row" ng-click="fileClick(file);" ng-class="{'active': file.isChecked, 'blocked-file': file.isThrottled, 'back-btn': file.currentFolder, 'no-select-row': file.currentFolder || fileIsTrash(file) || (fileIsFolder(file) &amp;&amp; !storageFull) }" ng-repeat="file in filesDetails.files | filter:query | orderBy:orderByAttribute:reverseSort track by $index">
+      <!-- ngIf: fileIsFolder(file) && (!fileIsTrash(file) || storageFull) --><td colspan="4" ng-if="fileIsFolder(file) &amp;&amp; (!fileIsTrash(file) || storageFull)" class="ng-scope">
+        <span class="folder ng-binding">Another of Shea's Folders/</span>
+      </td><!-- end ngIf: fileIsFolder(file) && (!fileIsTrash(file) || storageFull) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+    </tr><!-- end ngRepeat: file in filesDetails.files | filter:query | orderBy:orderByAttribute:reverseSort track by $index --><tr class="clickable-row ng-scope no-select-row" ng-click="fileClick(file);" ng-class="{'active': file.isChecked, 'blocked-file': file.isThrottled, 'back-btn': file.currentFolder, 'no-select-row': file.currentFolder || fileIsTrash(file) || (fileIsFolder(file) &amp;&amp; !storageFull) }" ng-repeat="file in filesDetails.files | filter:query | orderBy:orderByAttribute:reverseSort track by $index">
+      <!-- ngIf: fileIsFolder(file) && (!fileIsTrash(file) || storageFull) --><td colspan="4" ng-if="fileIsFolder(file) &amp;&amp; (!fileIsTrash(file) || storageFull)" class="ng-scope">
+        <span class="folder ng-binding">Another Test of Shea's/</span>
+      </td><!-- end ngIf: fileIsFolder(file) && (!fileIsTrash(file) || storageFull) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+    </tr><!-- end ngRepeat: file in filesDetails.files | filter:query | orderBy:orderByAttribute:reverseSort track by $index --><tr class="clickable-row ng-scope no-select-row" ng-click="fileClick(file);" ng-class="{'active': file.isChecked, 'blocked-file': file.isThrottled, 'back-btn': file.currentFolder, 'no-select-row': file.currentFolder || fileIsTrash(file) || (fileIsFolder(file) &amp;&amp; !storageFull) }" ng-repeat="file in filesDetails.files | filter:query | orderBy:orderByAttribute:reverseSort track by $index">
+      <!-- ngIf: fileIsFolder(file) && (!fileIsTrash(file) || storageFull) --><td colspan="4" ng-if="fileIsFolder(file) &amp;&amp; (!fileIsTrash(file) || storageFull)" class="ng-scope">
+        <span class="folder ng-binding">asdasd/</span>
+      </td><!-- end ngIf: fileIsFolder(file) && (!fileIsTrash(file) || storageFull) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+    </tr><!-- end ngRepeat: file in filesDetails.files | filter:query | orderBy:orderByAttribute:reverseSort track by $index --><tr class="clickable-row ng-scope no-select-row" ng-click="fileClick(file);" ng-class="{'active': file.isChecked, 'blocked-file': file.isThrottled, 'back-btn': file.currentFolder, 'no-select-row': file.currentFolder || fileIsTrash(file) || (fileIsFolder(file) &amp;&amp; !storageFull) }" ng-repeat="file in filesDetails.files | filter:query | orderBy:orderByAttribute:reverseSort track by $index">
+      <!-- ngIf: fileIsFolder(file) && (!fileIsTrash(file) || storageFull) --><td colspan="4" ng-if="fileIsFolder(file) &amp;&amp; (!fileIsTrash(file) || storageFull)" class="ng-scope">
+        <span class="folder ng-binding">asdf/</span>
+      </td><!-- end ngIf: fileIsFolder(file) && (!fileIsTrash(file) || storageFull) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+    </tr><!-- end ngRepeat: file in filesDetails.files | filter:query | orderBy:orderByAttribute:reverseSort track by $index --><tr class="clickable-row ng-scope no-select-row" ng-click="fileClick(file);" ng-class="{'active': file.isChecked, 'blocked-file': file.isThrottled, 'back-btn': file.currentFolder, 'no-select-row': file.currentFolder || fileIsTrash(file) || (fileIsFolder(file) &amp;&amp; !storageFull) }" ng-repeat="file in filesDetails.files | filter:query | orderBy:orderByAttribute:reverseSort track by $index">
+      <!-- ngIf: fileIsFolder(file) && (!fileIsTrash(file) || storageFull) --><td colspan="4" ng-if="fileIsFolder(file) &amp;&amp; (!fileIsTrash(file) || storageFull)" class="ng-scope">
+        <span class="folder ng-binding">ashleigh is testing/</span>
+      </td><!-- end ngIf: fileIsFolder(file) && (!fileIsTrash(file) || storageFull) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+    </tr><!-- end ngRepeat: file in filesDetails.files | filter:query | orderBy:orderByAttribute:reverseSort track by $index --><tr class="clickable-row ng-scope no-select-row" ng-click="fileClick(file);" ng-class="{'active': file.isChecked, 'blocked-file': file.isThrottled, 'back-btn': file.currentFolder, 'no-select-row': file.currentFolder || fileIsTrash(file) || (fileIsFolder(file) &amp;&amp; !storageFull) }" ng-repeat="file in filesDetails.files | filter:query | orderBy:orderByAttribute:reverseSort track by $index">
+      <!-- ngIf: fileIsFolder(file) && (!fileIsTrash(file) || storageFull) --><td colspan="4" ng-if="fileIsFolder(file) &amp;&amp; (!fileIsTrash(file) || storageFull)" class="ng-scope">
+        <span class="folder ng-binding">blake test/</span>
+      </td><!-- end ngIf: fileIsFolder(file) && (!fileIsTrash(file) || storageFull) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+    </tr><!-- end ngRepeat: file in filesDetails.files | filter:query | orderBy:orderByAttribute:reverseSort track by $index --><tr class="clickable-row ng-scope no-select-row" ng-click="fileClick(file);" ng-class="{'active': file.isChecked, 'blocked-file': file.isThrottled, 'back-btn': file.currentFolder, 'no-select-row': file.currentFolder || fileIsTrash(file) || (fileIsFolder(file) &amp;&amp; !storageFull) }" ng-repeat="file in filesDetails.files | filter:query | orderBy:orderByAttribute:reverseSort track by $index">
+      <!-- ngIf: fileIsFolder(file) && (!fileIsTrash(file) || storageFull) --><td colspan="4" ng-if="fileIsFolder(file) &amp;&amp; (!fileIsTrash(file) || storageFull)" class="ng-scope">
+        <span class="folder ng-binding">brew-gallery/</span>
+      </td><!-- end ngIf: fileIsFolder(file) && (!fileIsTrash(file) || storageFull) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+    </tr><!-- end ngRepeat: file in filesDetails.files | filter:query | orderBy:orderByAttribute:reverseSort track by $index --><tr class="clickable-row ng-scope no-select-row" ng-click="fileClick(file);" ng-class="{'active': file.isChecked, 'blocked-file': file.isThrottled, 'back-btn': file.currentFolder, 'no-select-row': file.currentFolder || fileIsTrash(file) || (fileIsFolder(file) &amp;&amp; !storageFull) }" ng-repeat="file in filesDetails.files | filter:query | orderBy:orderByAttribute:reverseSort track by $index">
+      <!-- ngIf: fileIsFolder(file) && (!fileIsTrash(file) || storageFull) --><td colspan="4" ng-if="fileIsFolder(file) &amp;&amp; (!fileIsTrash(file) || storageFull)" class="ng-scope">
+        <span class="folder ng-binding">Byron/</span>
+      </td><!-- end ngIf: fileIsFolder(file) && (!fileIsTrash(file) || storageFull) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+    </tr><!-- end ngRepeat: file in filesDetails.files | filter:query | orderBy:orderByAttribute:reverseSort track by $index --><tr class="clickable-row ng-scope no-select-row" ng-click="fileClick(file);" ng-class="{'active': file.isChecked, 'blocked-file': file.isThrottled, 'back-btn': file.currentFolder, 'no-select-row': file.currentFolder || fileIsTrash(file) || (fileIsFolder(file) &amp;&amp; !storageFull) }" ng-repeat="file in filesDetails.files | filter:query | orderBy:orderByAttribute:reverseSort track by $index">
+      <!-- ngIf: fileIsFolder(file) && (!fileIsTrash(file) || storageFull) --><td colspan="4" ng-if="fileIsFolder(file) &amp;&amp; (!fileIsTrash(file) || storageFull)" class="ng-scope">
+        <span class="folder ng-binding">community-slider/</span>
+      </td><!-- end ngIf: fileIsFolder(file) && (!fileIsTrash(file) || storageFull) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+    </tr><!-- end ngRepeat: file in filesDetails.files | filter:query | orderBy:orderByAttribute:reverseSort track by $index --><tr class="clickable-row ng-scope no-select-row" ng-click="fileClick(file);" ng-class="{'active': file.isChecked, 'blocked-file': file.isThrottled, 'back-btn': file.currentFolder, 'no-select-row': file.currentFolder || fileIsTrash(file) || (fileIsFolder(file) &amp;&amp; !storageFull) }" ng-repeat="file in filesDetails.files | filter:query | orderBy:orderByAttribute:reverseSort track by $index">
+      <!-- ngIf: fileIsFolder(file) && (!fileIsTrash(file) || storageFull) --><td colspan="4" ng-if="fileIsFolder(file) &amp;&amp; (!fileIsTrash(file) || storageFull)" class="ng-scope">
+        <span class="folder ng-binding">content-clatsop/</span>
+      </td><!-- end ngIf: fileIsFolder(file) && (!fileIsTrash(file) || storageFull) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+    </tr><!-- end ngRepeat: file in filesDetails.files | filter:query | orderBy:orderByAttribute:reverseSort track by $index --><tr class="clickable-row ng-scope no-select-row" ng-click="fileClick(file);" ng-class="{'active': file.isChecked, 'blocked-file': file.isThrottled, 'back-btn': file.currentFolder, 'no-select-row': file.currentFolder || fileIsTrash(file) || (fileIsFolder(file) &amp;&amp; !storageFull) }" ng-repeat="file in filesDetails.files | filter:query | orderBy:orderByAttribute:reverseSort track by $index">
+      <!-- ngIf: fileIsFolder(file) && (!fileIsTrash(file) || storageFull) --><td colspan="4" ng-if="fileIsFolder(file) &amp;&amp; (!fileIsTrash(file) || storageFull)" class="ng-scope">
+        <span class="folder ng-binding">content-resources/</span>
+      </td><!-- end ngIf: fileIsFolder(file) && (!fileIsTrash(file) || storageFull) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+    </tr><!-- end ngRepeat: file in filesDetails.files | filter:query | orderBy:orderByAttribute:reverseSort track by $index --><tr class="clickable-row ng-scope no-select-row" ng-click="fileClick(file);" ng-class="{'active': file.isChecked, 'blocked-file': file.isThrottled, 'back-btn': file.currentFolder, 'no-select-row': file.currentFolder || fileIsTrash(file) || (fileIsFolder(file) &amp;&amp; !storageFull) }" ng-repeat="file in filesDetails.files | filter:query | orderBy:orderByAttribute:reverseSort track by $index">
+      <!-- ngIf: fileIsFolder(file) && (!fileIsTrash(file) || storageFull) --><td colspan="4" ng-if="fileIsFolder(file) &amp;&amp; (!fileIsTrash(file) || storageFull)" class="ng-scope">
+        <span class="folder ng-binding">content-restaurant-promotion/</span>
+      </td><!-- end ngIf: fileIsFolder(file) && (!fileIsTrash(file) || storageFull) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+    </tr><!-- end ngRepeat: file in filesDetails.files | filter:query | orderBy:orderByAttribute:reverseSort track by $index --><tr class="clickable-row ng-scope no-select-row" ng-click="fileClick(file);" ng-class="{'active': file.isChecked, 'blocked-file': file.isThrottled, 'back-btn': file.currentFolder, 'no-select-row': file.currentFolder || fileIsTrash(file) || (fileIsFolder(file) &amp;&amp; !storageFull) }" ng-repeat="file in filesDetails.files | filter:query | orderBy:orderByAttribute:reverseSort track by $index">
+      <!-- ngIf: fileIsFolder(file) && (!fileIsTrash(file) || storageFull) --><td colspan="4" ng-if="fileIsFolder(file) &amp;&amp; (!fileIsTrash(file) || storageFull)" class="ng-scope">
+        <span class="folder ng-binding">content-template-jobs-board-master/</span>
+      </td><!-- end ngIf: fileIsFolder(file) && (!fileIsTrash(file) || storageFull) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+    </tr><!-- end ngRepeat: file in filesDetails.files | filter:query | orderBy:orderByAttribute:reverseSort track by $index --><tr class="clickable-row ng-scope no-select-row" ng-click="fileClick(file);" ng-class="{'active': file.isChecked, 'blocked-file': file.isThrottled, 'back-btn': file.currentFolder, 'no-select-row': file.currentFolder || fileIsTrash(file) || (fileIsFolder(file) &amp;&amp; !storageFull) }" ng-repeat="file in filesDetails.files | filter:query | orderBy:orderByAttribute:reverseSort track by $index">
+      <!-- ngIf: fileIsFolder(file) && (!fileIsTrash(file) || storageFull) --><td colspan="4" ng-if="fileIsFolder(file) &amp;&amp; (!fileIsTrash(file) || storageFull)" class="ng-scope">
+        <span class="folder ng-binding">coupon_campaign/</span>
+      </td><!-- end ngIf: fileIsFolder(file) && (!fileIsTrash(file) || storageFull) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+    </tr><!-- end ngRepeat: file in filesDetails.files | filter:query | orderBy:orderByAttribute:reverseSort track by $index --><tr class="clickable-row ng-scope no-select-row" ng-click="fileClick(file);" ng-class="{'active': file.isChecked, 'blocked-file': file.isThrottled, 'back-btn': file.currentFolder, 'no-select-row': file.currentFolder || fileIsTrash(file) || (fileIsFolder(file) &amp;&amp; !storageFull) }" ng-repeat="file in filesDetails.files | filter:query | orderBy:orderByAttribute:reverseSort track by $index">
+      <!-- ngIf: fileIsFolder(file) && (!fileIsTrash(file) || storageFull) --><td colspan="4" ng-if="fileIsFolder(file) &amp;&amp; (!fileIsTrash(file) || storageFull)" class="ng-scope">
+        <span class="folder ng-binding">delete me at will/</span>
+      </td><!-- end ngIf: fileIsFolder(file) && (!fileIsTrash(file) || storageFull) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+    </tr><!-- end ngRepeat: file in filesDetails.files | filter:query | orderBy:orderByAttribute:reverseSort track by $index --><tr class="clickable-row ng-scope no-select-row" ng-click="fileClick(file);" ng-class="{'active': file.isChecked, 'blocked-file': file.isThrottled, 'back-btn': file.currentFolder, 'no-select-row': file.currentFolder || fileIsTrash(file) || (fileIsFolder(file) &amp;&amp; !storageFull) }" ng-repeat="file in filesDetails.files | filter:query | orderBy:orderByAttribute:reverseSort track by $index">
+      <!-- ngIf: fileIsFolder(file) && (!fileIsTrash(file) || storageFull) --><td colspan="4" ng-if="fileIsFolder(file) &amp;&amp; (!fileIsTrash(file) || storageFull)" class="ng-scope">
+        <span class="folder ng-binding">delete me/</span>
+      </td><!-- end ngIf: fileIsFolder(file) && (!fileIsTrash(file) || storageFull) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+    </tr><!-- end ngRepeat: file in filesDetails.files | filter:query | orderBy:orderByAttribute:reverseSort track by $index --><tr class="clickable-row ng-scope no-select-row" ng-click="fileClick(file);" ng-class="{'active': file.isChecked, 'blocked-file': file.isThrottled, 'back-btn': file.currentFolder, 'no-select-row': file.currentFolder || fileIsTrash(file) || (fileIsFolder(file) &amp;&amp; !storageFull) }" ng-repeat="file in filesDetails.files | filter:query | orderBy:orderByAttribute:reverseSort track by $index">
+      <!-- ngIf: fileIsFolder(file) && (!fileIsTrash(file) || storageFull) --><td colspan="4" ng-if="fileIsFolder(file) &amp;&amp; (!fileIsTrash(file) || storageFull)" class="ng-scope">
+        <span class="folder ng-binding">Display/</span>
+      </td><!-- end ngIf: fileIsFolder(file) && (!fileIsTrash(file) || storageFull) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+    </tr><!-- end ngRepeat: file in filesDetails.files | filter:query | orderBy:orderByAttribute:reverseSort track by $index --><tr class="clickable-row ng-scope no-select-row" ng-click="fileClick(file);" ng-class="{'active': file.isChecked, 'blocked-file': file.isThrottled, 'back-btn': file.currentFolder, 'no-select-row': file.currentFolder || fileIsTrash(file) || (fileIsFolder(file) &amp;&amp; !storageFull) }" ng-repeat="file in filesDetails.files | filter:query | orderBy:orderByAttribute:reverseSort track by $index">
+      <!-- ngIf: fileIsFolder(file) && (!fileIsTrash(file) || storageFull) --><td colspan="4" ng-if="fileIsFolder(file) &amp;&amp; (!fileIsTrash(file) || storageFull)" class="ng-scope">
+        <span class="folder ng-binding">DS_Images/</span>
+      </td><!-- end ngIf: fileIsFolder(file) && (!fileIsTrash(file) || storageFull) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+    </tr><!-- end ngRepeat: file in filesDetails.files | filter:query | orderBy:orderByAttribute:reverseSort track by $index --><tr class="clickable-row ng-scope no-select-row" ng-click="fileClick(file);" ng-class="{'active': file.isChecked, 'blocked-file': file.isThrottled, 'back-btn': file.currentFolder, 'no-select-row': file.currentFolder || fileIsTrash(file) || (fileIsFolder(file) &amp;&amp; !storageFull) }" ng-repeat="file in filesDetails.files | filter:query | orderBy:orderByAttribute:reverseSort track by $index">
+      <!-- ngIf: fileIsFolder(file) && (!fileIsTrash(file) || storageFull) --><td colspan="4" ng-if="fileIsFolder(file) &amp;&amp; (!fileIsTrash(file) || storageFull)" class="ng-scope">
+        <span class="folder ng-binding">education-k-12-calendar/</span>
+      </td><!-- end ngIf: fileIsFolder(file) && (!fileIsTrash(file) || storageFull) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+    </tr><!-- end ngRepeat: file in filesDetails.files | filter:query | orderBy:orderByAttribute:reverseSort track by $index --><tr class="clickable-row ng-scope no-select-row" ng-click="fileClick(file);" ng-class="{'active': file.isChecked, 'blocked-file': file.isThrottled, 'back-btn': file.currentFolder, 'no-select-row': file.currentFolder || fileIsTrash(file) || (fileIsFolder(file) &amp;&amp; !storageFull) }" ng-repeat="file in filesDetails.files | filter:query | orderBy:orderByAttribute:reverseSort track by $index">
+      <!-- ngIf: fileIsFolder(file) && (!fileIsTrash(file) || storageFull) --><td colspan="4" ng-if="fileIsFolder(file) &amp;&amp; (!fileIsTrash(file) || storageFull)" class="ng-scope">
+        <span class="folder ng-binding">events/</span>
+      </td><!-- end ngIf: fileIsFolder(file) && (!fileIsTrash(file) || storageFull) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+    </tr><!-- end ngRepeat: file in filesDetails.files | filter:query | orderBy:orderByAttribute:reverseSort track by $index --><tr class="clickable-row ng-scope no-select-row" ng-click="fileClick(file);" ng-class="{'active': file.isChecked, 'blocked-file': file.isThrottled, 'back-btn': file.currentFolder, 'no-select-row': file.currentFolder || fileIsTrash(file) || (fileIsFolder(file) &amp;&amp; !storageFull) }" ng-repeat="file in filesDetails.files | filter:query | orderBy:orderByAttribute:reverseSort track by $index">
+      <!-- ngIf: fileIsFolder(file) && (!fileIsTrash(file) || storageFull) --><td colspan="4" ng-if="fileIsFolder(file) &amp;&amp; (!fileIsTrash(file) || storageFull)" class="ng-scope">
+        <span class="folder ng-binding">FilterableProductGrid/</span>
+      </td><!-- end ngIf: fileIsFolder(file) && (!fileIsTrash(file) || storageFull) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+    </tr><!-- end ngRepeat: file in filesDetails.files | filter:query | orderBy:orderByAttribute:reverseSort track by $index --><tr class="clickable-row ng-scope no-select-row" ng-click="fileClick(file);" ng-class="{'active': file.isChecked, 'blocked-file': file.isThrottled, 'back-btn': file.currentFolder, 'no-select-row': file.currentFolder || fileIsTrash(file) || (fileIsFolder(file) &amp;&amp; !storageFull) }" ng-repeat="file in filesDetails.files | filter:query | orderBy:orderByAttribute:reverseSort track by $index">
+      <!-- ngIf: fileIsFolder(file) && (!fileIsTrash(file) || storageFull) --><td colspan="4" ng-if="fileIsFolder(file) &amp;&amp; (!fileIsTrash(file) || storageFull)" class="ng-scope">
+        <span class="folder ng-binding">fonts/</span>
+      </td><!-- end ngIf: fileIsFolder(file) && (!fileIsTrash(file) || storageFull) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+    </tr><!-- end ngRepeat: file in filesDetails.files | filter:query | orderBy:orderByAttribute:reverseSort track by $index --><tr class="clickable-row ng-scope no-select-row" ng-click="fileClick(file);" ng-class="{'active': file.isChecked, 'blocked-file': file.isThrottled, 'back-btn': file.currentFolder, 'no-select-row': file.currentFolder || fileIsTrash(file) || (fileIsFolder(file) &amp;&amp; !storageFull) }" ng-repeat="file in filesDetails.files | filter:query | orderBy:orderByAttribute:reverseSort track by $index">
+      <!-- ngIf: fileIsFolder(file) && (!fileIsTrash(file) || storageFull) --><td colspan="4" ng-if="fileIsFolder(file) &amp;&amp; (!fileIsTrash(file) || storageFull)" class="ng-scope">
+        <span class="folder ng-binding">halloweentemplate/</span>
+      </td><!-- end ngIf: fileIsFolder(file) && (!fileIsTrash(file) || storageFull) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+    </tr><!-- end ngRepeat: file in filesDetails.files | filter:query | orderBy:orderByAttribute:reverseSort track by $index --><tr class="clickable-row ng-scope no-select-row" ng-click="fileClick(file);" ng-class="{'active': file.isChecked, 'blocked-file': file.isThrottled, 'back-btn': file.currentFolder, 'no-select-row': file.currentFolder || fileIsTrash(file) || (fileIsFolder(file) &amp;&amp; !storageFull) }" ng-repeat="file in filesDetails.files | filter:query | orderBy:orderByAttribute:reverseSort track by $index">
+      <!-- ngIf: fileIsFolder(file) && (!fileIsTrash(file) || storageFull) --><td colspan="4" ng-if="fileIsFolder(file) &amp;&amp; (!fileIsTrash(file) || storageFull)" class="ng-scope">
+        <span class="folder ng-binding">hotel_landscape_template/</span>
+      </td><!-- end ngIf: fileIsFolder(file) && (!fileIsTrash(file) || storageFull) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+    </tr><!-- end ngRepeat: file in filesDetails.files | filter:query | orderBy:orderByAttribute:reverseSort track by $index --><tr class="clickable-row ng-scope no-select-row" ng-click="fileClick(file);" ng-class="{'active': file.isChecked, 'blocked-file': file.isThrottled, 'back-btn': file.currentFolder, 'no-select-row': file.currentFolder || fileIsTrash(file) || (fileIsFolder(file) &amp;&amp; !storageFull) }" ng-repeat="file in filesDetails.files | filter:query | orderBy:orderByAttribute:reverseSort track by $index">
+      <!-- ngIf: fileIsFolder(file) && (!fileIsTrash(file) || storageFull) --><td colspan="4" ng-if="fileIsFolder(file) &amp;&amp; (!fileIsTrash(file) || storageFull)" class="ng-scope">
+        <span class="folder ng-binding">html-pages-content/</span>
+      </td><!-- end ngIf: fileIsFolder(file) && (!fileIsTrash(file) || storageFull) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+    </tr><!-- end ngRepeat: file in filesDetails.files | filter:query | orderBy:orderByAttribute:reverseSort track by $index --><tr class="clickable-row ng-scope no-select-row" ng-click="fileClick(file);" ng-class="{'active': file.isChecked, 'blocked-file': file.isThrottled, 'back-btn': file.currentFolder, 'no-select-row': file.currentFolder || fileIsTrash(file) || (fileIsFolder(file) &amp;&amp; !storageFull) }" ng-repeat="file in filesDetails.files | filter:query | orderBy:orderByAttribute:reverseSort track by $index">
+      <!-- ngIf: fileIsFolder(file) && (!fileIsTrash(file) || storageFull) --><td colspan="4" ng-if="fileIsFolder(file) &amp;&amp; (!fileIsTrash(file) || storageFull)" class="ng-scope">
+        <span class="folder ng-binding">HTML5VIDEOTEMPLATE/</span>
+      </td><!-- end ngIf: fileIsFolder(file) && (!fileIsTrash(file) || storageFull) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+    </tr><!-- end ngRepeat: file in filesDetails.files | filter:query | orderBy:orderByAttribute:reverseSort track by $index --><tr class="clickable-row ng-scope no-select-row" ng-click="fileClick(file);" ng-class="{'active': file.isChecked, 'blocked-file': file.isThrottled, 'back-btn': file.currentFolder, 'no-select-row': file.currentFolder || fileIsTrash(file) || (fileIsFolder(file) &amp;&amp; !storageFull) }" ng-repeat="file in filesDetails.files | filter:query | orderBy:orderByAttribute:reverseSort track by $index">
+      <!-- ngIf: fileIsFolder(file) && (!fileIsTrash(file) || storageFull) --><td colspan="4" ng-if="fileIsFolder(file) &amp;&amp; (!fileIsTrash(file) || storageFull)" class="ng-scope">
+        <span class="folder ng-binding">imageslider/</span>
+      </td><!-- end ngIf: fileIsFolder(file) && (!fileIsTrash(file) || storageFull) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+    </tr><!-- end ngRepeat: file in filesDetails.files | filter:query | orderBy:orderByAttribute:reverseSort track by $index --><tr class="clickable-row ng-scope no-select-row" ng-click="fileClick(file);" ng-class="{'active': file.isChecked, 'blocked-file': file.isThrottled, 'back-btn': file.currentFolder, 'no-select-row': file.currentFolder || fileIsTrash(file) || (fileIsFolder(file) &amp;&amp; !storageFull) }" ng-repeat="file in filesDetails.files | filter:query | orderBy:orderByAttribute:reverseSort track by $index">
+      <!-- ngIf: fileIsFolder(file) && (!fileIsTrash(file) || storageFull) --><td colspan="4" ng-if="fileIsFolder(file) &amp;&amp; (!fileIsTrash(file) || storageFull)" class="ng-scope">
+        <span class="folder ng-binding">instagram-content/</span>
+      </td><!-- end ngIf: fileIsFolder(file) && (!fileIsTrash(file) || storageFull) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+    </tr><!-- end ngRepeat: file in filesDetails.files | filter:query | orderBy:orderByAttribute:reverseSort track by $index --><tr class="clickable-row ng-scope no-select-row" ng-click="fileClick(file);" ng-class="{'active': file.isChecked, 'blocked-file': file.isThrottled, 'back-btn': file.currentFolder, 'no-select-row': file.currentFolder || fileIsTrash(file) || (fileIsFolder(file) &amp;&amp; !storageFull) }" ng-repeat="file in filesDetails.files | filter:query | orderBy:orderByAttribute:reverseSort track by $index">
+      <!-- ngIf: fileIsFolder(file) && (!fileIsTrash(file) || storageFull) --><td colspan="4" ng-if="fileIsFolder(file) &amp;&amp; (!fileIsTrash(file) || storageFull)" class="ng-scope">
+        <span class="folder ng-binding">Interactive_InfoBoard/</span>
+      </td><!-- end ngIf: fileIsFolder(file) && (!fileIsTrash(file) || storageFull) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+    </tr><!-- end ngRepeat: file in filesDetails.files | filter:query | orderBy:orderByAttribute:reverseSort track by $index --><tr class="clickable-row ng-scope no-select-row" ng-click="fileClick(file);" ng-class="{'active': file.isChecked, 'blocked-file': file.isThrottled, 'back-btn': file.currentFolder, 'no-select-row': file.currentFolder || fileIsTrash(file) || (fileIsFolder(file) &amp;&amp; !storageFull) }" ng-repeat="file in filesDetails.files | filter:query | orderBy:orderByAttribute:reverseSort track by $index">
+      <!-- ngIf: fileIsFolder(file) && (!fileIsTrash(file) || storageFull) --><td colspan="4" ng-if="fileIsFolder(file) &amp;&amp; (!fileIsTrash(file) || storageFull)" class="ng-scope">
+        <span class="folder ng-binding">jobs_board_template/</span>
+      </td><!-- end ngIf: fileIsFolder(file) && (!fileIsTrash(file) || storageFull) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+    </tr><!-- end ngRepeat: file in filesDetails.files | filter:query | orderBy:orderByAttribute:reverseSort track by $index --><tr class="clickable-row ng-scope no-select-row" ng-click="fileClick(file);" ng-class="{'active': file.isChecked, 'blocked-file': file.isThrottled, 'back-btn': file.currentFolder, 'no-select-row': file.currentFolder || fileIsTrash(file) || (fileIsFolder(file) &amp;&amp; !storageFull) }" ng-repeat="file in filesDetails.files | filter:query | orderBy:orderByAttribute:reverseSort track by $index">
+      <!-- ngIf: fileIsFolder(file) && (!fileIsTrash(file) || storageFull) --><td colspan="4" ng-if="fileIsFolder(file) &amp;&amp; (!fileIsTrash(file) || storageFull)" class="ng-scope">
+        <span class="folder ng-binding">Justin/</span>
+      </td><!-- end ngIf: fileIsFolder(file) && (!fileIsTrash(file) || storageFull) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+    </tr><!-- end ngRepeat: file in filesDetails.files | filter:query | orderBy:orderByAttribute:reverseSort track by $index --><tr class="clickable-row ng-scope no-select-row" ng-click="fileClick(file);" ng-class="{'active': file.isChecked, 'blocked-file': file.isThrottled, 'back-btn': file.currentFolder, 'no-select-row': file.currentFolder || fileIsTrash(file) || (fileIsFolder(file) &amp;&amp; !storageFull) }" ng-repeat="file in filesDetails.files | filter:query | orderBy:orderByAttribute:reverseSort track by $index">
+      <!-- ngIf: fileIsFolder(file) && (!fileIsTrash(file) || storageFull) --><td colspan="4" ng-if="fileIsFolder(file) &amp;&amp; (!fileIsTrash(file) || storageFull)" class="ng-scope">
+        <span class="folder ng-binding">Justin2/</span>
+      </td><!-- end ngIf: fileIsFolder(file) && (!fileIsTrash(file) || storageFull) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+    </tr><!-- end ngRepeat: file in filesDetails.files | filter:query | orderBy:orderByAttribute:reverseSort track by $index --><tr class="clickable-row ng-scope no-select-row" ng-click="fileClick(file);" ng-class="{'active': file.isChecked, 'blocked-file': file.isThrottled, 'back-btn': file.currentFolder, 'no-select-row': file.currentFolder || fileIsTrash(file) || (fileIsFolder(file) &amp;&amp; !storageFull) }" ng-repeat="file in filesDetails.files | filter:query | orderBy:orderByAttribute:reverseSort track by $index">
+      <!-- ngIf: fileIsFolder(file) && (!fileIsTrash(file) || storageFull) --><td colspan="4" ng-if="fileIsFolder(file) &amp;&amp; (!fileIsTrash(file) || storageFull)" class="ng-scope">
+        <span class="folder ng-binding">k-12 Premium Template/</span>
+      </td><!-- end ngIf: fileIsFolder(file) && (!fileIsTrash(file) || storageFull) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+    </tr><!-- end ngRepeat: file in filesDetails.files | filter:query | orderBy:orderByAttribute:reverseSort track by $index --><tr class="clickable-row ng-scope no-select-row" ng-click="fileClick(file);" ng-class="{'active': file.isChecked, 'blocked-file': file.isThrottled, 'back-btn': file.currentFolder, 'no-select-row': file.currentFolder || fileIsTrash(file) || (fileIsFolder(file) &amp;&amp; !storageFull) }" ng-repeat="file in filesDetails.files | filter:query | orderBy:orderByAttribute:reverseSort track by $index">
+      <!-- ngIf: fileIsFolder(file) && (!fileIsTrash(file) || storageFull) --><td colspan="4" ng-if="fileIsFolder(file) &amp;&amp; (!fileIsTrash(file) || storageFull)" class="ng-scope">
+        <span class="folder ng-binding">landing-restaurant/</span>
+      </td><!-- end ngIf: fileIsFolder(file) && (!fileIsTrash(file) || storageFull) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+    </tr><!-- end ngRepeat: file in filesDetails.files | filter:query | orderBy:orderByAttribute:reverseSort track by $index --><tr class="clickable-row ng-scope no-select-row" ng-click="fileClick(file);" ng-class="{'active': file.isChecked, 'blocked-file': file.isThrottled, 'back-btn': file.currentFolder, 'no-select-row': file.currentFolder || fileIsTrash(file) || (fileIsFolder(file) &amp;&amp; !storageFull) }" ng-repeat="file in filesDetails.files | filter:query | orderBy:orderByAttribute:reverseSort track by $index">
+      <!-- ngIf: fileIsFolder(file) && (!fileIsTrash(file) || storageFull) --><td colspan="4" ng-if="fileIsFolder(file) &amp;&amp; (!fileIsTrash(file) || storageFull)" class="ng-scope">
+        <span class="folder ng-binding">Lato2OFLWeb/</span>
+      </td><!-- end ngIf: fileIsFolder(file) && (!fileIsTrash(file) || storageFull) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+    </tr><!-- end ngRepeat: file in filesDetails.files | filter:query | orderBy:orderByAttribute:reverseSort track by $index --><tr class="clickable-row ng-scope no-select-row" ng-click="fileClick(file);" ng-class="{'active': file.isChecked, 'blocked-file': file.isThrottled, 'back-btn': file.currentFolder, 'no-select-row': file.currentFolder || fileIsTrash(file) || (fileIsFolder(file) &amp;&amp; !storageFull) }" ng-repeat="file in filesDetails.files | filter:query | orderBy:orderByAttribute:reverseSort track by $index">
+      <!-- ngIf: fileIsFolder(file) && (!fileIsTrash(file) || storageFull) --><td colspan="4" ng-if="fileIsFolder(file) &amp;&amp; (!fileIsTrash(file) || storageFull)" class="ng-scope">
+        <span class="folder ng-binding">mat/</span>
+      </td><!-- end ngIf: fileIsFolder(file) && (!fileIsTrash(file) || storageFull) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+    </tr><!-- end ngRepeat: file in filesDetails.files | filter:query | orderBy:orderByAttribute:reverseSort track by $index --><tr class="clickable-row ng-scope no-select-row" ng-click="fileClick(file);" ng-class="{'active': file.isChecked, 'blocked-file': file.isThrottled, 'back-btn': file.currentFolder, 'no-select-row': file.currentFolder || fileIsTrash(file) || (fileIsFolder(file) &amp;&amp; !storageFull) }" ng-repeat="file in filesDetails.files | filter:query | orderBy:orderByAttribute:reverseSort track by $index">
+      <!-- ngIf: fileIsFolder(file) && (!fileIsTrash(file) || storageFull) --><td colspan="4" ng-if="fileIsFolder(file) &amp;&amp; (!fileIsTrash(file) || storageFull)" class="ng-scope">
+        <span class="folder ng-binding">matthew test/</span>
+      </td><!-- end ngIf: fileIsFolder(file) && (!fileIsTrash(file) || storageFull) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+    </tr><!-- end ngRepeat: file in filesDetails.files | filter:query | orderBy:orderByAttribute:reverseSort track by $index --><tr class="clickable-row ng-scope no-select-row" ng-click="fileClick(file);" ng-class="{'active': file.isChecked, 'blocked-file': file.isThrottled, 'back-btn': file.currentFolder, 'no-select-row': file.currentFolder || fileIsTrash(file) || (fileIsFolder(file) &amp;&amp; !storageFull) }" ng-repeat="file in filesDetails.files | filter:query | orderBy:orderByAttribute:reverseSort track by $index">
+      <!-- ngIf: fileIsFolder(file) && (!fileIsTrash(file) || storageFull) --><td colspan="4" ng-if="fileIsFolder(file) &amp;&amp; (!fileIsTrash(file) || storageFull)" class="ng-scope">
+        <span class="folder ng-binding">offline-presentation/</span>
+      </td><!-- end ngIf: fileIsFolder(file) && (!fileIsTrash(file) || storageFull) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+    </tr><!-- end ngRepeat: file in filesDetails.files | filter:query | orderBy:orderByAttribute:reverseSort track by $index --><tr class="clickable-row ng-scope no-select-row" ng-click="fileClick(file);" ng-class="{'active': file.isChecked, 'blocked-file': file.isThrottled, 'back-btn': file.currentFolder, 'no-select-row': file.currentFolder || fileIsTrash(file) || (fileIsFolder(file) &amp;&amp; !storageFull) }" ng-repeat="file in filesDetails.files | filter:query | orderBy:orderByAttribute:reverseSort track by $index">
+      <!-- ngIf: fileIsFolder(file) && (!fileIsTrash(file) || storageFull) --><td colspan="4" ng-if="fileIsFolder(file) &amp;&amp; (!fileIsTrash(file) || storageFull)" class="ng-scope">
+        <span class="folder ng-binding">Open_Sans_Condensed/</span>
+      </td><!-- end ngIf: fileIsFolder(file) && (!fileIsTrash(file) || storageFull) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+    </tr><!-- end ngRepeat: file in filesDetails.files | filter:query | orderBy:orderByAttribute:reverseSort track by $index --><tr class="clickable-row ng-scope no-select-row" ng-click="fileClick(file);" ng-class="{'active': file.isChecked, 'blocked-file': file.isThrottled, 'back-btn': file.currentFolder, 'no-select-row': file.currentFolder || fileIsTrash(file) || (fileIsFolder(file) &amp;&amp; !storageFull) }" ng-repeat="file in filesDetails.files | filter:query | orderBy:orderByAttribute:reverseSort track by $index">
+      <!-- ngIf: fileIsFolder(file) && (!fileIsTrash(file) || storageFull) --><td colspan="4" ng-if="fileIsFolder(file) &amp;&amp; (!fileIsTrash(file) || storageFull)" class="ng-scope">
+        <span class="folder ng-binding">overlay article/</span>
+      </td><!-- end ngIf: fileIsFolder(file) && (!fileIsTrash(file) || storageFull) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+    </tr><!-- end ngRepeat: file in filesDetails.files | filter:query | orderBy:orderByAttribute:reverseSort track by $index --><tr class="clickable-row ng-scope no-select-row" ng-click="fileClick(file);" ng-class="{'active': file.isChecked, 'blocked-file': file.isThrottled, 'back-btn': file.currentFolder, 'no-select-row': file.currentFolder || fileIsTrash(file) || (fileIsFolder(file) &amp;&amp; !storageFull) }" ng-repeat="file in filesDetails.files | filter:query | orderBy:orderByAttribute:reverseSort track by $index">
+      <!-- ngIf: fileIsFolder(file) && (!fileIsTrash(file) || storageFull) --><td colspan="4" ng-if="fileIsFolder(file) &amp;&amp; (!fileIsTrash(file) || storageFull)" class="ng-scope">
+        <span class="folder ng-binding">peter/</span>
+      </td><!-- end ngIf: fileIsFolder(file) && (!fileIsTrash(file) || storageFull) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+    </tr><!-- end ngRepeat: file in filesDetails.files | filter:query | orderBy:orderByAttribute:reverseSort track by $index --><tr class="clickable-row ng-scope no-select-row" ng-click="fileClick(file);" ng-class="{'active': file.isChecked, 'blocked-file': file.isThrottled, 'back-btn': file.currentFolder, 'no-select-row': file.currentFolder || fileIsTrash(file) || (fileIsFolder(file) &amp;&amp; !storageFull) }" ng-repeat="file in filesDetails.files | filter:query | orderBy:orderByAttribute:reverseSort track by $index">
+      <!-- ngIf: fileIsFolder(file) && (!fileIsTrash(file) || storageFull) --><td colspan="4" ng-if="fileIsFolder(file) &amp;&amp; (!fileIsTrash(file) || storageFull)" class="ng-scope">
+        <span class="folder ng-binding">profile photo/</span>
+      </td><!-- end ngIf: fileIsFolder(file) && (!fileIsTrash(file) || storageFull) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+    </tr><!-- end ngRepeat: file in filesDetails.files | filter:query | orderBy:orderByAttribute:reverseSort track by $index --><tr class="clickable-row ng-scope no-select-row" ng-click="fileClick(file);" ng-class="{'active': file.isChecked, 'blocked-file': file.isThrottled, 'back-btn': file.currentFolder, 'no-select-row': file.currentFolder || fileIsTrash(file) || (fileIsFolder(file) &amp;&amp; !storageFull) }" ng-repeat="file in filesDetails.files | filter:query | orderBy:orderByAttribute:reverseSort track by $index">
+      <!-- ngIf: fileIsFolder(file) && (!fileIsTrash(file) || storageFull) --><td colspan="4" ng-if="fileIsFolder(file) &amp;&amp; (!fileIsTrash(file) || storageFull)" class="ng-scope">
+        <span class="folder ng-binding">RainEffect/</span>
+      </td><!-- end ngIf: fileIsFolder(file) && (!fileIsTrash(file) || storageFull) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+    </tr><!-- end ngRepeat: file in filesDetails.files | filter:query | orderBy:orderByAttribute:reverseSort track by $index --><tr class="clickable-row ng-scope no-select-row" ng-click="fileClick(file);" ng-class="{'active': file.isChecked, 'blocked-file': file.isThrottled, 'back-btn': file.currentFolder, 'no-select-row': file.currentFolder || fileIsTrash(file) || (fileIsFolder(file) &amp;&amp; !storageFull) }" ng-repeat="file in filesDetails.files | filter:query | orderBy:orderByAttribute:reverseSort track by $index">
+      <!-- ngIf: fileIsFolder(file) && (!fileIsTrash(file) || storageFull) --><td colspan="4" ng-if="fileIsFolder(file) &amp;&amp; (!fileIsTrash(file) || storageFull)" class="ng-scope">
+        <span class="folder ng-binding">rbc-community-videos/</span>
+      </td><!-- end ngIf: fileIsFolder(file) && (!fileIsTrash(file) || storageFull) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+    </tr><!-- end ngRepeat: file in filesDetails.files | filter:query | orderBy:orderByAttribute:reverseSort track by $index --><tr class="clickable-row ng-scope no-select-row" ng-click="fileClick(file);" ng-class="{'active': file.isChecked, 'blocked-file': file.isThrottled, 'back-btn': file.currentFolder, 'no-select-row': file.currentFolder || fileIsTrash(file) || (fileIsFolder(file) &amp;&amp; !storageFull) }" ng-repeat="file in filesDetails.files | filter:query | orderBy:orderByAttribute:reverseSort track by $index">
+      <!-- ngIf: fileIsFolder(file) && (!fileIsTrash(file) || storageFull) --><td colspan="4" ng-if="fileIsFolder(file) &amp;&amp; (!fileIsTrash(file) || storageFull)" class="ng-scope">
+        <span class="folder ng-binding">Rise Training Mohonasen/</span>
+      </td><!-- end ngIf: fileIsFolder(file) && (!fileIsTrash(file) || storageFull) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+    </tr><!-- end ngRepeat: file in filesDetails.files | filter:query | orderBy:orderByAttribute:reverseSort track by $index --><tr class="clickable-row ng-scope no-select-row" ng-click="fileClick(file);" ng-class="{'active': file.isChecked, 'blocked-file': file.isThrottled, 'back-btn': file.currentFolder, 'no-select-row': file.currentFolder || fileIsTrash(file) || (fileIsFolder(file) &amp;&amp; !storageFull) }" ng-repeat="file in filesDetails.files | filter:query | orderBy:orderByAttribute:reverseSort track by $index">
+      <!-- ngIf: fileIsFolder(file) && (!fileIsTrash(file) || storageFull) --><td colspan="4" ng-if="fileIsFolder(file) &amp;&amp; (!fileIsTrash(file) || storageFull)" class="ng-scope">
+        <span class="folder ng-binding">Rise Vision Themes/</span>
+      </td><!-- end ngIf: fileIsFolder(file) && (!fileIsTrash(file) || storageFull) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+    </tr><!-- end ngRepeat: file in filesDetails.files | filter:query | orderBy:orderByAttribute:reverseSort track by $index --><tr class="clickable-row ng-scope no-select-row" ng-click="fileClick(file);" ng-class="{'active': file.isChecked, 'blocked-file': file.isThrottled, 'back-btn': file.currentFolder, 'no-select-row': file.currentFolder || fileIsTrash(file) || (fileIsFolder(file) &amp;&amp; !storageFull) }" ng-repeat="file in filesDetails.files | filter:query | orderBy:orderByAttribute:reverseSort track by $index">
+      <!-- ngIf: fileIsFolder(file) && (!fileIsTrash(file) || storageFull) --><td colspan="4" ng-if="fileIsFolder(file) &amp;&amp; (!fileIsTrash(file) || storageFull)" class="ng-scope">
+        <span class="folder ng-binding">ryan/</span>
+      </td><!-- end ngIf: fileIsFolder(file) && (!fileIsTrash(file) || storageFull) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+    </tr><!-- end ngRepeat: file in filesDetails.files | filter:query | orderBy:orderByAttribute:reverseSort track by $index --><tr class="clickable-row ng-scope no-select-row" ng-click="fileClick(file);" ng-class="{'active': file.isChecked, 'blocked-file': file.isThrottled, 'back-btn': file.currentFolder, 'no-select-row': file.currentFolder || fileIsTrash(file) || (fileIsFolder(file) &amp;&amp; !storageFull) }" ng-repeat="file in filesDetails.files | filter:query | orderBy:orderByAttribute:reverseSort track by $index">
+      <!-- ngIf: fileIsFolder(file) && (!fileIsTrash(file) || storageFull) --><td colspan="4" ng-if="fileIsFolder(file) &amp;&amp; (!fileIsTrash(file) || storageFull)" class="ng-scope">
+        <span class="folder ng-binding">sailormoon/</span>
+      </td><!-- end ngIf: fileIsFolder(file) && (!fileIsTrash(file) || storageFull) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+    </tr><!-- end ngRepeat: file in filesDetails.files | filter:query | orderBy:orderByAttribute:reverseSort track by $index --><tr class="clickable-row ng-scope no-select-row" ng-click="fileClick(file);" ng-class="{'active': file.isChecked, 'blocked-file': file.isThrottled, 'back-btn': file.currentFolder, 'no-select-row': file.currentFolder || fileIsTrash(file) || (fileIsFolder(file) &amp;&amp; !storageFull) }" ng-repeat="file in filesDetails.files | filter:query | orderBy:orderByAttribute:reverseSort track by $index">
+      <!-- ngIf: fileIsFolder(file) && (!fileIsTrash(file) || storageFull) --><td colspan="4" ng-if="fileIsFolder(file) &amp;&amp; (!fileIsTrash(file) || storageFull)" class="ng-scope">
+        <span class="folder ng-binding">sample-education-k-12-premium/</span>
+      </td><!-- end ngIf: fileIsFolder(file) && (!fileIsTrash(file) || storageFull) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+    </tr><!-- end ngRepeat: file in filesDetails.files | filter:query | orderBy:orderByAttribute:reverseSort track by $index --><tr class="clickable-row ng-scope no-select-row" ng-click="fileClick(file);" ng-class="{'active': file.isChecked, 'blocked-file': file.isThrottled, 'back-btn': file.currentFolder, 'no-select-row': file.currentFolder || fileIsTrash(file) || (fileIsFolder(file) &amp;&amp; !storageFull) }" ng-repeat="file in filesDetails.files | filter:query | orderBy:orderByAttribute:reverseSort track by $index">
+      <!-- ngIf: fileIsFolder(file) && (!fileIsTrash(file) || storageFull) --><td colspan="4" ng-if="fileIsFolder(file) &amp;&amp; (!fileIsTrash(file) || storageFull)" class="ng-scope">
+        <span class="folder ng-binding">school-social-media/</span>
+      </td><!-- end ngIf: fileIsFolder(file) && (!fileIsTrash(file) || storageFull) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+    </tr><!-- end ngRepeat: file in filesDetails.files | filter:query | orderBy:orderByAttribute:reverseSort track by $index --><tr class="clickable-row ng-scope no-select-row" ng-click="fileClick(file);" ng-class="{'active': file.isChecked, 'blocked-file': file.isThrottled, 'back-btn': file.currentFolder, 'no-select-row': file.currentFolder || fileIsTrash(file) || (fileIsFolder(file) &amp;&amp; !storageFull) }" ng-repeat="file in filesDetails.files | filter:query | orderBy:orderByAttribute:reverseSort track by $index">
+      <!-- ngIf: fileIsFolder(file) && (!fileIsTrash(file) || storageFull) --><td colspan="4" ng-if="fileIsFolder(file) &amp;&amp; (!fileIsTrash(file) || storageFull)" class="ng-scope">
+        <span class="folder ng-binding">scroll/</span>
+      </td><!-- end ngIf: fileIsFolder(file) && (!fileIsTrash(file) || storageFull) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+    </tr><!-- end ngRepeat: file in filesDetails.files | filter:query | orderBy:orderByAttribute:reverseSort track by $index --><tr class="clickable-row ng-scope no-select-row" ng-click="fileClick(file);" ng-class="{'active': file.isChecked, 'blocked-file': file.isThrottled, 'back-btn': file.currentFolder, 'no-select-row': file.currentFolder || fileIsTrash(file) || (fileIsFolder(file) &amp;&amp; !storageFull) }" ng-repeat="file in filesDetails.files | filter:query | orderBy:orderByAttribute:reverseSort track by $index">
+      <!-- ngIf: fileIsFolder(file) && (!fileIsTrash(file) || storageFull) --><td colspan="4" ng-if="fileIsFolder(file) &amp;&amp; (!fileIsTrash(file) || storageFull)" class="ng-scope">
+        <span class="folder ng-binding">scrollingelementsarticle/</span>
+      </td><!-- end ngIf: fileIsFolder(file) && (!fileIsTrash(file) || storageFull) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+    </tr><!-- end ngRepeat: file in filesDetails.files | filter:query | orderBy:orderByAttribute:reverseSort track by $index --><tr class="clickable-row ng-scope no-select-row" ng-click="fileClick(file);" ng-class="{'active': file.isChecked, 'blocked-file': file.isThrottled, 'back-btn': file.currentFolder, 'no-select-row': file.currentFolder || fileIsTrash(file) || (fileIsFolder(file) &amp;&amp; !storageFull) }" ng-repeat="file in filesDetails.files | filter:query | orderBy:orderByAttribute:reverseSort track by $index">
+      <!-- ngIf: fileIsFolder(file) && (!fileIsTrash(file) || storageFull) --><td colspan="4" ng-if="fileIsFolder(file) &amp;&amp; (!fileIsTrash(file) || storageFull)" class="ng-scope">
+        <span class="folder ng-binding">Shea - Sample/</span>
+      </td><!-- end ngIf: fileIsFolder(file) && (!fileIsTrash(file) || storageFull) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+    </tr><!-- end ngRepeat: file in filesDetails.files | filter:query | orderBy:orderByAttribute:reverseSort track by $index --><tr class="clickable-row ng-scope no-select-row" ng-click="fileClick(file);" ng-class="{'active': file.isChecked, 'blocked-file': file.isThrottled, 'back-btn': file.currentFolder, 'no-select-row': file.currentFolder || fileIsTrash(file) || (fileIsFolder(file) &amp;&amp; !storageFull) }" ng-repeat="file in filesDetails.files | filter:query | orderBy:orderByAttribute:reverseSort track by $index">
+      <!-- ngIf: fileIsFolder(file) && (!fileIsTrash(file) || storageFull) --><td colspan="4" ng-if="fileIsFolder(file) &amp;&amp; (!fileIsTrash(file) || storageFull)" class="ng-scope">
+        <span class="folder ng-binding">Shea test/</span>
+      </td><!-- end ngIf: fileIsFolder(file) && (!fileIsTrash(file) || storageFull) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+    </tr><!-- end ngRepeat: file in filesDetails.files | filter:query | orderBy:orderByAttribute:reverseSort track by $index --><tr class="clickable-row ng-scope no-select-row" ng-click="fileClick(file);" ng-class="{'active': file.isChecked, 'blocked-file': file.isThrottled, 'back-btn': file.currentFolder, 'no-select-row': file.currentFolder || fileIsTrash(file) || (fileIsFolder(file) &amp;&amp; !storageFull) }" ng-repeat="file in filesDetails.files | filter:query | orderBy:orderByAttribute:reverseSort track by $index">
+      <!-- ngIf: fileIsFolder(file) && (!fileIsTrash(file) || storageFull) --><td colspan="4" ng-if="fileIsFolder(file) &amp;&amp; (!fileIsTrash(file) || storageFull)" class="ng-scope">
+        <span class="folder ng-binding">shea's folder/</span>
+      </td><!-- end ngIf: fileIsFolder(file) && (!fileIsTrash(file) || storageFull) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+    </tr><!-- end ngRepeat: file in filesDetails.files | filter:query | orderBy:orderByAttribute:reverseSort track by $index --><tr class="clickable-row ng-scope no-select-row" ng-click="fileClick(file);" ng-class="{'active': file.isChecked, 'blocked-file': file.isThrottled, 'back-btn': file.currentFolder, 'no-select-row': file.currentFolder || fileIsTrash(file) || (fileIsFolder(file) &amp;&amp; !storageFull) }" ng-repeat="file in filesDetails.files | filter:query | orderBy:orderByAttribute:reverseSort track by $index">
+      <!-- ngIf: fileIsFolder(file) && (!fileIsTrash(file) || storageFull) --><td colspan="4" ng-if="fileIsFolder(file) &amp;&amp; (!fileIsTrash(file) || storageFull)" class="ng-scope">
+        <span class="folder ng-binding">Shea's Test Folder/</span>
+      </td><!-- end ngIf: fileIsFolder(file) && (!fileIsTrash(file) || storageFull) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+    </tr><!-- end ngRepeat: file in filesDetails.files | filter:query | orderBy:orderByAttribute:reverseSort track by $index --><tr class="clickable-row ng-scope no-select-row" ng-click="fileClick(file);" ng-class="{'active': file.isChecked, 'blocked-file': file.isThrottled, 'back-btn': file.currentFolder, 'no-select-row': file.currentFolder || fileIsTrash(file) || (fileIsFolder(file) &amp;&amp; !storageFull) }" ng-repeat="file in filesDetails.files | filter:query | orderBy:orderByAttribute:reverseSort track by $index">
+      <!-- ngIf: fileIsFolder(file) && (!fileIsTrash(file) || storageFull) --><td colspan="4" ng-if="fileIsFolder(file) &amp;&amp; (!fileIsTrash(file) || storageFull)" class="ng-scope">
+        <span class="folder ng-binding">SOH/</span>
+      </td><!-- end ngIf: fileIsFolder(file) && (!fileIsTrash(file) || storageFull) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+    </tr><!-- end ngRepeat: file in filesDetails.files | filter:query | orderBy:orderByAttribute:reverseSort track by $index --><tr class="clickable-row ng-scope no-select-row" ng-click="fileClick(file);" ng-class="{'active': file.isChecked, 'blocked-file': file.isThrottled, 'back-btn': file.currentFolder, 'no-select-row': file.currentFolder || fileIsTrash(file) || (fileIsFolder(file) &amp;&amp; !storageFull) }" ng-repeat="file in filesDetails.files | filter:query | orderBy:orderByAttribute:reverseSort track by $index">
+      <!-- ngIf: fileIsFolder(file) && (!fileIsTrash(file) || storageFull) --><td colspan="4" ng-if="fileIsFolder(file) &amp;&amp; (!fileIsTrash(file) || storageFull)" class="ng-scope">
+        <span class="folder ng-binding">Storage_files/</span>
+      </td><!-- end ngIf: fileIsFolder(file) && (!fileIsTrash(file) || storageFull) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+    </tr><!-- end ngRepeat: file in filesDetails.files | filter:query | orderBy:orderByAttribute:reverseSort track by $index --><tr class="clickable-row ng-scope no-select-row" ng-click="fileClick(file);" ng-class="{'active': file.isChecked, 'blocked-file': file.isThrottled, 'back-btn': file.currentFolder, 'no-select-row': file.currentFolder || fileIsTrash(file) || (fileIsFolder(file) &amp;&amp; !storageFull) }" ng-repeat="file in filesDetails.files | filter:query | orderBy:orderByAttribute:reverseSort track by $index">
+      <!-- ngIf: fileIsFolder(file) && (!fileIsTrash(file) || storageFull) --><td colspan="4" ng-if="fileIsFolder(file) &amp;&amp; (!fileIsTrash(file) || storageFull)" class="ng-scope">
+        <span class="folder ng-binding">Store-Templates/</span>
+      </td><!-- end ngIf: fileIsFolder(file) && (!fileIsTrash(file) || storageFull) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+    </tr><!-- end ngRepeat: file in filesDetails.files | filter:query | orderBy:orderByAttribute:reverseSort track by $index --><tr class="clickable-row ng-scope no-select-row" ng-click="fileClick(file);" ng-class="{'active': file.isChecked, 'blocked-file': file.isThrottled, 'back-btn': file.currentFolder, 'no-select-row': file.currentFolder || fileIsTrash(file) || (fileIsFolder(file) &amp;&amp; !storageFull) }" ng-repeat="file in filesDetails.files | filter:query | orderBy:orderByAttribute:reverseSort track by $index">
+      <!-- ngIf: fileIsFolder(file) && (!fileIsTrash(file) || storageFull) --><td colspan="4" ng-if="fileIsFolder(file) &amp;&amp; (!fileIsTrash(file) || storageFull)" class="ng-scope">
+        <span class="folder ng-binding">stu/</span>
+      </td><!-- end ngIf: fileIsFolder(file) && (!fileIsTrash(file) || storageFull) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+    </tr><!-- end ngRepeat: file in filesDetails.files | filter:query | orderBy:orderByAttribute:reverseSort track by $index --><tr class="clickable-row ng-scope no-select-row" ng-click="fileClick(file);" ng-class="{'active': file.isChecked, 'blocked-file': file.isThrottled, 'back-btn': file.currentFolder, 'no-select-row': file.currentFolder || fileIsTrash(file) || (fileIsFolder(file) &amp;&amp; !storageFull) }" ng-repeat="file in filesDetails.files | filter:query | orderBy:orderByAttribute:reverseSort track by $index">
+      <!-- ngIf: fileIsFolder(file) && (!fileIsTrash(file) || storageFull) --><td colspan="4" ng-if="fileIsFolder(file) &amp;&amp; (!fileIsTrash(file) || storageFull)" class="ng-scope">
+        <span class="folder ng-binding">template_images_Do-Not-Delete/</span>
+      </td><!-- end ngIf: fileIsFolder(file) && (!fileIsTrash(file) || storageFull) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+    </tr><!-- end ngRepeat: file in filesDetails.files | filter:query | orderBy:orderByAttribute:reverseSort track by $index --><tr class="clickable-row ng-scope no-select-row" ng-click="fileClick(file);" ng-class="{'active': file.isChecked, 'blocked-file': file.isThrottled, 'back-btn': file.currentFolder, 'no-select-row': file.currentFolder || fileIsTrash(file) || (fileIsFolder(file) &amp;&amp; !storageFull) }" ng-repeat="file in filesDetails.files | filter:query | orderBy:orderByAttribute:reverseSort track by $index">
+      <!-- ngIf: fileIsFolder(file) && (!fileIsTrash(file) || storageFull) --><td colspan="4" ng-if="fileIsFolder(file) &amp;&amp; (!fileIsTrash(file) || storageFull)" class="ng-scope">
+        <span class="folder ng-binding">test 0413/</span>
+      </td><!-- end ngIf: fileIsFolder(file) && (!fileIsTrash(file) || storageFull) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+    </tr><!-- end ngRepeat: file in filesDetails.files | filter:query | orderBy:orderByAttribute:reverseSort track by $index --><tr class="clickable-row ng-scope no-select-row" ng-click="fileClick(file);" ng-class="{'active': file.isChecked, 'blocked-file': file.isThrottled, 'back-btn': file.currentFolder, 'no-select-row': file.currentFolder || fileIsTrash(file) || (fileIsFolder(file) &amp;&amp; !storageFull) }" ng-repeat="file in filesDetails.files | filter:query | orderBy:orderByAttribute:reverseSort track by $index">
+      <!-- ngIf: fileIsFolder(file) && (!fileIsTrash(file) || storageFull) --><td colspan="4" ng-if="fileIsFolder(file) &amp;&amp; (!fileIsTrash(file) || storageFull)" class="ng-scope">
+        <span class="folder ng-binding">Test 1/</span>
+      </td><!-- end ngIf: fileIsFolder(file) && (!fileIsTrash(file) || storageFull) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+    </tr><!-- end ngRepeat: file in filesDetails.files | filter:query | orderBy:orderByAttribute:reverseSort track by $index --><tr class="clickable-row ng-scope no-select-row" ng-click="fileClick(file);" ng-class="{'active': file.isChecked, 'blocked-file': file.isThrottled, 'back-btn': file.currentFolder, 'no-select-row': file.currentFolder || fileIsTrash(file) || (fileIsFolder(file) &amp;&amp; !storageFull) }" ng-repeat="file in filesDetails.files | filter:query | orderBy:orderByAttribute:reverseSort track by $index">
+      <!-- ngIf: fileIsFolder(file) && (!fileIsTrash(file) || storageFull) --><td colspan="4" ng-if="fileIsFolder(file) &amp;&amp; (!fileIsTrash(file) || storageFull)" class="ng-scope">
+        <span class="folder ng-binding">test-template/</span>
+      </td><!-- end ngIf: fileIsFolder(file) && (!fileIsTrash(file) || storageFull) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+    </tr><!-- end ngRepeat: file in filesDetails.files | filter:query | orderBy:orderByAttribute:reverseSort track by $index --><tr class="clickable-row ng-scope no-select-row" ng-click="fileClick(file);" ng-class="{'active': file.isChecked, 'blocked-file': file.isThrottled, 'back-btn': file.currentFolder, 'no-select-row': file.currentFolder || fileIsTrash(file) || (fileIsFolder(file) &amp;&amp; !storageFull) }" ng-repeat="file in filesDetails.files | filter:query | orderBy:orderByAttribute:reverseSort track by $index">
+      <!-- ngIf: fileIsFolder(file) && (!fileIsTrash(file) || storageFull) --><td colspan="4" ng-if="fileIsFolder(file) &amp;&amp; (!fileIsTrash(file) || storageFull)" class="ng-scope">
+        <span class="folder ng-binding">test/</span>
+      </td><!-- end ngIf: fileIsFolder(file) && (!fileIsTrash(file) || storageFull) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+    </tr><!-- end ngRepeat: file in filesDetails.files | filter:query | orderBy:orderByAttribute:reverseSort track by $index --><tr class="clickable-row ng-scope no-select-row" ng-click="fileClick(file);" ng-class="{'active': file.isChecked, 'blocked-file': file.isThrottled, 'back-btn': file.currentFolder, 'no-select-row': file.currentFolder || fileIsTrash(file) || (fileIsFolder(file) &amp;&amp; !storageFull) }" ng-repeat="file in filesDetails.files | filter:query | orderBy:orderByAttribute:reverseSort track by $index">
+      <!-- ngIf: fileIsFolder(file) && (!fileIsTrash(file) || storageFull) --><td colspan="4" ng-if="fileIsFolder(file) &amp;&amp; (!fileIsTrash(file) || storageFull)" class="ng-scope">
+        <span class="folder ng-binding">test02134/</span>
+      </td><!-- end ngIf: fileIsFolder(file) && (!fileIsTrash(file) || storageFull) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+    </tr><!-- end ngRepeat: file in filesDetails.files | filter:query | orderBy:orderByAttribute:reverseSort track by $index --><tr class="clickable-row ng-scope no-select-row" ng-click="fileClick(file);" ng-class="{'active': file.isChecked, 'blocked-file': file.isThrottled, 'back-btn': file.currentFolder, 'no-select-row': file.currentFolder || fileIsTrash(file) || (fileIsFolder(file) &amp;&amp; !storageFull) }" ng-repeat="file in filesDetails.files | filter:query | orderBy:orderByAttribute:reverseSort track by $index">
+      <!-- ngIf: fileIsFolder(file) && (!fileIsTrash(file) || storageFull) --><td colspan="4" ng-if="fileIsFolder(file) &amp;&amp; (!fileIsTrash(file) || storageFull)" class="ng-scope">
+        <span class="folder ng-binding">test09/</span>
+      </td><!-- end ngIf: fileIsFolder(file) && (!fileIsTrash(file) || storageFull) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+    </tr><!-- end ngRepeat: file in filesDetails.files | filter:query | orderBy:orderByAttribute:reverseSort track by $index --><tr class="clickable-row ng-scope no-select-row" ng-click="fileClick(file);" ng-class="{'active': file.isChecked, 'blocked-file': file.isThrottled, 'back-btn': file.currentFolder, 'no-select-row': file.currentFolder || fileIsTrash(file) || (fileIsFolder(file) &amp;&amp; !storageFull) }" ng-repeat="file in filesDetails.files | filter:query | orderBy:orderByAttribute:reverseSort track by $index">
+      <!-- ngIf: fileIsFolder(file) && (!fileIsTrash(file) || storageFull) --><td colspan="4" ng-if="fileIsFolder(file) &amp;&amp; (!fileIsTrash(file) || storageFull)" class="ng-scope">
+        <span class="folder ng-binding">test098/</span>
+      </td><!-- end ngIf: fileIsFolder(file) && (!fileIsTrash(file) || storageFull) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+    </tr><!-- end ngRepeat: file in filesDetails.files | filter:query | orderBy:orderByAttribute:reverseSort track by $index --><tr class="clickable-row ng-scope no-select-row" ng-click="fileClick(file);" ng-class="{'active': file.isChecked, 'blocked-file': file.isThrottled, 'back-btn': file.currentFolder, 'no-select-row': file.currentFolder || fileIsTrash(file) || (fileIsFolder(file) &amp;&amp; !storageFull) }" ng-repeat="file in filesDetails.files | filter:query | orderBy:orderByAttribute:reverseSort track by $index">
+      <!-- ngIf: fileIsFolder(file) && (!fileIsTrash(file) || storageFull) --><td colspan="4" ng-if="fileIsFolder(file) &amp;&amp; (!fileIsTrash(file) || storageFull)" class="ng-scope">
+        <span class="folder ng-binding">test3232/</span>
+      </td><!-- end ngIf: fileIsFolder(file) && (!fileIsTrash(file) || storageFull) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+    </tr><!-- end ngRepeat: file in filesDetails.files | filter:query | orderBy:orderByAttribute:reverseSort track by $index --><tr class="clickable-row ng-scope no-select-row" ng-click="fileClick(file);" ng-class="{'active': file.isChecked, 'blocked-file': file.isThrottled, 'back-btn': file.currentFolder, 'no-select-row': file.currentFolder || fileIsTrash(file) || (fileIsFolder(file) &amp;&amp; !storageFull) }" ng-repeat="file in filesDetails.files | filter:query | orderBy:orderByAttribute:reverseSort track by $index">
+      <!-- ngIf: fileIsFolder(file) && (!fileIsTrash(file) || storageFull) --><td colspan="4" ng-if="fileIsFolder(file) &amp;&amp; (!fileIsTrash(file) || storageFull)" class="ng-scope">
+        <span class="folder ng-binding">testFolder/</span>
+      </td><!-- end ngIf: fileIsFolder(file) && (!fileIsTrash(file) || storageFull) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+    </tr><!-- end ngRepeat: file in filesDetails.files | filter:query | orderBy:orderByAttribute:reverseSort track by $index --><tr class="clickable-row ng-scope no-select-row" ng-click="fileClick(file);" ng-class="{'active': file.isChecked, 'blocked-file': file.isThrottled, 'back-btn': file.currentFolder, 'no-select-row': file.currentFolder || fileIsTrash(file) || (fileIsFolder(file) &amp;&amp; !storageFull) }" ng-repeat="file in filesDetails.files | filter:query | orderBy:orderByAttribute:reverseSort track by $index">
+      <!-- ngIf: fileIsFolder(file) && (!fileIsTrash(file) || storageFull) --><td colspan="4" ng-if="fileIsFolder(file) &amp;&amp; (!fileIsTrash(file) || storageFull)" class="ng-scope">
+        <span class="folder ng-binding">testfolder222/</span>
+      </td><!-- end ngIf: fileIsFolder(file) && (!fileIsTrash(file) || storageFull) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+    </tr><!-- end ngRepeat: file in filesDetails.files | filter:query | orderBy:orderByAttribute:reverseSort track by $index --><tr class="clickable-row ng-scope no-select-row" ng-click="fileClick(file);" ng-class="{'active': file.isChecked, 'blocked-file': file.isThrottled, 'back-btn': file.currentFolder, 'no-select-row': file.currentFolder || fileIsTrash(file) || (fileIsFolder(file) &amp;&amp; !storageFull) }" ng-repeat="file in filesDetails.files | filter:query | orderBy:orderByAttribute:reverseSort track by $index">
+      <!-- ngIf: fileIsFolder(file) && (!fileIsTrash(file) || storageFull) --><td colspan="4" ng-if="fileIsFolder(file) &amp;&amp; (!fileIsTrash(file) || storageFull)" class="ng-scope">
+        <span class="folder ng-binding">testingaa/</span>
+      </td><!-- end ngIf: fileIsFolder(file) && (!fileIsTrash(file) || storageFull) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+    </tr><!-- end ngRepeat: file in filesDetails.files | filter:query | orderBy:orderByAttribute:reverseSort track by $index --><tr class="clickable-row ng-scope no-select-row" ng-click="fileClick(file);" ng-class="{'active': file.isChecked, 'blocked-file': file.isThrottled, 'back-btn': file.currentFolder, 'no-select-row': file.currentFolder || fileIsTrash(file) || (fileIsFolder(file) &amp;&amp; !storageFull) }" ng-repeat="file in filesDetails.files | filter:query | orderBy:orderByAttribute:reverseSort track by $index">
+      <!-- ngIf: fileIsFolder(file) && (!fileIsTrash(file) || storageFull) --><td colspan="4" ng-if="fileIsFolder(file) &amp;&amp; (!fileIsTrash(file) || storageFull)" class="ng-scope">
+        <span class="folder ng-binding">tests/</span>
+      </td><!-- end ngIf: fileIsFolder(file) && (!fileIsTrash(file) || storageFull) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+    </tr><!-- end ngRepeat: file in filesDetails.files | filter:query | orderBy:orderByAttribute:reverseSort track by $index --><tr class="clickable-row ng-scope no-select-row" ng-click="fileClick(file);" ng-class="{'active': file.isChecked, 'blocked-file': file.isThrottled, 'back-btn': file.currentFolder, 'no-select-row': file.currentFolder || fileIsTrash(file) || (fileIsFolder(file) &amp;&amp; !storageFull) }" ng-repeat="file in filesDetails.files | filter:query | orderBy:orderByAttribute:reverseSort track by $index">
+      <!-- ngIf: fileIsFolder(file) && (!fileIsTrash(file) || storageFull) --><td colspan="4" ng-if="fileIsFolder(file) &amp;&amp; (!fileIsTrash(file) || storageFull)" class="ng-scope">
+        <span class="folder ng-binding">touch-systems/</span>
+      </td><!-- end ngIf: fileIsFolder(file) && (!fileIsTrash(file) || storageFull) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+    </tr><!-- end ngRepeat: file in filesDetails.files | filter:query | orderBy:orderByAttribute:reverseSort track by $index --><tr class="clickable-row ng-scope no-select-row" ng-click="fileClick(file);" ng-class="{'active': file.isChecked, 'blocked-file': file.isThrottled, 'back-btn': file.currentFolder, 'no-select-row': file.currentFolder || fileIsTrash(file) || (fileIsFolder(file) &amp;&amp; !storageFull) }" ng-repeat="file in filesDetails.files | filter:query | orderBy:orderByAttribute:reverseSort track by $index">
+      <!-- ngIf: fileIsFolder(file) && (!fileIsTrash(file) || storageFull) --><td colspan="4" ng-if="fileIsFolder(file) &amp;&amp; (!fileIsTrash(file) || storageFull)" class="ng-scope">
+        <span class="folder ng-binding">touch/</span>
+      </td><!-- end ngIf: fileIsFolder(file) && (!fileIsTrash(file) || storageFull) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+    </tr><!-- end ngRepeat: file in filesDetails.files | filter:query | orderBy:orderByAttribute:reverseSort track by $index --><tr class="clickable-row ng-scope no-select-row" ng-click="fileClick(file);" ng-class="{'active': file.isChecked, 'blocked-file': file.isThrottled, 'back-btn': file.currentFolder, 'no-select-row': file.currentFolder || fileIsTrash(file) || (fileIsFolder(file) &amp;&amp; !storageFull) }" ng-repeat="file in filesDetails.files | filter:query | orderBy:orderByAttribute:reverseSort track by $index">
+      <!-- ngIf: fileIsFolder(file) && (!fileIsTrash(file) || storageFull) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+    </tr><!-- end ngRepeat: file in filesDetails.files | filter:query | orderBy:orderByAttribute:reverseSort track by $index --><tr class="clickable-row ng-scope no-select-row" ng-click="fileClick(file);" ng-class="{'active': file.isChecked, 'blocked-file': file.isThrottled, 'back-btn': file.currentFolder, 'no-select-row': file.currentFolder || fileIsTrash(file) || (fileIsFolder(file) &amp;&amp; !storageFull) }" ng-repeat="file in filesDetails.files | filter:query | orderBy:orderByAttribute:reverseSort track by $index">
+      <!-- ngIf: fileIsFolder(file) && (!fileIsTrash(file) || storageFull) --><td colspan="4" ng-if="fileIsFolder(file) &amp;&amp; (!fileIsTrash(file) || storageFull)" class="ng-scope">
+        <span class="folder ng-binding">UPTIME WALL ASSETS/</span>
+      </td><!-- end ngIf: fileIsFolder(file) && (!fileIsTrash(file) || storageFull) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+    </tr><!-- end ngRepeat: file in filesDetails.files | filter:query | orderBy:orderByAttribute:reverseSort track by $index --><tr class="clickable-row ng-scope no-select-row" ng-click="fileClick(file);" ng-class="{'active': file.isChecked, 'blocked-file': file.isThrottled, 'back-btn': file.currentFolder, 'no-select-row': file.currentFolder || fileIsTrash(file) || (fileIsFolder(file) &amp;&amp; !storageFull) }" ng-repeat="file in filesDetails.files | filter:query | orderBy:orderByAttribute:reverseSort track by $index">
+      <!-- ngIf: fileIsFolder(file) && (!fileIsTrash(file) || storageFull) --><td colspan="4" ng-if="fileIsFolder(file) &amp;&amp; (!fileIsTrash(file) || storageFull)" class="ng-scope">
+        <span class="folder ng-binding">uptime wall image folder do not touch/</span>
+      </td><!-- end ngIf: fileIsFolder(file) && (!fileIsTrash(file) || storageFull) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+    </tr><!-- end ngRepeat: file in filesDetails.files | filter:query | orderBy:orderByAttribute:reverseSort track by $index --><tr class="clickable-row ng-scope no-select-row" ng-click="fileClick(file);" ng-class="{'active': file.isChecked, 'blocked-file': file.isThrottled, 'back-btn': file.currentFolder, 'no-select-row': file.currentFolder || fileIsTrash(file) || (fileIsFolder(file) &amp;&amp; !storageFull) }" ng-repeat="file in filesDetails.files | filter:query | orderBy:orderByAttribute:reverseSort track by $index">
+      <!-- ngIf: fileIsFolder(file) && (!fileIsTrash(file) || storageFull) --><td colspan="4" ng-if="fileIsFolder(file) &amp;&amp; (!fileIsTrash(file) || storageFull)" class="ng-scope">
+        <span class="folder ng-binding">uptime wall video folder do not touch/</span>
+      </td><!-- end ngIf: fileIsFolder(file) && (!fileIsTrash(file) || storageFull) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+    </tr><!-- end ngRepeat: file in filesDetails.files | filter:query | orderBy:orderByAttribute:reverseSort track by $index --><tr class="clickable-row ng-scope no-select-row" ng-click="fileClick(file);" ng-class="{'active': file.isChecked, 'blocked-file': file.isThrottled, 'back-btn': file.currentFolder, 'no-select-row': file.currentFolder || fileIsTrash(file) || (fileIsFolder(file) &amp;&amp; !storageFull) }" ng-repeat="file in filesDetails.files | filter:query | orderBy:orderByAttribute:reverseSort track by $index">
+      <!-- ngIf: fileIsFolder(file) && (!fileIsTrash(file) || storageFull) --><td colspan="4" ng-if="fileIsFolder(file) &amp;&amp; (!fileIsTrash(file) || storageFull)" class="ng-scope">
+        <span class="folder ng-binding">Weather-template/</span>
+      </td><!-- end ngIf: fileIsFolder(file) && (!fileIsTrash(file) || storageFull) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+    </tr><!-- end ngRepeat: file in filesDetails.files | filter:query | orderBy:orderByAttribute:reverseSort track by $index --><tr class="clickable-row ng-scope no-select-row" ng-click="fileClick(file);" ng-class="{'active': file.isChecked, 'blocked-file': file.isThrottled, 'back-btn': file.currentFolder, 'no-select-row': file.currentFolder || fileIsTrash(file) || (fileIsFolder(file) &amp;&amp; !storageFull) }" ng-repeat="file in filesDetails.files | filter:query | orderBy:orderByAttribute:reverseSort track by $index">
+      <!-- ngIf: fileIsFolder(file) && (!fileIsTrash(file) || storageFull) --><td colspan="4" ng-if="fileIsFolder(file) &amp;&amp; (!fileIsTrash(file) || storageFull)" class="ng-scope">
+        <span class="folder ng-binding">Widgets/</span>
+      </td><!-- end ngIf: fileIsFolder(file) && (!fileIsTrash(file) || storageFull) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+    </tr><!-- end ngRepeat: file in filesDetails.files | filter:query | orderBy:orderByAttribute:reverseSort track by $index --><tr class="clickable-row ng-scope no-select-row" ng-click="fileClick(file);" ng-class="{'active': file.isChecked, 'blocked-file': file.isThrottled, 'back-btn': file.currentFolder, 'no-select-row': file.currentFolder || fileIsTrash(file) || (fileIsFolder(file) &amp;&amp; !storageFull) }" ng-repeat="file in filesDetails.files | filter:query | orderBy:orderByAttribute:reverseSort track by $index">
+      <!-- ngIf: fileIsFolder(file) && (!fileIsTrash(file) || storageFull) --><td colspan="4" ng-if="fileIsFolder(file) &amp;&amp; (!fileIsTrash(file) || storageFull)" class="ng-scope">
+        <span class="folder ng-binding">winona-test/</span>
+      </td><!-- end ngIf: fileIsFolder(file) && (!fileIsTrash(file) || storageFull) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+    </tr><!-- end ngRepeat: file in filesDetails.files | filter:query | orderBy:orderByAttribute:reverseSort track by $index --><tr class="clickable-row ng-scope no-select-row" ng-click="fileClick(file);" ng-class="{'active': file.isChecked, 'blocked-file': file.isThrottled, 'back-btn': file.currentFolder, 'no-select-row': file.currentFolder || fileIsTrash(file) || (fileIsFolder(file) &amp;&amp; !storageFull) }" ng-repeat="file in filesDetails.files | filter:query | orderBy:orderByAttribute:reverseSort track by $index">
+      <!-- ngIf: fileIsFolder(file) && (!fileIsTrash(file) || storageFull) --><td colspan="4" ng-if="fileIsFolder(file) &amp;&amp; (!fileIsTrash(file) || storageFull)" class="ng-scope">
+        <span class="folder ng-binding">winter theme/</span>
+      </td><!-- end ngIf: fileIsFolder(file) && (!fileIsTrash(file) || storageFull) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+      <!-- ngIf: !fileIsFolder(file) -->
+    </tr><!-- end ngRepeat: file in filesDetails.files | filter:query | orderBy:orderByAttribute:reverseSort track by $index -->
+  </tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+            <div ng-show="trialAvailable" class="ng-hide">
+              <!-- ngInclude: undefined --><ng-include src="'partials/start-trial.html'" ng-show="trialAvailable" class="ng-scope ng-hide"><div class="container ng-scope" id="pitchdeck">
+  <div>&nbsp;</div>
+  <div class="add-bottom blank-state">
+    <div class="product-graphic">
+      <img itemprop="image" class="img-responsive" src="https://s3.amazonaws.com/Store-Products/Rise-Vision/storage_image.png">
+    </div>
+
+    <div class="content-box-body ng-scope">
+      <div class="product-intro">
+        <h1>Storage</h1>
+        <p class="lead"><strong>Manage and deliver media to your digital signage displays, anywhere, anytime.</strong></p>
+        <p class="lead">Free 30 days trial. No credit card required.</p>
+        <p class="lead">$10 per Company per Month.</p>
+        <button type="button" class="btn btn-hg btn-primary" ng-click="startTrial()">Start Your Free Trial</button>
+      </div>
+    </div>    
+  </div>
+</div>
+</ng-include>
+            </div>
+      
+            <div ng-controller="FilesButtonsController" ng-show="multipleFileSelector &amp;&amp; !trialAvailable" class="ng-scope ng-hide">
+              <button type="button" title="select" class="btn btn-primary" ng-click="selectButtonClick()" ng-disabled="filesDetails.checkedCount < 1 &amp;&amp; filesDetails.folderCheckedCount < 1" disabled="disabled">
+                <span translate="common.select" class="ng-scope">Select</span> <span class="fa fa-check icon-right"></span>
+              </button>
+              <button class="btn btn-default ng-scope" ng-controller="ModalWindowController" ng-click="closeButtonClick()">
+                <span translate="common.cancel" class="ng-scope">Cancel</span> <span class="fa fa-times icon-right"></span>
+              </button>
+            </div>
+          </div>
+        </div>
+        
+        <div>
+          <span us-spinner="{ radius: 24, width: 8, length: 16 }" spinner-key="spn-storage-main" class="ng-scope"></span>
+        </div>
+        <iframe name="logoutFrame" id="logoutFrame" style="display:none"></iframe>
+      </div><!-- end ngIf: !FULLSCREEN -->
+    </div>
+
+    <div ng-controller="FullScreenController" class="ng-scope">
+      <!-- ngIf: FULLSCREEN===true -->
+    </div>
+  
+    
+</body>
+</html>
+
+
+
+
 </script>
