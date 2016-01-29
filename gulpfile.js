@@ -119,7 +119,7 @@
   });
 
   gulp.task('test', ['build'], function (cb) {
-    return runSequence(cb);
+    return runSequence("test:metrics", cb);
   });
 
   gulp.task('build', function (cb) {
