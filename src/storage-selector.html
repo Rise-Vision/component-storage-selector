@@ -1,11 +1,9 @@
-
 <button class="btn btn-default" ng-class="{active: selected}" ng-click="open()" type="button" >
   {{ label }}<img src="http://s3.amazonaws.com/Rise-Images/Icons/storage.png" class="storage-selector-icon" ng-class="{'icon-right': label}">
 </button>
 
 <script type="text/ng-template" id="storage.html">  //prototype modal
         
-<div style="padding:22px">
 
 
               <button type="button" class="close" data-dismiss="modal" ng-click="closeButtonClick()">
@@ -40,11 +38,11 @@
 
 
 
-<table class="table-2 table-hover table-selector single-selector">
+<table class="table-2 table-hover table-selector single-selector" ng-class="storageFull || multipleFileSelector ? 'multiple-selector' : 'single-selector'">
   <thead>
     <tr>
       <th class="col-sm-6">
-        <input type="checkbox" class="add-right" ng-model="selectAll">
+        <input type="checkbox" class="add-right ng-pristine ng-untouched ng-valid" ng-model="selectAll">
         <label ng-click="selectAllCheckboxes(query)"></label>
         <a href="" ng-click="orderByAttribute = fileNameOrderFunction; reverseSort = !reverseSort">
           <span translate="common.file-name" class="ng-scope">Name</span>
@@ -61,26 +59,17 @@
     </tr>
   </thead>
   <tbody>
-    <tr class="clickable-row no-select-row">
-      <td colspan="4">
-        <span class="folder">000folder/</span>
-      </td>
-    </tr>
-     <tr class="clickable-row no-select-row">
-      <td colspan="4">
-        <span class="folder">000folder/</span>
-      </td>
-    </tr>
-     <tr class="clickable-row no-select-row">
-      <td colspan="4">
-        <span class="folder">000folder/</span>
-      </td>
+    <tr class="clickable-row ng-scope no-select-row" ng-click="fileClick(file);" ng-class="{'active': file.isChecked, 'blocked-file': file.isThrottled, 'back-btn': file.currentFolder, 'no-select-row': file.currentFolder || fileIsTrash(file) || (fileIsFolder(file) &amp;&amp; !storageFull) }" ng-repeat="file in filesDetails.files | filter:query | orderBy:orderByAttribute:reverseSort track by $index">
+      <!-- ngIf: fileIsFolder(file) && (!fileIsTrash(file) || storageFull) --><td colspan="4" ng-if="fileIsFolder(file) &amp;&amp; (!fileIsTrash(file) || storageFull)" class="ng-scope">
+        <span class="folder ng-binding">000folder/</span>
+      </td><!-- end ngIf: fileIsFolder(file) && (!fileIsTrash(file) || storageFull) -->
+     
     </tr>
   </tbody>
 </table>
 
           
-</div>
+
 
 
 

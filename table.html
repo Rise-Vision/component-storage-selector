@@ -1,0 +1,207 @@
+<table id="schedulesListTable" class="table-2 table-hover">
+    <thead>
+        <tr class="clickable">
+            <th id="tableHeaderName" ng-click="sortBy('name')" class="ng-binding ng-click-active"> Name
+                <!-- ngIf: search.sortBy == 'name' -->
+            </th>
+            <th id="tableHeaderChangeDate" class="text-right hidden-xs ng-binding" ng-click="sortBy('changeDate')"> Last Modified
+                <!-- ngIf: search.sortBy == 'changeDate' --><i ng-if="search.sortBy == 'changeDate'" class="fa ng-scope fa-long-arrow-down" ng-class="{false: 'fa-long-arrow-up', true: 'fa-long-arrow-down'}[search.reverse]"></i>
+                <!-- end ngIf: search.sortBy == 'changeDate' -->
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+         
+        <tr class="clickable-row ng-scope" ng-repeat="schedule in schedules.list">
+            <td class="col-sm-9"><a ui-sref="apps.schedules.details({scheduleId: schedule.id})" href="/schedules/details/f8632f0f-2d66-46c5-83f4-98ee49430587?cid=f114ad26-949d-44b4-87e9-8528afc76ce4"><strong class="ng-binding">Ghislaine's Living Room</strong></a></td>
+            <td class="col-sm-2 hidden-xs text-right nowrap"><a ui-sref="apps.schedules.details({scheduleId: schedule.id})" class="ng-binding" href="/schedules/details/f8632f0f-2d66-46c5-83f4-98ee49430587?cid=f114ad26-949d-44b4-87e9-8528afc76ce4">27-Jan-2016 5:07 PM</a></td>
+        </tr>
+         
+        <tr class="clickable-row ng-scope" ng-repeat="schedule in schedules.list">
+            <td class="col-sm-9"><a ui-sref="apps.schedules.details({scheduleId: schedule.id})" href="/schedules/details/035229d5-7331-4be1-ad5f-2d81d51ad71a?cid=f114ad26-949d-44b4-87e9-8528afc76ce4"><strong class="ng-binding">android schedule</strong></a></td>
+            <td class="col-sm-2 hidden-xs text-right nowrap"><a ui-sref="apps.schedules.details({scheduleId: schedule.id})" class="ng-binding" href="/schedules/details/035229d5-7331-4be1-ad5f-2d81d51ad71a?cid=f114ad26-949d-44b4-87e9-8528afc76ce4">26-Jan-2016 2:40 PM</a></td>
+        </tr>
+         
+        <tr class="clickable-row ng-scope" ng-repeat="schedule in schedules.list">
+            <td class="col-sm-9"><a ui-sref="apps.schedules.details({scheduleId: schedule.id})" href="/schedules/details/b53fff78-7e9e-401b-8b03-32032020c311?cid=f114ad26-949d-44b4-87e9-8528afc76ce4"><strong class="ng-binding">Demo Schedule Shea</strong></a></td>
+            <td class="col-sm-2 hidden-xs text-right nowrap"><a ui-sref="apps.schedules.details({scheduleId: schedule.id})" class="ng-binding" href="/schedules/details/b53fff78-7e9e-401b-8b03-32032020c311?cid=f114ad26-949d-44b4-87e9-8528afc76ce4">26-Jan-2016 1:13 PM</a></td>
+        </tr>
+         
+        <tr class="clickable-row ng-scope" ng-repeat="schedule in schedules.list">
+            <td class="col-sm-9"><a ui-sref="apps.schedules.details({scheduleId: schedule.id})" href="/schedules/details/8fd59e2d-d8ae-40f4-8b23-ebc20f8c5f6c?cid=f114ad26-949d-44b4-87e9-8528afc76ce4"><strong class="ng-binding">Alex's test schedule</strong></a></td>
+            <td class="col-sm-2 hidden-xs text-right nowrap"><a ui-sref="apps.schedules.details({scheduleId: schedule.id})" class="ng-binding" href="/schedules/details/8fd59e2d-d8ae-40f4-8b23-ebc20f8c5f6c?cid=f114ad26-949d-44b4-87e9-8528afc76ce4">12-Jan-2016 3:17 PM</a></td>
+        </tr>
+         
+        <tr class="clickable-row ng-scope" ng-repeat="schedule in schedules.list">
+            <td class="col-sm-9"><a ui-sref="apps.schedules.details({scheduleId: schedule.id})" href="/schedules/details/11342e2a-1798-4f18-8798-bc296607e7d3?cid=f114ad26-949d-44b4-87e9-8528afc76ce4"><strong class="ng-binding">testa</strong></a></td>
+            <td class="col-sm-2 hidden-xs text-right nowrap"><a ui-sref="apps.schedules.details({scheduleId: schedule.id})" class="ng-binding" href="/schedules/details/11342e2a-1798-4f18-8798-bc296607e7d3?cid=f114ad26-949d-44b4-87e9-8528afc76ce4">11-Jan-2016 3:33 PM</a></td>
+        </tr>
+         
+        <tr class="clickable-row ng-scope" ng-repeat="schedule in schedules.list">
+            <td class="col-sm-9"><a ui-sref="apps.schedules.details({scheduleId: schedule.id})" href="/schedules/details/70790289-0bd1-48f0-90af-38c5fb884164?cid=f114ad26-949d-44b4-87e9-8528afc76ce4"><strong class="ng-binding">sample</strong></a></td>
+            <td class="col-sm-2 hidden-xs text-right nowrap"><a ui-sref="apps.schedules.details({scheduleId: schedule.id})" class="ng-binding" href="/schedules/details/70790289-0bd1-48f0-90af-38c5fb884164?cid=f114ad26-949d-44b4-87e9-8528afc76ce4">22-Dec-2015 9:27 AM</a></td>
+        </tr>
+         
+        <tr class="clickable-row ng-scope" ng-repeat="schedule in schedules.list">
+            <td class="col-sm-9"><a ui-sref="apps.schedules.details({scheduleId: schedule.id})" href="/schedules/details/1c3ce5c2-9a78-41ff-b768-d4e54694a549?cid=f114ad26-949d-44b4-87e9-8528afc76ce4"><strong class="ng-binding">JP TEST</strong></a></td>
+            <td class="col-sm-2 hidden-xs text-right nowrap"><a ui-sref="apps.schedules.details({scheduleId: schedule.id})" class="ng-binding" href="/schedules/details/1c3ce5c2-9a78-41ff-b768-d4e54694a549?cid=f114ad26-949d-44b4-87e9-8528afc76ce4">17-Dec-2015 2:14 PM</a></td>
+        </tr>
+         
+        <tr class="clickable-row ng-scope" ng-repeat="schedule in schedules.list">
+            <td class="col-sm-9"><a ui-sref="apps.schedules.details({scheduleId: schedule.id})" href="/schedules/details/d7488a05-8009-45b5-a29a-3d5140a2e074?cid=f114ad26-949d-44b4-87e9-8528afc76ce4"><strong class="ng-binding">jays peak test</strong></a></td>
+            <td class="col-sm-2 hidden-xs text-right nowrap"><a ui-sref="apps.schedules.details({scheduleId: schedule.id})" class="ng-binding" href="/schedules/details/d7488a05-8009-45b5-a29a-3d5140a2e074?cid=f114ad26-949d-44b4-87e9-8528afc76ce4">9-Dec-2015 9:55 AM</a></td>
+        </tr>
+         
+        <tr class="clickable-row ng-scope" ng-repeat="schedule in schedules.list">
+            <td class="col-sm-9"><a ui-sref="apps.schedules.details({scheduleId: schedule.id})" href="/schedules/details/914bd70b-55e3-4d4b-ab6e-020deaa6b826?cid=f114ad26-949d-44b4-87e9-8528afc76ce4"><strong class="ng-binding">ray durkin test</strong></a></td>
+            <td class="col-sm-2 hidden-xs text-right nowrap"><a ui-sref="apps.schedules.details({scheduleId: schedule.id})" class="ng-binding" href="/schedules/details/914bd70b-55e3-4d4b-ab6e-020deaa6b826?cid=f114ad26-949d-44b4-87e9-8528afc76ce4">17-Nov-2015 12:07 PM</a></td>
+        </tr>
+         
+        <tr class="clickable-row ng-scope" ng-repeat="schedule in schedules.list">
+            <td class="col-sm-9"><a ui-sref="apps.schedules.details({scheduleId: schedule.id})" href="/schedules/details/fd6409e9-66c4-4184-9be7-99de26758956?cid=f114ad26-949d-44b4-87e9-8528afc76ce4"><strong class="ng-binding">Tyler Test Uptime Wall</strong></a></td>
+            <td class="col-sm-2 hidden-xs text-right nowrap"><a ui-sref="apps.schedules.details({scheduleId: schedule.id})" class="ng-binding" href="/schedules/details/fd6409e9-66c4-4184-9be7-99de26758956?cid=f114ad26-949d-44b4-87e9-8528afc76ce4">9-Nov-2015 4:21 PM</a></td>
+        </tr>
+         
+        <tr class="clickable-row ng-scope" ng-repeat="schedule in schedules.list">
+            <td class="col-sm-9"><a ui-sref="apps.schedules.details({scheduleId: schedule.id})" href="/schedules/details/d10ec1d3-c739-448d-8a9d-7f456f5708f5?cid=f114ad26-949d-44b4-87e9-8528afc76ce4"><strong class="ng-binding">Memory Test</strong></a></td>
+            <td class="col-sm-2 hidden-xs text-right nowrap"><a ui-sref="apps.schedules.details({scheduleId: schedule.id})" class="ng-binding" href="/schedules/details/d10ec1d3-c739-448d-8a9d-7f456f5708f5?cid=f114ad26-949d-44b4-87e9-8528afc76ce4">9-Nov-2015 8:04 AM</a></td>
+        </tr>
+         
+        <tr class="clickable-row ng-scope" ng-repeat="schedule in schedules.list">
+            <td class="col-sm-9"><a ui-sref="apps.schedules.details({scheduleId: schedule.id})" href="/schedules/details/417673d3-3a08-4589-ae9a-dd6d869b8131?cid=f114ad26-949d-44b4-87e9-8528afc76ce4"><strong class="ng-binding">Test Shea</strong></a></td>
+            <td class="col-sm-2 hidden-xs text-right nowrap"><a ui-sref="apps.schedules.details({scheduleId: schedule.id})" class="ng-binding" href="/schedules/details/417673d3-3a08-4589-ae9a-dd6d869b8131?cid=f114ad26-949d-44b4-87e9-8528afc76ce4">5-Nov-2015 9:21 AM</a></td>
+        </tr>
+         
+        <tr class="clickable-row ng-scope" ng-repeat="schedule in schedules.list">
+            <td class="col-sm-9"><a ui-sref="apps.schedules.details({scheduleId: schedule.id})" href="/schedules/details/3737feb0-340c-43eb-a46e-5ded87501e6a?cid=f114ad26-949d-44b4-87e9-8528afc76ce4"><strong class="ng-binding">Brightlane Schedule</strong></a></td>
+            <td class="col-sm-2 hidden-xs text-right nowrap"><a ui-sref="apps.schedules.details({scheduleId: schedule.id})" class="ng-binding" href="/schedules/details/3737feb0-340c-43eb-a46e-5ded87501e6a?cid=f114ad26-949d-44b4-87e9-8528afc76ce4">28-Oct-2015 1:42 PM</a></td>
+        </tr>
+         
+        <tr class="clickable-row ng-scope" ng-repeat="schedule in schedules.list">
+            <td class="col-sm-9"><a ui-sref="apps.schedules.details({scheduleId: schedule.id})" href="/schedules/details/d0a64f52-07c6-481a-b946-2fe14a5705d2?cid=f114ad26-949d-44b4-87e9-8528afc76ce4"><strong class="ng-binding">UPTIME WALL SCHEDULE</strong></a></td>
+            <td class="col-sm-2 hidden-xs text-right nowrap"><a ui-sref="apps.schedules.details({scheduleId: schedule.id})" class="ng-binding" href="/schedules/details/d0a64f52-07c6-481a-b946-2fe14a5705d2?cid=f114ad26-949d-44b4-87e9-8528afc76ce4">28-Oct-2015 1:39 PM</a></td>
+        </tr>
+         
+        <tr class="clickable-row ng-scope" ng-repeat="schedule in schedules.list">
+            <td class="col-sm-9"><a ui-sref="apps.schedules.details({scheduleId: schedule.id})" href="/schedules/details/a5365c7d-c4f4-4a22-b8e1-47074bd39230?cid=f114ad26-949d-44b4-87e9-8528afc76ce4"><strong class="ng-binding">Uptime Content Schedule</strong></a></td>
+            <td class="col-sm-2 hidden-xs text-right nowrap"><a ui-sref="apps.schedules.details({scheduleId: schedule.id})" class="ng-binding" href="/schedules/details/a5365c7d-c4f4-4a22-b8e1-47074bd39230?cid=f114ad26-949d-44b4-87e9-8528afc76ce4">21-Oct-2015 1:38 PM</a></td>
+        </tr>
+         
+        <tr class="clickable-row ng-scope" ng-repeat="schedule in schedules.list">
+            <td class="col-sm-9"><a ui-sref="apps.schedules.details({scheduleId: schedule.id})" href="/schedules/details/395dee3c-5886-4ae1-97fa-e3504be328ec?cid=f114ad26-949d-44b4-87e9-8528afc76ce4"><strong class="ng-binding">Weld Test</strong></a></td>
+            <td class="col-sm-2 hidden-xs text-right nowrap"><a ui-sref="apps.schedules.details({scheduleId: schedule.id})" class="ng-binding" href="/schedules/details/395dee3c-5886-4ae1-97fa-e3504be328ec?cid=f114ad26-949d-44b4-87e9-8528afc76ce4">15-Sep-2015 3:35 PM</a></td>
+        </tr>
+         
+        <tr class="clickable-row ng-scope" ng-repeat="schedule in schedules.list">
+            <td class="col-sm-9"><a ui-sref="apps.schedules.details({scheduleId: schedule.id})" href="/schedules/details/aa69588c-058b-4832-96fe-0d87395380aa?cid=f114ad26-949d-44b4-87e9-8528afc76ce4"><strong class="ng-binding">Tyler</strong></a></td>
+            <td class="col-sm-2 hidden-xs text-right nowrap"><a ui-sref="apps.schedules.details({scheduleId: schedule.id})" class="ng-binding" href="/schedules/details/aa69588c-058b-4832-96fe-0d87395380aa?cid=f114ad26-949d-44b4-87e9-8528afc76ce4">8-Sep-2015 5:48 PM</a></td>
+        </tr>
+         
+        <tr class="clickable-row ng-scope" ng-repeat="schedule in schedules.list">
+            <td class="col-sm-9"><a ui-sref="apps.schedules.details({scheduleId: schedule.id})" href="/schedules/details/5fd37adb-059d-43bd-ae34-942330740b4c?cid=f114ad26-949d-44b4-87e9-8528afc76ce4"><strong class="ng-binding">Test-Tyler-Ilta-Sanomat</strong></a></td>
+            <td class="col-sm-2 hidden-xs text-right nowrap"><a ui-sref="apps.schedules.details({scheduleId: schedule.id})" class="ng-binding" href="/schedules/details/5fd37adb-059d-43bd-ae34-942330740b4c?cid=f114ad26-949d-44b4-87e9-8528afc76ce4">8-Sep-2015 5:48 PM</a></td>
+        </tr>
+         
+        <tr class="clickable-row ng-scope" ng-repeat="schedule in schedules.list">
+            <td class="col-sm-9"><a ui-sref="apps.schedules.details({scheduleId: schedule.id})" href="/schedules/details/dcd08132-810b-456b-b7c4-8e7ff2e17acc?cid=f114ad26-949d-44b4-87e9-8528afc76ce4"><strong class="ng-binding">Test Temp Sched</strong></a></td>
+            <td class="col-sm-2 hidden-xs text-right nowrap"><a ui-sref="apps.schedules.details({scheduleId: schedule.id})" class="ng-binding" href="/schedules/details/dcd08132-810b-456b-b7c4-8e7ff2e17acc?cid=f114ad26-949d-44b4-87e9-8528afc76ce4">30-Jul-2015 1:57 PM</a></td>
+        </tr>
+         
+        <tr class="clickable-row ng-scope" ng-repeat="schedule in schedules.list">
+            <td class="col-sm-9"><a ui-sref="apps.schedules.details({scheduleId: schedule.id})" href="/schedules/details/749a646d-e1e0-4205-ba06-57e77508f7db?cid=f114ad26-949d-44b4-87e9-8528afc76ce4"><strong class="ng-binding">Justin Test</strong></a></td>
+            <td class="col-sm-2 hidden-xs text-right nowrap"><a ui-sref="apps.schedules.details({scheduleId: schedule.id})" class="ng-binding" href="/schedules/details/749a646d-e1e0-4205-ba06-57e77508f7db?cid=f114ad26-949d-44b4-87e9-8528afc76ce4">24-Jul-2015 12:38 PM</a></td>
+        </tr>
+         
+        <tr class="clickable-row ng-scope" ng-repeat="schedule in schedules.list">
+            <td class="col-sm-9"><a ui-sref="apps.schedules.details({scheduleId: schedule.id})" href="/schedules/details/d1abe371-792b-45b7-98f1-ed696bdf88cd?cid=f114ad26-949d-44b4-87e9-8528afc76ce4"><strong class="ng-binding">Trello Test</strong></a></td>
+            <td class="col-sm-2 hidden-xs text-right nowrap"><a ui-sref="apps.schedules.details({scheduleId: schedule.id})" class="ng-binding" href="/schedules/details/d1abe371-792b-45b7-98f1-ed696bdf88cd?cid=f114ad26-949d-44b4-87e9-8528afc76ce4">9-Jul-2015 5:37 PM</a></td>
+        </tr>
+         
+        <tr class="clickable-row ng-scope" ng-repeat="schedule in schedules.list">
+            <td class="col-sm-9"><a ui-sref="apps.schedules.details({scheduleId: schedule.id})" href="/schedules/details/ad30de1d-7148-4db9-bd1b-52c4cb509e76?cid=f114ad26-949d-44b4-87e9-8528afc76ce4"><strong class="ng-binding">rodrigo testing</strong></a></td>
+            <td class="col-sm-2 hidden-xs text-right nowrap"><a ui-sref="apps.schedules.details({scheduleId: schedule.id})" class="ng-binding" href="/schedules/details/ad30de1d-7148-4db9-bd1b-52c4cb509e76?cid=f114ad26-949d-44b4-87e9-8528afc76ce4">7-Jul-2015 10:36 AM</a></td>
+        </tr>
+         
+        <tr class="clickable-row ng-scope" ng-repeat="schedule in schedules.list">
+            <td class="col-sm-9"><a ui-sref="apps.schedules.details({scheduleId: schedule.id})" href="/schedules/details/78a9d83e-caba-4e04-93bf-ed880fc72752?cid=f114ad26-949d-44b4-87e9-8528afc76ce4"><strong class="ng-binding">Rodrigo test 4</strong></a></td>
+            <td class="col-sm-2 hidden-xs text-right nowrap"><a ui-sref="apps.schedules.details({scheduleId: schedule.id})" class="ng-binding" href="/schedules/details/78a9d83e-caba-4e04-93bf-ed880fc72752?cid=f114ad26-949d-44b4-87e9-8528afc76ce4">7-Jul-2015 10:02 AM</a></td>
+        </tr>
+         
+        <tr class="clickable-row ng-scope" ng-repeat="schedule in schedules.list">
+            <td class="col-sm-9"><a ui-sref="apps.schedules.details({scheduleId: schedule.id})" href="/schedules/details/0f32c2e0-de78-493c-84c9-0eb2dc309300?cid=f114ad26-949d-44b4-87e9-8528afc76ce4"><strong class="ng-binding">rodrigo test 6</strong></a></td>
+            <td class="col-sm-2 hidden-xs text-right nowrap"><a ui-sref="apps.schedules.details({scheduleId: schedule.id})" class="ng-binding" href="/schedules/details/0f32c2e0-de78-493c-84c9-0eb2dc309300?cid=f114ad26-949d-44b4-87e9-8528afc76ce4">7-Jul-2015 9:51 AM</a></td>
+        </tr>
+         
+        <tr class="clickable-row ng-scope" ng-repeat="schedule in schedules.list">
+            <td class="col-sm-9"><a ui-sref="apps.schedules.details({scheduleId: schedule.id})" href="/schedules/details/7596abbe-f847-4c8e-8ea8-01f568628457?cid=f114ad26-949d-44b4-87e9-8528afc76ce4"><strong class="ng-binding">test</strong></a></td>
+            <td class="col-sm-2 hidden-xs text-right nowrap"><a ui-sref="apps.schedules.details({scheduleId: schedule.id})" class="ng-binding" href="/schedules/details/7596abbe-f847-4c8e-8ea8-01f568628457?cid=f114ad26-949d-44b4-87e9-8528afc76ce4">3-Jul-2015 5:33 PM</a></td>
+        </tr>
+         
+        <tr class="clickable-row ng-scope" ng-repeat="schedule in schedules.list">
+            <td class="col-sm-9"><a ui-sref="apps.schedules.details({scheduleId: schedule.id})" href="/schedules/details/28f59548-14ac-4b32-a11f-0c7eb5b45fdc?cid=f114ad26-949d-44b4-87e9-8528afc76ce4"><strong class="ng-binding">name</strong></a></td>
+            <td class="col-sm-2 hidden-xs text-right nowrap"><a ui-sref="apps.schedules.details({scheduleId: schedule.id})" class="ng-binding" href="/schedules/details/28f59548-14ac-4b32-a11f-0c7eb5b45fdc?cid=f114ad26-949d-44b4-87e9-8528afc76ce4">3-Jul-2015 5:16 PM</a></td>
+        </tr>
+         
+        <tr class="clickable-row ng-scope" ng-repeat="schedule in schedules.list">
+            <td class="col-sm-9"><a ui-sref="apps.schedules.details({scheduleId: schedule.id})" href="/schedules/details/f5abf6f0-dcbf-4881-b340-cb6db746022d?cid=f114ad26-949d-44b4-87e9-8528afc76ce4"><strong class="ng-binding">BCBC</strong></a></td>
+            <td class="col-sm-2 hidden-xs text-right nowrap"><a ui-sref="apps.schedules.details({scheduleId: schedule.id})" class="ng-binding" href="/schedules/details/f5abf6f0-dcbf-4881-b340-cb6db746022d?cid=f114ad26-949d-44b4-87e9-8528afc76ce4">3-Jul-2015 5:09 PM</a></td>
+        </tr>
+         
+        <tr class="clickable-row ng-scope" ng-repeat="schedule in schedules.list">
+            <td class="col-sm-9"><a ui-sref="apps.schedules.details({scheduleId: schedule.id})" href="/schedules/details/bdbda013-11ef-4efd-88cc-5357d9716240?cid=f114ad26-949d-44b4-87e9-8528afc76ce4"><strong class="ng-binding">AAAA</strong></a></td>
+            <td class="col-sm-2 hidden-xs text-right nowrap"><a ui-sref="apps.schedules.details({scheduleId: schedule.id})" class="ng-binding" href="/schedules/details/bdbda013-11ef-4efd-88cc-5357d9716240?cid=f114ad26-949d-44b4-87e9-8528afc76ce4">3-Jul-2015 5:08 PM</a></td>
+        </tr>
+         
+        <tr class="clickable-row ng-scope" ng-repeat="schedule in schedules.list">
+            <td class="col-sm-9"><a ui-sref="apps.schedules.details({scheduleId: schedule.id})" href="/schedules/details/188fe638-2864-45e2-8a52-054eaf13d7d2?cid=f114ad26-949d-44b4-87e9-8528afc76ce4"><strong class="ng-binding">BBB</strong></a></td>
+            <td class="col-sm-2 hidden-xs text-right nowrap"><a ui-sref="apps.schedules.details({scheduleId: schedule.id})" class="ng-binding" href="/schedules/details/188fe638-2864-45e2-8a52-054eaf13d7d2?cid=f114ad26-949d-44b4-87e9-8528afc76ce4">3-Jul-2015 12:33 PM</a></td>
+        </tr>
+         
+        <tr class="clickable-row ng-scope" ng-repeat="schedule in schedules.list">
+            <td class="col-sm-9"><a ui-sref="apps.schedules.details({scheduleId: schedule.id})" href="/schedules/details/3f4f2fd3-037a-4e56-9fd1-79387b4bfb4b?cid=f114ad26-949d-44b4-87e9-8528afc76ce4"><strong class="ng-binding">bb</strong></a></td>
+            <td class="col-sm-2 hidden-xs text-right nowrap"><a ui-sref="apps.schedules.details({scheduleId: schedule.id})" class="ng-binding" href="/schedules/details/3f4f2fd3-037a-4e56-9fd1-79387b4bfb4b?cid=f114ad26-949d-44b4-87e9-8528afc76ce4">2-Jul-2015 12:15 PM</a></td>
+        </tr>
+         
+        <tr class="clickable-row ng-scope" ng-repeat="schedule in schedules.list">
+            <td class="col-sm-9"><a ui-sref="apps.schedules.details({scheduleId: schedule.id})" href="/schedules/details/7d206fbc-dbe7-447b-a30b-2844291d8abd?cid=f114ad26-949d-44b4-87e9-8528afc76ce4"><strong class="ng-binding">Matthew Fisher Test Schedule</strong></a></td>
+            <td class="col-sm-2 hidden-xs text-right nowrap"><a ui-sref="apps.schedules.details({scheduleId: schedule.id})" class="ng-binding" href="/schedules/details/7d206fbc-dbe7-447b-a30b-2844291d8abd?cid=f114ad26-949d-44b4-87e9-8528afc76ce4">22-Apr-2015 2:56 PM</a></td>
+        </tr>
+         
+        <tr class="clickable-row ng-scope" ng-repeat="schedule in schedules.list">
+            <td class="col-sm-9"><a ui-sref="apps.schedules.details({scheduleId: schedule.id})" href="/schedules/details/6c397786-4316-49b3-831c-0c6d61731636?cid=f114ad26-949d-44b4-87e9-8528afc76ce4"><strong class="ng-binding">Throttle Test</strong></a></td>
+            <td class="col-sm-2 hidden-xs text-right nowrap"><a ui-sref="apps.schedules.details({scheduleId: schedule.id})" class="ng-binding" href="/schedules/details/6c397786-4316-49b3-831c-0c6d61731636?cid=f114ad26-949d-44b4-87e9-8528afc76ce4">7-Apr-2015 10:55 AM</a></td>
+        </tr>
+         
+        <tr class="clickable-row ng-scope" ng-repeat="schedule in schedules.list">
+            <td class="col-sm-9"><a ui-sref="apps.schedules.details({scheduleId: schedule.id})" href="/schedules/details/453cb8ad-b91e-4fe3-964b-46eec6fbb0d8?cid=f114ad26-949d-44b4-87e9-8528afc76ce4"><strong class="ng-binding">Justin Test</strong></a></td>
+            <td class="col-sm-2 hidden-xs text-right nowrap"><a ui-sref="apps.schedules.details({scheduleId: schedule.id})" class="ng-binding" href="/schedules/details/453cb8ad-b91e-4fe3-964b-46eec6fbb0d8?cid=f114ad26-949d-44b4-87e9-8528afc76ce4">8-Jan-2015 12:21 PM</a></td>
+        </tr>
+         
+        <tr class="clickable-row ng-scope" ng-repeat="schedule in schedules.list">
+            <td class="col-sm-9"><a ui-sref="apps.schedules.details({scheduleId: schedule.id})" href="/schedules/details/c78d7e82-c7fa-4d65-b52f-89d6620124ef?cid=f114ad26-949d-44b4-87e9-8528afc76ce4"><strong class="ng-binding">Byron</strong></a></td>
+            <td class="col-sm-2 hidden-xs text-right nowrap"><a ui-sref="apps.schedules.details({scheduleId: schedule.id})" class="ng-binding" href="/schedules/details/c78d7e82-c7fa-4d65-b52f-89d6620124ef?cid=f114ad26-949d-44b4-87e9-8528afc76ce4">16-Dec-2014 12:15 PM</a></td>
+        </tr>
+         
+        <tr class="clickable-row ng-scope" ng-repeat="schedule in schedules.list">
+            <td class="col-sm-9"><a ui-sref="apps.schedules.details({scheduleId: schedule.id})" href="/schedules/details/724b3396-c0c0-47db-8e6e-5d3ce7dafd13?cid=f114ad26-949d-44b4-87e9-8528afc76ce4"><strong class="ng-binding">Test Schedule Ghislaine</strong></a></td>
+            <td class="col-sm-2 hidden-xs text-right nowrap"><a ui-sref="apps.schedules.details({scheduleId: schedule.id})" class="ng-binding" href="/schedules/details/724b3396-c0c0-47db-8e6e-5d3ce7dafd13?cid=f114ad26-949d-44b4-87e9-8528afc76ce4">16-Dec-2014 10:50 AM</a></td>
+        </tr>
+         
+        <tr class="clickable-row ng-scope" ng-repeat="schedule in schedules.list">
+            <td class="col-sm-9"><a ui-sref="apps.schedules.details({scheduleId: schedule.id})" href="/schedules/details/42aab044-65f6-474c-9c32-7bb0db14335b?cid=f114ad26-949d-44b4-87e9-8528afc76ce4"><strong class="ng-binding">Test</strong></a></td>
+            <td class="col-sm-2 hidden-xs text-right nowrap"><a ui-sref="apps.schedules.details({scheduleId: schedule.id})" class="ng-binding" href="/schedules/details/42aab044-65f6-474c-9c32-7bb0db14335b?cid=f114ad26-949d-44b4-87e9-8528afc76ce4">24-Oct-2014 5:06 PM</a></td>
+        </tr>
+         
+        <tr class="clickable-row ng-scope" ng-repeat="schedule in schedules.list">
+            <td class="col-sm-9"><a ui-sref="apps.schedules.details({scheduleId: schedule.id})" href="/schedules/details/e76bb869-cc17-4639-97b8-a1628bd9b7da?cid=f114ad26-949d-44b4-87e9-8528afc76ce4"><strong class="ng-binding">Mark's schedule</strong></a></td>
+            <td class="col-sm-2 hidden-xs text-right nowrap"><a ui-sref="apps.schedules.details({scheduleId: schedule.id})" class="ng-binding" href="/schedules/details/e76bb869-cc17-4639-97b8-a1628bd9b7da?cid=f114ad26-949d-44b4-87e9-8528afc76ce4">5-Nov-2012 6:55 PM</a></td>
+        </tr>
+         
+        <tr ng-show="schedules.list.length === 0 &amp;&amp; !search.query" class="ng-hide">
+            <td colspan="3" class="text-center"><a ui-sref="apps.schedules.details({scheduleId: schedule.id})" href="/schedules/details/?cid=f114ad26-949d-44b4-87e9-8528afc76ce4"><span translate="" class="ng-scope">You haven't created any Schedules yet</span></a></td>
+        </tr>
+        <tr ng-show="schedules.list.length === 0 &amp;&amp; search.query" class="ng-hide">
+            <td colspan="3" class="text-center"><a ui-sref="apps.schedules.details({scheduleId: schedule.id})" href="/schedules/details/?cid=f114ad26-949d-44b4-87e9-8528afc76ce4"><span translate="" class="ng-scope">Your search didn't return any results</span></a></td>
+        </tr>
+    </tbody>
+</table>
