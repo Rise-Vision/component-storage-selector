@@ -38,11 +38,11 @@
 
 
 
-<table class="table-2 table-hover table-selector single-selector" ng-class="storageFull || multipleFileSelector ? 'multiple-selector' : 'single-selector'">
+<table class="table-2 table-hover table-selector single-selector">
   <thead>
     <tr>
       <th class="col-sm-6">
-        <input type="checkbox" class="add-right ng-pristine ng-untouched ng-valid" ng-model="selectAll">
+        <input type="checkbox" class="add-right" ng-model="selectAll">
         <label ng-click="selectAllCheckboxes(query)"></label>
         <a href="" ng-click="orderByAttribute = fileNameOrderFunction; reverseSort = !reverseSort">
           <span translate="common.file-name" class="ng-scope">Name</span>

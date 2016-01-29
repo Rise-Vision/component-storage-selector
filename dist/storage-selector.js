@@ -162,11 +162,11 @@ module.run(["$templateCache", function($templateCache) {
     "\n" +
     "\n" +
     "\n" +
-    "<table class=\"table-2 table-hover table-selector single-selector\" ng-class=\"storageFull || multipleFileSelector ? 'multiple-selector' : 'single-selector'\">\n" +
+    "<table class=\"table-2 table-hover table-selector single-selector\">\n" +
     "  <thead>\n" +
     "    <tr>\n" +
     "      <th class=\"col-sm-6\">\n" +
-    "        <input type=\"checkbox\" class=\"add-right ng-pristine ng-untouched ng-valid\" ng-model=\"selectAll\">\n" +
+    "        <input type=\"checkbox\" class=\"add-right\" ng-model=\"selectAll\">\n" +
     "        <label ng-click=\"selectAllCheckboxes(query)\"></label>\n" +
     "        <a href=\"\" ng-click=\"orderByAttribute = fileNameOrderFunction; reverseSort = !reverseSort\">\n" +
     "          <span translate=\"common.file-name\" class=\"ng-scope\">Name</span>\n" +
