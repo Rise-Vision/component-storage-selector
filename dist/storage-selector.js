@@ -160,7 +160,7 @@ module.run(["$templateCache", function($templateCache) {
     "              </div>\n" +
     "\n" +
     "\n" +
-    "<div class=\"content-box\"\n" +
+    "<div class=\"content-box\">\n" +
     "\n" +
     "<table class=\"table-2 table-hover table-selector single-selector\" ng-class=\"storageFull || multipleFileSelector ? 'multiple-selector' : 'single-selector'\">\n" +
     "  <thead>\n" +
