@@ -4,7 +4,7 @@
 
 <script type="text/ng-template" id="storage.html">  //prototype modal
         
-
+<div class="storage-modal">
 
               <button type="button" class="close" data-dismiss="modal" ng-click="closeButtonClick()">
                 <i class="fa fa-times"></i>
@@ -36,14 +36,12 @@
               </div>
 
 
-
+<div class="content-box"
 
 <table class="table-2 table-hover table-selector single-selector" ng-class="storageFull || multipleFileSelector ? 'multiple-selector' : 'single-selector'">
   <thead>
     <tr>
       <th class="col-sm-6">
-        <input type="checkbox" class="add-right ng-pristine ng-untouched ng-valid" ng-model="selectAll">
-        <label ng-click="selectAllCheckboxes(query)"></label>
         <a href="" ng-click="orderByAttribute = fileNameOrderFunction; reverseSort = !reverseSort">
           <span translate="common.file-name" class="ng-scope">Name</span>
           <span>
@@ -60,9 +58,9 @@
   </thead>
   <tbody>
     <tr class="clickable-row ng-scope no-select-row" ng-click="fileClick(file);" ng-class="{'active': file.isChecked, 'blocked-file': file.isThrottled, 'back-btn': file.currentFolder, 'no-select-row': file.currentFolder || fileIsTrash(file) || (fileIsFolder(file) &amp;&amp; !storageFull) }">
-       <td colspan="4" ng-if="fileIsFolder(file) &amp;&amp; (!fileIsTrash(file) || storageFull)">
-        <span class="folder ng-binding">000folder/</span>
-       </td>
+       <td colspan="4" >
+        <span class="folder">000folder/</span>
+      </td>
     </tr>
     <tr class="clickable-row ng-scope no-select-row" ng-click="fileClick(file);" ng-class="{'active': file.isChecked, 'blocked-file': file.isThrottled, 'back-btn': file.currentFolder, 'no-select-row': file.currentFolder || fileIsTrash(file) || (fileIsFolder(file) &amp;&amp; !storageFull) }">
        <td colspan="4" ng-if="fileIsFolder(file) &amp;&amp; (!fileIsTrash(file) || storageFull)">
@@ -77,9 +75,9 @@
   </tbody>
 </table>
 
-          
+</div>    
 
 
-
+</div>
 
 </script>

@@ -128,7 +128,7 @@ module.run(["$templateCache", function($templateCache) {
     "\n" +
     "<script type=\"text/ng-template\" id=\"storage.html\">  //prototype modal\n" +
     "        \n" +
-    "\n" +
+    "<div class=\"storage-modal\">\n" +
     "\n" +
     "              <button type=\"button\" class=\"close\" data-dismiss=\"modal\" ng-click=\"closeButtonClick()\">\n" +
     "                <i class=\"fa fa-times\"></i>\n" +
@@ -160,14 +160,12 @@ module.run(["$templateCache", function($templateCache) {
     "              </div>\n" +
     "\n" +
     "\n" +
-    "\n" +
+    "<div class=\"content-box\"\n" +
     "\n" +
     "<table class=\"table-2 table-hover table-selector single-selector\" ng-class=\"storageFull || multipleFileSelector ? 'multiple-selector' : 'single-selector'\">\n" +
     "  <thead>\n" +
     "    <tr>\n" +
     "      <th class=\"col-sm-6\">\n" +
-    "        <input type=\"checkbox\" class=\"add-right ng-pristine ng-untouched ng-valid\" ng-model=\"selectAll\">\n" +
-    "        <label ng-click=\"selectAllCheckboxes(query)\"></label>\n" +
     "        <a href=\"\" ng-click=\"orderByAttribute = fileNameOrderFunction; reverseSort = !reverseSort\">\n" +
     "          <span translate=\"common.file-name\" class=\"ng-scope\">Name</span>\n" +
     "          <span>\n" +
@@ -184,9 +182,9 @@ module.run(["$templateCache", function($templateCache) {
     "  </thead>\n" +
     "  <tbody>\n" +
     "    <tr class=\"clickable-row ng-scope no-select-row\" ng-click=\"fileClick(file);\" ng-class=\"{'active': file.isChecked, 'blocked-file': file.isThrottled, 'back-btn': file.currentFolder, 'no-select-row': file.currentFolder || fileIsTrash(file) || (fileIsFolder(file) &amp;&amp; !storageFull) }\">\n" +
-    "       <td colspan=\"4\" ng-if=\"fileIsFolder(file) &amp;&amp; (!fileIsTrash(file) || storageFull)\">\n" +
-    "        <span class=\"folder ng-binding\">000folder/</span>\n" +
-    "       </td>\n" +
+    "       <td colspan=\"4\" >\n" +
+    "        <span class=\"folder\">000folder/</span>\n" +
+    "      </td>\n" +
     "    </tr>\n" +
     "    <tr class=\"clickable-row ng-scope no-select-row\" ng-click=\"fileClick(file);\" ng-class=\"{'active': file.isChecked, 'blocked-file': file.isThrottled, 'back-btn': file.currentFolder, 'no-select-row': file.currentFolder || fileIsTrash(file) || (fileIsFolder(file) &amp;&amp; !storageFull) }\">\n" +
     "       <td colspan=\"4\" ng-if=\"fileIsFolder(file) &amp;&amp; (!fileIsTrash(file) || storageFull)\">\n" +
@@ -201,10 +199,10 @@ module.run(["$templateCache", function($templateCache) {
     "  </tbody>\n" +
     "</table>\n" +
     "\n" +
-    "          \n" +
+    "</div>    \n" +
     "\n" +
     "\n" +
-    "\n" +
+    "</div>\n" +
     "\n" +
     "</script>\n" +
     "");
