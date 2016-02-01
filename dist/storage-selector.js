@@ -142,9 +142,10 @@ module.run(["$templateCache", function($templateCache) {
     "                  <button class=\"btn btn-link\" ng-click=\"newFolderButtonClick('md')\" ng-disabled=\"isTrashFolder()\">\n" +
     "                    <svg-icon p=\"iconNewFolder\"><svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 32 32\"><path d=\"M30.7 8c-0.8-0.8-1.9-1-3.1-1H15V5.9c0-1.2-0.5-2-1.4-2.8C12.8 2.2 11.7 2 10.5 2H4.3C3.1 2 2.1 2.2 1.3 3.1 0.4 3.9 0 4.7 0 5.9v18.5c0 1.2 0.4 2.3 1.3 3.2C2.1 28.5 3.1 29 4.3 29h23.3c1.2 0 2.2-0.5 3.1-1.4 0.9-0.9 1.3-2 1.3-3.2V10.8C32 9.6 31.6 8.9 30.7 8zM23 20h-5v5h-4v-5H9v-4h5v-5h4v5h5V20\"></path><path d=\"\"></path></svg></svg-icon>\n" +
     "                  </button>\n" +
-    "                  <label for=\"upload-files\" class=\"btn btn-link\" ng-disabled=\"!(filesDetails.localFiles === false &amp;&amp; !isTrashFolder())\">\n" +
+    "                  <input id=\"myInput\" type=\"file\" style=\"visibility:hidden\" />\n" +
+    "                  <button class=\"btn btn-link\" type=\"button\" value=\"Show Dialog\" onclick=\"$('#myInput').click();\">\n" +
     "                    <i class=\"fa fa-cloud-upload\"></i>\n" +
-    "                  </label>\n" +
+    "                  </button>\n" +
     "                  <button class=\"btn btn-link\" ng-click=\"showSelectorFileSearch()\">\n" +
     "                    <i class=\"fa fa-search\"></i>\n" +
     "                  </button>\n" +
