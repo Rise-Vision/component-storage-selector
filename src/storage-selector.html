@@ -59,11 +59,20 @@
     </tr>
   </thead>
   <tbody>
-    <tr class="clickable-row ng-scope no-select-row" ng-click="fileClick(file);" ng-class="{'active': file.isChecked, 'blocked-file': file.isThrottled, 'back-btn': file.currentFolder, 'no-select-row': file.currentFolder || fileIsTrash(file) || (fileIsFolder(file) &amp;&amp; !storageFull) }" ng-repeat="file in filesDetails.files | filter:query | orderBy:orderByAttribute:reverseSort track by $index">
-      <!-- ngIf: fileIsFolder(file) && (!fileIsTrash(file) || storageFull) --><td colspan="4" ng-if="fileIsFolder(file) &amp;&amp; (!fileIsTrash(file) || storageFull)" class="ng-scope">
+    <tr class="clickable-row ng-scope no-select-row" ng-click="fileClick(file);" ng-class="{'active': file.isChecked, 'blocked-file': file.isThrottled, 'back-btn': file.currentFolder, 'no-select-row': file.currentFolder || fileIsTrash(file) || (fileIsFolder(file) &amp;&amp; !storageFull) }">
+       <td colspan="4" ng-if="fileIsFolder(file) &amp;&amp; (!fileIsTrash(file) || storageFull)">
         <span class="folder ng-binding">000folder/</span>
-      </td><!-- end ngIf: fileIsFolder(file) && (!fileIsTrash(file) || storageFull) -->
-     
+       </td>
+    </tr>
+    <tr class="clickable-row ng-scope no-select-row" ng-click="fileClick(file);" ng-class="{'active': file.isChecked, 'blocked-file': file.isThrottled, 'back-btn': file.currentFolder, 'no-select-row': file.currentFolder || fileIsTrash(file) || (fileIsFolder(file) &amp;&amp; !storageFull) }">
+       <td colspan="4" ng-if="fileIsFolder(file) &amp;&amp; (!fileIsTrash(file) || storageFull)">
+        <span class="folder ng-binding">000folder/</span>
+       </td>
+    </tr>
+    <tr class="clickable-row ng-scope no-select-row" ng-click="fileClick(file);" ng-class="{'active': file.isChecked, 'blocked-file': file.isThrottled, 'back-btn': file.currentFolder, 'no-select-row': file.currentFolder || fileIsTrash(file) || (fileIsFolder(file) &amp;&amp; !storageFull) }">
+       <td colspan="4" ng-if="fileIsFolder(file) &amp;&amp; (!fileIsTrash(file) || storageFull)">
+        <span class="folder ng-binding">000folder/</span>
+       </td>
     </tr>
   </tbody>
 </table>
