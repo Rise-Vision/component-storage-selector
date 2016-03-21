@@ -1,6 +1,6 @@
 {
   "name": "component-storage-selector",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "An Angular directive that provides the Storage Icon button to launch a modal containing Storage selection",
   "main": "gulpfile.js",
   "scripts": {
