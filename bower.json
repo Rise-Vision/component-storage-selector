@@ -1,6 +1,6 @@
 {
   "name": "component-storage-selector",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "homepage": "https://github.com/Rise-Vision/component-storage-selector",
   "authors": [
     "Rise Vision"
@@ -20,7 +20,7 @@
   },
   "dependencies": {
     "angular": "~1.3.0",
-    "angular-bootstrap": "~0.11.1",
+    "angular-bootstrap": "^0.13.0",
     "rv-common-style": "https://github.com/Rise-Vision/common-style.git"
   }
 }
