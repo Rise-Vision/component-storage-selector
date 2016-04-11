@@ -32,7 +32,7 @@ describe("Storage URL Tests", function () {
     // Get the isolate scope for the directive
     var isoScope = element.isolateScope();
 
-    expect(isoScope.storageUrl).to.equal(baseURL + "abc123?selector-type=single-folder");
+    expect(isoScope.storageUrl).to.equal(baseURL + "abc123&selector-type=single-folder");
   });
 
 });
